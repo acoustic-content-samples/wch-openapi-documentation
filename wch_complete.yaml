@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.91
+  version: 1.0.92
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -114,10 +114,10 @@ tags:
       positioned before the Search service. Use the Authoring context search
       Rest APIs to retrieve user targeted content items. You can target specific
       content items by providing the condition requests as filters. The filters
-      that are currently supported by the API are
+      that are currently supported by the API are  
 
       1. `accept-language` : Use this filter to target content items in a
-      language of your preference.
+      language of your preference.  
 
       2. `location` : Use this filter to target content items that are available
       in a location, that is, proximity to current location (within `distance`
@@ -131,10 +131,10 @@ tags:
       positioned before the Search service. Use the Delivery context search Rest
       APIs to retrieve user targeted content items. You can target specific
       content items by providing the condition requests as filters. The filters
-      that are currently supported by the API are
+      that are currently supported by the API are  
 
       1. `accept-language` : Use this filter to target content items in a
-      language of your preference.
+      language of your preference.  
 
       2. `location` : Use this filter to target content items that are available
       in a location, that is, proximity to current location (within `distance`
@@ -303,8 +303,8 @@ tags:
   - name: Login service
     description: >-
       Login service offers endpoint to login into Watson Content Hub. This is
-      possible via a UI driven redirect flow that leverage the blueID UI or a
-      basicAuthentication endpoint which communicates with blueID using the
+      possible via a UI driven redirect flow that leverage the IBMid UI or a
+      basicAuthentication endpoint which communicates with IBMid using the
       password_grant OIDC feature. While the UI login finds the corresponding
       tenant for the current user automated, the API login requires to get
       called using a valid baseUrl (as described above).
@@ -357,18 +357,6 @@ parameters:
       Specify additional update directives.
       Valid directives are:
          * rebuild-path-filename: Instructs the service to re-generate the last fragment of the specified document path, by converting the specified document name into a filesystem friendly filename.
-    required: false
-    type: string
-  getExpand15:
-    name: expand
-    in: query
-    description: >
-      Specifies additional expansion directives, which add more detail to
-      returned elements and fields.
-
-      Valid directives are:
-         * groups: Expands 'group' elements to include the 'elements' of their referenced content-types.
-    x-ibm-dx-api-visibility: private
     required: false
     type: string
   bulkRequest18: &ref_173
@@ -427,47 +415,12 @@ parameters:
       instead of the content item.
     type: string
     required: false
-  HeaderTenantId18:
-    x-ibm-dx-api-visibility: private
-    name: x-ibm-dx-tenant-id
-    in: header
-    description: Provide the tenant Id for the tenant.
-    type: string
-    required: true
-  HeaderSecureAlways18:
-    x-ibm-dx-api-visibility: private
-    name: x-ibm-dx-delivery-secure-always
-    in: header
-    description: Specifies the global restriction from tenant configuration
-    type: string
-    required: false
   IDPathParameter19: &ref_185
     in: path
     name: id
     description: >-
       Provide the ID of the resource. Note that IDs are always the IDs of
       published item, even if a draft exists with a different ID.
-    type: string
-    required: true
-  TenantIDHeader19:
-    in: header
-    name: x-ibm-dx-tenant-id
-    x-ibm-dx-api-visibility: private
-    description: Provide the tenant ID for the tenant.
-    type: string
-    required: true
-  RevisionIDHeader19:
-    in: header
-    name: x-ibm-dx-revision-id
-    x-ibm-dx-api-visibility: private
-    description: Provide the revision ID for the tenant.
-    type: string
-    required: false
-  EdgeTokenHeader19:
-    name: x-ibm-dx-edge-token
-    x-ibm-dx-api-visibility: private
-    in: header
-    description: Provide the edge token to identify tenant environment.
     type: string
     required: true
   FieldQueryParameter19: &ref_190
@@ -507,29 +460,7 @@ parameters:
     description: Provide the absolute path of the resource (URL encoded).
     type: string
     required: true
-  HeaderTenantId20:
-    x-ibm-dx-api-visibility: private
-    name: x-ibm-dx-tenant-id
-    in: header
-    description: Provide the tenant Id for the tenant.
-    type: string
-    required: true
-  HeaderRevisionId20:
-    x-ibm-dx-api-visibility: private
-    name: x-ibm-dx-revision-id
-    in: header
-    description: >-
-      Provide the revision Id that should be used as an overlay on top of the
-      default revision.
-    type: string
-  HeaderEdgeToken20:
-    x-ibm-dx-api-visibility: private
-    name: x-ibm-dx-edge-token
-    in: header
-    description: Provide the edge token to identify tenant environment.
-    type: string
-    required: true
-  expand4JobDefinition37:
+  expand4JobDefinition35:
     name: expand
     in: query
     description: expand (inline) given references
@@ -542,7 +473,7 @@ parameters:
         - profile
         - '*'
         - all
-  include37: &ref_207
+  include35: &ref_207
     name: include
     in: query
     description: >-
@@ -555,7 +486,7 @@ parameters:
       enum:
         - links
         - none
-  offset37: &ref_204
+  offset35: &ref_204
     name: offset
     in: query
     description: the index of the first item to be included in the response
@@ -564,7 +495,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit37: &ref_205
+  limit35: &ref_205
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -574,14 +505,14 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  id37: &ref_211
+  id35: &ref_211
     name: id
     in: path
     description: The ID of the item
     required: true
     type: string
     maxLength: 64
-  classification37:
+  classification35:
     name: classification
     in: path
     description: The classification of the item
@@ -594,7 +525,7 @@ parameters:
       - site
       - category
       - taxonomy
-  force37: &ref_212
+  force35: &ref_212
     name: force
     in: query
     description: >-
@@ -603,7 +534,7 @@ parameters:
     required: false
     default: false
     type: boolean
-  state37: &ref_206
+  state35: &ref_206
     name: state
     in: query
     description: Only jobs that have (one of) the specified state(s) will be returned
@@ -1440,7 +1371,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  clientError37: &ref_209
+  clientError35: &ref_209
     description: Unable to handle the request as it does not match the API definition.
     schema: &ref_66
       description: This JSON record represents an error condition.
@@ -6269,7 +6200,7 @@ definitions:
         type: array
         description: An array of JSON objects that contain the requested page items.
         items: *ref_63
-  TenantInfo30: &ref_64
+  TenantInfo29: &ref_64
     type: object
     properties:
       baseUrl:
@@ -6279,13 +6210,13 @@ definitions:
         type: string
         description: The tenantId of the available tenant
     description: Object containing the tenantId and baseUrl
-  TenantArray30: &ref_202
+  TenantArray29: &ref_203
     type: array
     items: *ref_64
     minItems: 0
     maxItems: 100
     description: The list of available tenants for the authenticated user
-  Status30: &ref_203
+  Status29: &ref_202
     type: object
     properties:
       service:
@@ -6297,9 +6228,9 @@ definitions:
       httpStatus:
         type: integer
         description: The http return code
-  error37: *ref_65
-  error_message37: *ref_66
-  localizedItem37: &ref_81
+  error35: *ref_65
+  error_message35: *ref_66
+  localizedItem35: &ref_81
     type: object
     required:
       - name
@@ -6310,14 +6241,14 @@ definitions:
       name: &ref_67
         type: object
         description: an object holding the localized title for multiple languages
-  localizedItemCreation37: &ref_83
+  localizedItemCreation35: &ref_83
     type: object
     required:
       - name
     properties:
       name: *ref_67
       description: *ref_68
-  managedItem37: &ref_80
+  managedItem35: &ref_80
     type: object
     required:
       - id
@@ -6391,7 +6322,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  managedItemCreation37: &ref_84
+  managedItemCreation35: &ref_84
     type: object
     properties:
       id:
@@ -6430,7 +6361,7 @@ definitions:
         type: object
         required: *ref_71
         properties: *ref_72
-  managedItemUpdate37: &ref_85
+  managedItemUpdate35: &ref_85
     type: object
     required:
       - rev
@@ -6449,7 +6380,7 @@ definitions:
       creator: *ref_76
       lastModified: *ref_77
       lastModifier: *ref_78
-  itemList37: &ref_86
+  itemList35: &ref_86
     type: object
     required:
       - offset
@@ -6513,7 +6444,7 @@ definitions:
       count:
         type: integer
         description: Number of items in the complete list
-  unmanagedJobDefinition37:
+  unmanagedJobDefinition35:
     type: object
     properties:
       profile: &ref_96
@@ -6597,7 +6528,7 @@ definitions:
               asset: *ref_79
               category: *ref_79
               resource: *ref_79
-  jobDefinitionCore37: &ref_82
+  jobDefinitionCore35: &ref_82
     type: object
     properties:
       profile: &ref_107
@@ -6618,27 +6549,27 @@ definitions:
           id:
             type: string
             maxLength: 64
-  jobDefinition37: &ref_87
+  jobDefinition35: &ref_87
     type: object
     allOf:
       - *ref_80
       - *ref_81
       - *ref_82
-  jobDefinitionCreation37:
+  jobDefinitionCreation35:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_83
       - *ref_84
       - *ref_82
-  jobDefinitionUpdate37:
+  jobDefinitionUpdate35:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_83
       - *ref_85
       - *ref_82
-  jobDefinitions37:
+  jobDefinitions35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobDefinitions. At
@@ -6651,7 +6582,7 @@ definitions:
       items:
         type: array
         items: *ref_87
-  job37: &ref_89
+  job35: &ref_89
     type: object
     allOf:
       - *ref_80
@@ -6687,7 +6618,7 @@ definitions:
         items:
           type: string
           maxLength: 64
-  jobCreation37: &ref_210
+  jobCreation35: &ref_210
     type: object
     description: >-
       When creating a job, you can specify an id that can be used to address the
@@ -6698,7 +6629,7 @@ definitions:
         description: Unique identifier representing a specific job
         maxLength: 64
       mode: *ref_88
-  jobs37: &ref_208
+  jobs35: &ref_208
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobs. At most
@@ -6711,7 +6642,7 @@ definitions:
       items:
         type: array
         items: *ref_89
-  siteRevisionCore37: &ref_90
+  siteRevisionCore35: &ref_90
     type: object
     properties:
       state:
@@ -6744,7 +6675,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  siteRevision37: &ref_91
+  siteRevision35: &ref_91
     type: object
     allOf:
       - *ref_80
@@ -6752,7 +6683,7 @@ definitions:
       - *ref_90
     required:
       - state
-  siteRevisionUpdate37: &ref_214
+  siteRevisionUpdate35: &ref_214
     description: >-
       Only properties autoPublishEnabled, name and description will be updated,
       others will be ignored
@@ -6761,7 +6692,7 @@ definitions:
       - *ref_83
       - *ref_85
       - *ref_90
-  siteRevisions37:
+  siteRevisions35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of site revisions. At
@@ -6774,7 +6705,7 @@ definitions:
       items:
         type: array
         items: *ref_91
-  status37: &ref_213
+  status35: &ref_213
     type: object
     required:
       - id
@@ -6844,36 +6775,36 @@ definitions:
                 - ERROR
                 - INFO
                 - WARNING
-  message37: *ref_94
-  task37: *ref_95
-  profileCore37: *ref_96
-  profile37: &ref_97
+  message35: *ref_94
+  task35: *ref_95
+  profileCore35: *ref_96
+  profile35: &ref_97
     type: object
     allOf:
       - *ref_80
       - *ref_81
       - *ref_96
-  profileCreation37:
+  profileCreation35:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_83
       - *ref_84
       - *ref_96
-  profileUpdate37:
+  profileUpdate35:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_83
       - *ref_85
       - *ref_96
-  profileCreationForJobCreation37:
+  profileCreationForJobCreation35:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_84
       - *ref_96
-  profiles37:
+  profiles35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of profiles. At most
@@ -6886,28 +6817,28 @@ definitions:
       items:
         type: array
         items: *ref_97
-  sourceCore37: *ref_98
-  source37: &ref_99
+  sourceCore35: *ref_98
+  source35: &ref_99
     type: object
     allOf:
       - *ref_80
       - *ref_81
       - *ref_98
-  sourceCreation37:
+  sourceCreation35:
     type: object
     allOf:
       - *ref_83
       - *ref_84
       - *ref_98
-  sourceUpdate37:
+  sourceUpdate35:
     type: object
     allOf:
       - *ref_83
       - *ref_85
       - *ref_98
-  sourceDocs37: *ref_93
-  docEvents37: *ref_79
-  sources37:
+  sourceDocs35: *ref_93
+  docEvents35: *ref_79
+  sources35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of sources. At most
@@ -6920,9 +6851,9 @@ definitions:
       items:
         type: array
         items: *ref_99
-  jobState37: *ref_92
-  httpVerb37: *ref_100
-  itemsDeleteResponse37:
+  jobState35: *ref_92
+  httpVerb35: *ref_100
+  itemsDeleteResponse35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of items. At most
@@ -6933,30 +6864,30 @@ definitions:
       items:
         type: array
         items: &ref_101 {}
-  itemDeleteResponse37: *ref_101
-  contentFormat37: *ref_102
-  created37: *ref_75
-  lastModified37: *ref_77
-  rev37: *ref_74
-  description37: *ref_68
-  title37: *ref_67
-  jobMode37: *ref_88
-  site37:
+  itemDeleteResponse35: *ref_101
+  contentFormat35: *ref_102
+  created35: *ref_75
+  lastModified35: *ref_77
+  rev35: *ref_74
+  description35: *ref_68
+  title35: *ref_67
+  jobMode35: *ref_88
+  site35:
     type: object
     description: tbd
     properties:
       href:
         type: string
         maxLength: 1024
-  urlSelf37: *ref_73
-  urlFirst37: *ref_103
-  urlPrev37: *ref_104
-  urlNext37: *ref_105
-  urlLast37: *ref_106
-  urlCreator37: *ref_76
-  urlLastModifier37: *ref_78
-  profileRef37: *ref_107
-  siteRevisionRef37:
+  urlSelf35: *ref_73
+  urlFirst35: *ref_103
+  urlPrev35: *ref_104
+  urlNext35: *ref_105
+  urlLast35: *ref_106
+  urlCreator35: *ref_76
+  urlLastModifier35: *ref_78
+  profileRef35: *ref_107
+  siteRevisionRef35:
     type: object
     required:
       - id
@@ -6965,7 +6896,7 @@ definitions:
       id:
         type: string
         maxLength: 64
-  sourceRef37: *ref_108
+  sourceRef35: *ref_108
   ErrorResponse:
     description: This JSON record represents an error condition.
     type: object
@@ -17908,18 +17839,18 @@ paths:
 
         #### Examples
 
-        * **Search by proximity by using user's location:**
+        * **Search by proximity by using user's location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of user's location.
 
 
 
-        * **Search by proximity by providing a location:**
+        * **Search by proximity by providing a location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of the location that is specifed in the `position`
@@ -17927,11 +17858,12 @@ paths:
 
 
 
-        * **Search by language (setting the `accept-language` request header):**
+        * **Search by language (setting the `accept-language` request
+        header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` de
+        `accept-language` de  
 
         Searches all content of the type `article` and returns items where the
         language is set to `German [de]`.
@@ -17939,11 +17871,11 @@ paths:
 
 
         * **Search by language with ordered language list (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type 'article` and returns items where the
         language is set to `English [en]`. Then, proceeds to search all content
@@ -17952,9 +17884,9 @@ paths:
 
 
 
-        * **Search for images similar to a specified image:**
+        * **Search for images similar to a specified image:**  
 
-        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100
+        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -17964,10 +17896,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `score` order:**
+        ascending `score` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=score
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -17977,10 +17909,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `lastModified` order:**
+        ascending `lastModified` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=lastModified
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -17990,11 +17922,11 @@ paths:
 
 
         * **Apply location and language filters (setting the `accept-language`
-        request header):**
+        request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0
+        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type `article` and returns items where the
         language is set to `English [en]` and the `location` is within a 5 km
@@ -18007,17 +17939,17 @@ paths:
 
 
         * **Apply similar, location, and language filters (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100
+        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100  
 
-        `accept-language` en
+        `accept-language` en  
 
         The search returns any type of content which meets all of the following
-        criteria:
-          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude
-          2. language is set to `English [de]`
-          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).
+        criteria:  
+          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude  
+          2. language is set to `English [de]`  
+          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).  
         <br />User roles: admin, manager, editor, viewer
       produces:
         - application/json
@@ -18060,7 +17992,7 @@ paths:
           in: header
           description: >
             Provide the ordered list of preferred languages in the request to
-            filter the retrieved search results.
+            filter the retrieved search results.  
 
             This header must be provided if the filter to be applied is
             `accept-language` (a web browser would provide this header by
@@ -18072,7 +18004,7 @@ paths:
           in: query
           description: >
             Provide the ID (uuid) of the item on which to base the `similar`
-            search.
+            search.  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18082,9 +18014,9 @@ paths:
           in: query
           description: >
             Provide the classification of the item on which to base the
-            `similar` search.
+            `similar` search.  
 
-            For example, to specify an asset classification, use "asset".
+            For example, to specify an asset classification, use "asset".  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18372,18 +18304,18 @@ paths:
 
         #### Examples
 
-        * **Search by proximity by using user's location:**
+        * **Search by proximity by using user's location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of user's location.
 
 
 
-        * **Search by proximity by providing a location:**
+        * **Search by proximity by providing a location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of the location that is specifed in the `position`
@@ -18391,11 +18323,12 @@ paths:
 
 
 
-        * **Search by language (setting the `accept-language` request header):**
+        * **Search by language (setting the `accept-language` request
+        header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` de
+        `accept-language` de  
 
         Searches all content of the type `article` and returns items where the
         language is set to `German [de]`.
@@ -18403,11 +18336,11 @@ paths:
 
 
         * **Search by language with ordered language list (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type 'article` and returns items where the
         language is set to `English [en]`. Then, proceeds to search all content
@@ -18416,9 +18349,9 @@ paths:
 
 
 
-        * **Search for images similar to a specified image:**
+        * **Search for images similar to a specified image:**  
 
-        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100
+        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18428,10 +18361,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `score` order:**
+        ascending `score` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=score
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18441,10 +18374,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `lastModified` order:**
+        ascending `lastModified` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=lastModified
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18454,11 +18387,11 @@ paths:
 
 
         * **Apply location and language filters (setting the `accept-language`
-        request header):**
+        request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0
+        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type `article` and returns items where the
         language is set to `English [en]` and the `location` is within a 5 km
@@ -18471,17 +18404,17 @@ paths:
 
 
         * **Apply similar, location, and language filters (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100
+        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100  
 
-        `accept-language` en
+        `accept-language` en  
 
         The search returns any type of content which meets all of the following
-        criteria:
-          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude
-          2. language is set to `English [de]`
-          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).
+        criteria:  
+          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude  
+          2. language is set to `English [de]`  
+          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).  
         <br />User roles: admin, manager, editor, viewer, authenticatedVisitor,
         anonymous
       produces:
@@ -18525,7 +18458,7 @@ paths:
           in: header
           description: >
             Provide the ordered list of preferred languages in the request to
-            filter the retrieved search results.
+            filter the retrieved search results.  
 
             This header must be provided if the filter to be applied is
             `accept-language` (a web browser would provide this header by
@@ -18537,7 +18470,7 @@ paths:
           in: query
           description: >
             Provide the ID (uuid) of the item on which to base the `similar`
-            search.
+            search.  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18547,9 +18480,9 @@ paths:
           in: query
           description: >
             Provide the classification of the item on which to base the
-            `similar` search.
+            `similar` search.  
 
-            For example, to specify an asset classification, use "asset".
+            For example, to specify an asset classification, use "asset".  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -23185,6 +23118,94 @@ paths:
                 locale: en
       tags:
         - Delivery sites
+  /login/v1/redirect:
+    get:
+      x-ibm-dx-security-user-roles:
+        - admin
+        - manager
+        - editor
+        - viewer
+        - authenticatedVisitor
+        - anonymous
+      summary: Browser flow for login.
+      description: >-
+        Browser flow to redirect to IBMid for authentication and update user and
+        redirect to authoring UI. This redirect flow leverages the IBMid UI and
+        also supports enterprise federation (details:
+        https://ibm.ent.box.com/notes/78040808400?s=nhuzrhlsn0ly338zddomx329tlpmfghc)
+        while basicauth logins do not work with enterprise federated
+        accounts.<br />User roles: admin, manager, editor, viewer,
+        authenticatedVisitor, anonymous
+      parameters:
+        - name: targetUrl
+          in: query
+          description: >-
+            After successful login the redirect will be executed to this
+            targetUrl (whitelist checking)
+          required: false
+          type: string
+        - name: targetTenant
+          in: query
+          description: >-
+            If the login to a specific tenant is required, bypassing the 'login
+            tenant' lookup.
+          required: false
+          type: string
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Redirect to IdP using javascript form.
+          headers:
+            set-cookie:
+              description: Sending cookies to client
+              type: string
+            set-cookie2:
+              description: Sending cookies to client
+              type: string
+        '302':
+          description: Redirect to authoring url
+          headers:
+            set-cookie:
+              description: Sending cookies to client
+              type: string
+            set-cookie2:
+              description: Sending cookies to client
+              type: string
+          schema: *ref_202
+        '429': *ref_112
+      tags:
+        - Login service
+  /login/v1/removecookies:
+    get:
+      x-ibm-dx-security-user-roles:
+        - admin
+        - manager
+        - editor
+        - viewer
+        - authenticatedVisitor
+        - anonymous
+      summary: Remove tenant and auth cookie.
+      description: >-
+        Endpoint to receive a set-cookie cleaning the authentication and tenant
+        cookies for the actual domain.<br />User roles: admin, manager, editor,
+        viewer, authenticatedVisitor, anonymous
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Cleaning the cookies
+          headers:
+            set-cookie:
+              description: Sending cookies to client
+              type: string
+            set-cookie2:
+              description: Sending cookies to client
+              type: string
+          schema: *ref_202
+        '429': *ref_112
+      tags:
+        - Login service
   /login/v1/basicauth:
     get:
       x-ibm-dx-security-user-roles:
@@ -23196,15 +23217,13 @@ paths:
         - anonymous
       summary: Userid and password login using GET operation
       description: >-
-        Does a password login with blueID and provides the authentication token
-        and tenant information. If the user authentication with blueID succeeds
+        Does a password login with IBMid and provides the authentication token
+        and tenant information. If the user authentication with IBMid succeeds
         this service tries to find the corresponding tenant for this
         authenticated user. It then returns the tenant ID in the response header
         x-ibm-dx-tenant-id. It also returns a header x-ibm-dx-tenant-base-url
         which includes the base API URL with the tenant ID. If no tenant for the
-        user is found, the authentication part is still valid - as the current
-        user did authenticate with blueID credentials - but there is not an
-        available tenant for this user.
+        user is found, the authentication fails presenting a HTTP404 error.
 
           Note that for calls to this service, the tenant ID component of the API URL can optionally be omitted.<br />User roles: admin, manager, editor, viewer, authenticatedVisitor, anonymous
       produces:
@@ -23212,15 +23231,18 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: blueId login credentials as basicAuthentication header
+          description: Login credentials as basicAuthentication header
           required: true
           type: string
+        - name: accept-privacy-notice
+          in: query
+          description: (Optional) To accept the latest privacy notice.
+          type: string
+          default: empty
       responses:
         '200':
-          description: >-
-            Success for login. If no tenant header was specified the return JSON
-            object includes a list of available tenants for this user.
-          schema: *ref_202
+          description: Success for login.
+          schema: *ref_203
           headers:
             x-ibm-dx-tenant-id:
               description: Sending tenant-id to client
@@ -23238,21 +23260,24 @@ paths:
               description: Sending cookies to client
               type: string
         '401':
-          description: error message if blueID server was under load
-          schema: *ref_203
+          description: Authentication failed with credentials (incorrect or missing)
+          schema: *ref_202
         '403':
-          description: error message if blueID server was under load
-          schema: *ref_203
+          description: Access forbidden (e.g. no access to tenant or enterprise federation)
+          schema: *ref_202
+        '404':
+          description: Tenant not found
+          schema: *ref_202
         '412':
-          description: error message problem with credentials
-          schema: *ref_203
+          description: Precondition Failed for credentials (incorrect format or missing)
+          schema: *ref_202
+        '423':
+          description: The tenant is locked
+          schema: *ref_202
         '429': *ref_112
-        '500':
-          description: error message
-          schema: *ref_203
         '503':
-          description: error message
-          schema: *ref_203
+          description: Downstream service not available (e.g. IBMid)
+          schema: *ref_202
       tags:
         - Login service
     post:
@@ -23265,15 +23290,13 @@ paths:
         - anonymous
       summary: Userid and password login using POST operation
       description: >-
-        Does a password login with blueID and provides the authentication token
-        and tenant information. If the user authentication with blueID succeeds
+        Does a password login with IBMid and provides the authentication token
+        and tenant information. If the user authentication with IBMid succeeds
         this service tries to find the corresponding tenant for this
         authenticated user. It then returns the tenant ID in the response header
         x-ibm-dx-tenant-id. It also returns a header x-ibm-dx-tenant-base-url
         which includes the base API URL with the tenant ID. If no tenant for the
-        user is found, the authentication part is still valid - as the current
-        user did authenticate with blueID credentials - but there is not an
-        available tenant for this user.
+        user is found, the authentication fails presenting a HTTP404 error.
 
           Note that for calls to this service, the tenant ID component of the API URL can optionally be omitted.
 
@@ -23283,15 +23306,18 @@ paths:
       parameters:
         - name: Authorization
           in: header
-          description: blueId login credentials as basicAuthentication header
+          description: Login credentials as basicAuthentication header
           required: false
           type: string
+        - name: accept-privacy-notice
+          in: query
+          description: (Optional) To accept the latest privacy notice.
+          type: string
+          default: empty
       responses:
         '200':
-          description: >-
-            Success for login. If no tenant header was specified the return JSON
-            object includes a list of available tenants for this user.
-          schema: *ref_202
+          description: Success for login.
+          schema: *ref_203
           headers:
             x-ibm-dx-tenant-id:
               description: Sending tenant-id to client
@@ -23308,16 +23334,25 @@ paths:
             set-cookie2:
               description: Sending cookies to client
               type: string
+        '401':
+          description: Authentication failed with credentials (incorrect or missing)
+          schema: *ref_202
         '403':
-          description: error message if blueID server was under load
-          schema: *ref_203
+          description: Access forbidden (e.g. no access to tenant or enterprise federation)
+          schema: *ref_202
+        '404':
+          description: Tenant not found
+          schema: *ref_202
         '412':
-          description: error message problem with credentials
-          schema: *ref_203
+          description: Precondition Failed for credentials (incorrect format or missing)
+          schema: *ref_202
+        '423':
+          description: The tenant is locked
+          schema: *ref_202
         '429': *ref_112
-        '500':
-          description: error message
-          schema: *ref_203
+        '503':
+          description: Downstream service not available (e.g. IBMid)
+          schema: *ref_202
       tags:
         - Login service
   /publishing/v1/jobs:
