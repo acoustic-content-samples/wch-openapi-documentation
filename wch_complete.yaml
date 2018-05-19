@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.93
+  version: 1.0.95
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -114,10 +114,10 @@ tags:
       positioned before the Search service. Use the Authoring context search
       Rest APIs to retrieve user targeted content items. You can target specific
       content items by providing the condition requests as filters. The filters
-      that are currently supported by the API are
+      that are currently supported by the API are  
 
       1. `accept-language` : Use this filter to target content items in a
-      language of your preference.
+      language of your preference.  
 
       2. `location` : Use this filter to target content items that are available
       in a location, that is, proximity to current location (within `distance`
@@ -131,10 +131,10 @@ tags:
       positioned before the Search service. Use the Delivery context search Rest
       APIs to retrieve user targeted content items. You can target specific
       content items by providing the condition requests as filters. The filters
-      that are currently supported by the API are
+      that are currently supported by the API are  
 
       1. `accept-language` : Use this filter to target content items in a
-      language of your preference.
+      language of your preference.  
 
       2. `location` : Use this filter to target content items that are available
       in a location, that is, proximity to current location (within `distance`
@@ -486,7 +486,7 @@ parameters:
       enum:
         - links
         - none
-  offset35: &ref_205
+  offset35:
     name: offset
     in: query
     description: the index of the first item to be included in the response
@@ -495,7 +495,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit35: &ref_206
+  limit35:
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -505,7 +505,7 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  id35: &ref_212
+  id35: &ref_207
     name: id
     in: path
     description: The ID of the item
@@ -525,7 +525,7 @@ parameters:
       - site
       - category
       - taxonomy
-  force35: &ref_213
+  force35:
     name: force
     in: query
     description: >-
@@ -534,7 +534,7 @@ parameters:
     required: false
     default: false
     type: boolean
-  state35: &ref_207
+  state35:
     name: state
     in: query
     description: Only jobs that have (one of) the specified state(s) will be returned
@@ -1371,7 +1371,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  clientError35: &ref_210
+  clientError35: &ref_206
     description: Unable to handle the request as it does not match the API definition.
     schema: &ref_67
       description: This JSON record represents an error condition.
@@ -2302,6 +2302,11 @@ definitions:
       name:
         type: string
         description: The name of the project.
+      tags:
+        type: array
+        description: The list of tags describing the project.
+        items:
+          type: string
       schedule:
         type: object
         properties:
@@ -2580,10 +2585,10 @@ definitions:
             name:
               type: string
               description: The name of the project.
-              example: MyProject
+              example: My Project
             id:
               type: string
-              description: The ID of the content item.
+              description: The ID of the project.
               example: 925d1454-167b-431b-a54c-6cbf0354398d
             rev:
               type: string
@@ -2626,14 +2631,16 @@ definitions:
               enum:
                 - project
             version:
-              description: 'api version of the project, set by system.'
+              description: 'The API version of the project, set by system.'
               enum:
                 - '1.0'
             status:
               description: the status of the project.
               enum:
                 - in-progress
+                - publishing
                 - published
+                - failed
             targetDate:
               type: string
               format: date-time
@@ -2651,7 +2658,7 @@ definitions:
                 projects.
             tags:
               type: array
-              description: tags describing the project item.
+              description: The list of tags describing the project item.
               items:
                 type: string
             schedule:
@@ -2671,12 +2678,12 @@ definitions:
                 resourceId:
                   type: string
                   example: b1660c62-8788-4f21-9c83-608c0289fb47
-                  description: the id of an `authoring/v1/resource` item.
+                  description: The id of an `authoring/v1/resource` item.
                 href:
                   type: string
                   example: >-
                     /authoring/v1/resources/b1660c62-8788-4f21-9c83-608c0289fb47?fit=inside%7C220:145
-                  description: url to the thumbnail of the specified resource.
+                  description: The url to the thumbnail of the specified resource.
   Project2: *ref_12
   Comment3: &ref_13
     type: object
@@ -6352,7 +6359,7 @@ definitions:
         type: array
         description: An array of JSON objects that contain the requested page items.
         items: *ref_64
-  TenantInfo29: &ref_65
+  TenantInfo30: &ref_65
     type: object
     properties:
       baseUrl:
@@ -6362,13 +6369,13 @@ definitions:
         type: string
         description: The tenantId of the available tenant
     description: Object containing the tenantId and baseUrl
-  TenantArray29: &ref_204
+  TenantArray30: &ref_204
     type: array
     items: *ref_65
     minItems: 0
     maxItems: 100
     description: The list of available tenants for the authenticated user
-  Status29: &ref_203
+  Status30: &ref_203
     type: object
     properties:
       service:
@@ -6770,7 +6777,7 @@ definitions:
         items:
           type: string
           maxLength: 64
-  jobCreation35: &ref_211
+  jobCreation35: &ref_205
     type: object
     description: >-
       When creating a job, you can specify an id that can be used to address the
@@ -6781,7 +6788,7 @@ definitions:
         description: Unique identifier representing a specific job
         maxLength: 64
       mode: *ref_89
-  jobs35: &ref_209
+  jobs35:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobs. At most
@@ -6835,7 +6842,7 @@ definitions:
       - *ref_91
     required:
       - state
-  siteRevisionUpdate35: &ref_215
+  siteRevisionUpdate35: &ref_210
     description: >-
       Only properties autoPublishEnabled, name and description will be updated,
       others will be ignored
@@ -6857,7 +6864,7 @@ definitions:
       items:
         type: array
         items: *ref_92
-  status35: &ref_214
+  status35: &ref_209
     type: object
     required:
       - id
@@ -13329,6 +13336,11 @@ paths:
           type: string
           enum:
             - download
+        - name: bypass-cache
+          in: query
+          description: Force bypassing intermediate caches by providing a unique token.
+          required: false
+          type: string
       responses:
         '200':
           description: >-
@@ -15618,10 +15630,17 @@ paths:
           collectionFormat: csv
         - name: include
           in: query
-          description: >-
-            Specify whether you want the page items to include the page encoded
-            route which is a concatenation of each ancestor page segment field.
-            Include parameter value must be 'route' eg include=route
+          description: >
+            Specify additional fields to include with each result. The following
+            fields can be specified to be included in the page item:
+            'hierarchicalPath', 'route'.
+
+            You can specify multiple fields as a comma-separated value. For
+            example, include=hierarchicalPath,route.
+
+            The hierarchicalPath field is a concatenation of each ancestor page
+            name field and the route field is a concatenation of each ancestor
+            page segment field.
           type: string
           required: false
       responses:
@@ -17980,18 +17999,18 @@ paths:
 
         #### Examples
 
-        * **Search by proximity by using user's location:**
+        * **Search by proximity by using user's location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of user's location.
 
 
 
-        * **Search by proximity by providing a location:**
+        * **Search by proximity by providing a location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of the location that is specifed in the `position`
@@ -17999,11 +18018,12 @@ paths:
 
 
 
-        * **Search by language (setting the `accept-language` request header):**
+        * **Search by language (setting the `accept-language` request
+        header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` de
+        `accept-language` de  
 
         Searches all content of the type `article` and returns items where the
         language is set to `German [de]`.
@@ -18011,11 +18031,11 @@ paths:
 
 
         * **Search by language with ordered language list (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type 'article` and returns items where the
         language is set to `English [en]`. Then, proceeds to search all content
@@ -18024,9 +18044,9 @@ paths:
 
 
 
-        * **Search for images similar to a specified image:**
+        * **Search for images similar to a specified image:**  
 
-        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100
+        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18036,10 +18056,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `score` order:**
+        ascending `score` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=score
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18049,10 +18069,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `lastModified` order:**
+        ascending `lastModified` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=lastModified
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18062,11 +18082,11 @@ paths:
 
 
         * **Apply location and language filters (setting the `accept-language`
-        request header):**
+        request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0
+        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type `article` and returns items where the
         language is set to `English [en]` and the `location` is within a 5 km
@@ -18079,17 +18099,17 @@ paths:
 
 
         * **Apply similar, location, and language filters (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100
+        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100  
 
-        `accept-language` en
+        `accept-language` en  
 
         The search returns any type of content which meets all of the following
-        criteria:
-          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude
-          2. language is set to `English [de]`
-          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).
+        criteria:  
+          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude  
+          2. language is set to `English [de]`  
+          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).  
         <br />User roles: admin, manager, editor, viewer
       produces:
         - application/json
@@ -18132,7 +18152,7 @@ paths:
           in: header
           description: >
             Provide the ordered list of preferred languages in the request to
-            filter the retrieved search results.
+            filter the retrieved search results.  
 
             This header must be provided if the filter to be applied is
             `accept-language` (a web browser would provide this header by
@@ -18144,7 +18164,7 @@ paths:
           in: query
           description: >
             Provide the ID (uuid) of the item on which to base the `similar`
-            search.
+            search.  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18154,9 +18174,9 @@ paths:
           in: query
           description: >
             Provide the classification of the item on which to base the
-            `similar` search.
+            `similar` search.  
 
-            For example, to specify an asset classification, use "asset".
+            For example, to specify an asset classification, use "asset".  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18444,18 +18464,18 @@ paths:
 
         #### Examples
 
-        * **Search by proximity by using user's location:**
+        * **Search by proximity by using user's location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of user's location.
 
 
 
-        * **Search by proximity by providing a location:**
+        * **Search by proximity by providing a location:**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796
+        `q`=type:article&`fl`=description&`filter`=proximity&`distance`=50&`position`=37.25,-5.796  
 
         Searches all content of the type `article` and returns items that are
         found within 50 km of the location that is specifed in the `position`
@@ -18463,11 +18483,12 @@ paths:
 
 
 
-        * **Search by language (setting the `accept-language` request header):**
+        * **Search by language (setting the `accept-language` request
+        header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` de
+        `accept-language` de  
 
         Searches all content of the type `article` and returns items where the
         language is set to `German [de]`.
@@ -18475,11 +18496,11 @@ paths:
 
 
         * **Search by language with ordered language list (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=accept-language
+        `q`=type:article&`fl`=description&`filter`=accept-language  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type 'article` and returns items where the
         language is set to `English [en]`. Then, proceeds to search all content
@@ -18488,9 +18509,9 @@ paths:
 
 
 
-        * **Search for images similar to a specified image:**
+        * **Search for images similar to a specified image:**  
 
-        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100
+        `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18500,10 +18521,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `score` order:**
+        ascending `score` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=score
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18513,10 +18534,10 @@ paths:
 
 
         * **Search for images similar to a specified image and sort results in
-        ascending `lastModified` order:**
+        ascending `lastModified` order:**  
 
         `q`=\*:\*&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=asset&sort=lastModified
-        asc&fq=assetType:image&rows=100
+        asc&fq=assetType:image&rows=100  
 
         The search returns images that are similar to the item with the
         specified ID (`similar-source-id`) and classification
@@ -18526,11 +18547,11 @@ paths:
 
 
         * **Apply location and language filters (setting the `accept-language`
-        request header):**
+        request header):**  
 
-        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0
+        `q`=type:article&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0  
 
-        `accept-language` en,de;q=0.5
+        `accept-language` en,de;q=0.5  
 
         Searches all content of the type `article` and returns items where the
         language is set to `English [en]` and the `location` is within a 5 km
@@ -18543,17 +18564,17 @@ paths:
 
 
         * **Apply similar, location, and language filters (setting the
-        `accept-language` request header):**
+        `accept-language` request header):**  
 
-        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100
+        `q`=\*:\*&`fl`=description&`filter`=proximity&`filter`=accept-language&`position`=0,0&`filter`=similar&`similar-source-id`=acd-23-564-09-asdf&`similar-source-classification`=content&fq=classification:content&rows=100  
 
-        `accept-language` en
+        `accept-language` en  
 
         The search returns any type of content which meets all of the following
-        criteria:
-          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude
-          2. language is set to `English [de]`
-          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).
+        criteria:  
+          1. `location` is within a radius of 5 km around the coordinates 0-degrees latitude and 0-degrees longitude  
+          2. language is set to `English [de]`  
+          3. similar to the item with specified id (`similar-source-id`) and classification (`similar-source-classification`).  
         <br />User roles: admin, manager, editor, viewer, authenticatedVisitor,
         anonymous
       produces:
@@ -18597,7 +18618,7 @@ paths:
           in: header
           description: >
             Provide the ordered list of preferred languages in the request to
-            filter the retrieved search results.
+            filter the retrieved search results.  
 
             This header must be provided if the filter to be applied is
             `accept-language` (a web browser would provide this header by
@@ -18609,7 +18630,7 @@ paths:
           in: query
           description: >
             Provide the ID (uuid) of the item on which to base the `similar`
-            search.
+            search.  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18619,9 +18640,9 @@ paths:
           in: query
           description: >
             Provide the classification of the item on which to base the
-            `similar` search.
+            `similar` search.  
 
-            For example, to specify an asset classification, use "asset".
+            For example, to specify an asset classification, use "asset".  
 
             This parameter is required if the filter to be applied is `similar`.
           required: false
@@ -18865,6 +18886,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Retrieve filtered content by id in bulk
       description: >-
         Returns an array of requested filtered content items. Restricted content
@@ -18987,6 +19009,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Get content item
       description: >-
         Returns the content item specified by `id`. Restricted content items
@@ -19192,6 +19215,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Retrieve a resource by path.
       description: >-
         This endpoint retrieves the resource at the given path. Restricted
@@ -19244,6 +19268,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Retrieve a resource by Id.
       description: >-
         This endpoint retrieves the resource for the specified resource Id.
@@ -22696,6 +22721,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Get the site descriptor of a public site
       description: >-
         Returns the site descriptor of the site specified by *siteId*.
@@ -22885,6 +22911,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Get the descriptor of a public page from a site.
       description: >-
         Returns the descriptor of the page item specified by *pageId*. The page
@@ -23081,6 +23108,7 @@ paths:
         - viewer
         - authenticatedVisitor
         - anonymous
+      x-ibm-dx-vary: []
       summary: Get all public child pages of a specified parent page
       description: >-
         Returns the descriptors of all public child pages which are  direct
@@ -23172,7 +23200,6 @@ paths:
         - editor
         - viewer
         - authenticatedVisitor
-        - anonymous
       summary: Get all public or protected child pages of a specified parent page
       description: >-
         Returns the descriptors of all public or protected child pages which
@@ -23183,8 +23210,7 @@ paths:
         If the value of *parentPageId* is ***@top***, then the descriptors of
         the top-level pages are returned.
 
-        <br />User roles: admin, manager, editor, viewer, authenticatedVisitor,
-        anonymous
+        <br />User roles: admin, manager, editor, viewer, authenticatedVisitor
       produces:
         - application/json
       parameters:
@@ -23498,30 +23524,6 @@ paths:
     x-ibm-dx-security-user-roles:
       - admin
       - manager
-    get:
-      x-ibm-dx-security-user-roles:
-        - admin
-        - manager
-        - editor
-      tags:
-        - Publishing
-      summary: List all jobs
-      description: >-
-        Use the /jobs endpoint to list all the jobs in the database. Use the
-        *offset* and *limit* parameter to control the length and the position of
-        the subset list.  Use the *state* parameter to filter for jobs in given
-        state(s).<br />User roles: admin, manager, editor
-      parameters:
-        - *ref_205
-        - *ref_206
-        - *ref_207
-        - *ref_208
-      responses:
-        '200':
-          description: Successfully listed a subset of all the jobs in the database.
-          schema: *ref_209
-        '400': *ref_210
-        '429': *ref_113
     post:
       tags:
         - Publishing
@@ -23534,7 +23536,7 @@ paths:
         - name: newJob
           in: body
           required: false
-          schema: *ref_211
+          schema: *ref_205
       responses:
         '200':
           description: >-
@@ -23544,20 +23546,7 @@ paths:
         '201':
           description: Successfully triggered a new job.
           schema: *ref_90
-        '400': *ref_210
-        '429': *ref_113
-    delete:
-      tags:
-        - Publishing
-      summary: Delete all jobs
-      description: >-
-        Use the /jobs endpoint to delete all jobs that are not in the state
-        "RUNNING"<br />User roles: admin, manager
-      responses:
-        '200':
-          description: Successfully deleted all jobs that are not in the state "RUNNING".
-          schema: *ref_209
-        '400': *ref_210
+        '400': *ref_206
         '429': *ref_113
   '/publishing/v1/jobs/{id}':
     x-ibm-dx-security-user-roles:
@@ -23576,7 +23565,7 @@ paths:
         ID you provide from the database.<br />User roles: admin, manager,
         editor
       parameters:
-        - *ref_212
+        - *ref_207
         - *ref_208
       responses:
         '200':
@@ -23599,72 +23588,6 @@ paths:
           description: 'The job with ID {id} that you provided was not found.'
           schema: *ref_67
         '429': *ref_113
-    delete:
-      tags:
-        - Publishing
-      summary: Delete an existing job
-      description: >-
-        Use the /jobs/{id} endpoint to delete an existing job with the provided
-        ID. Note: You cannot delete a job that is in the state "RUNNING". To
-        delete a job in the state "RUNNING", you must cancel the job first.
-        Alternatively, you can use the parameter force=true to enforce the
-        deletion of a job that is in the state "RUNNING".<br />User roles:
-        admin, manager
-      parameters:
-        - *ref_212
-        - *ref_213
-      responses:
-        '204':
-          description: Successfully deleted the job that matches the ID you provided.
-          schema: *ref_102
-        '400': *ref_210
-        '403':
-          description: Not allowed to delete the job
-        '404':
-          description: 'The job with ID {ID} that you provided was not found.'
-          schema: *ref_67
-        '409':
-          description: >-
-            Unable to delete the job that matches the ID you provided as the job
-            is still running.
-        '429': *ref_113
-  '/publishing/v1/jobs/{id}/cancel':
-    x-ibm-dx-security-user-roles:
-      - admin
-      - manager
-    put:
-      tags:
-        - Publishing
-      summary: Cancel an existing job
-      description: >-
-        Use the /jobs/{id}/cancel end point to cancel the job that matches the
-        ID you provide.<br />User roles: admin, manager
-      parameters:
-        - *ref_212
-      responses:
-        '200':
-          description: Successfully canceled the job that matches the ID that you provided.
-          schema: *ref_90
-          headers:
-            Content-Location:
-              description: >-
-                Provide the URL of the actual revision of the job that is
-                canceled.
-              type: string
-        '400':
-          description: >-
-            Unable to handle the request as it does not match the API
-            definition.
-          schema: *ref_67
-        '404':
-          description: 'The job with ID {ID} that you provided was not found.'
-          schema: *ref_67
-        '409':
-          description: >-
-            Unable to delete the job that matches the ID you provided as the job
-            is not in "RUNNING" or "WAITING" state.
-          schema: *ref_67
-        '429': *ref_113
   '/publishing/v1/jobs/{id}/status':
     x-ibm-dx-security-user-roles:
       - admin
@@ -23682,13 +23605,13 @@ paths:
         for the job that matches the ID that you provide.<br />User roles:
         admin, manager, editor
       parameters:
-        - *ref_212
+        - *ref_207
       responses:
         '200':
           description: >-
             Successfully retrieved the status for the job that matches the ID
             you provided.
-          schema: *ref_214
+          schema: *ref_209
         '400':
           description: >-
             Unable to handle the request as it does not match the API
@@ -23743,7 +23666,7 @@ paths:
         - name: siteRevision
           in: body
           required: true
-          schema: *ref_215
+          schema: *ref_210
       responses:
         '200':
           description: Successfully updated the site revision.
