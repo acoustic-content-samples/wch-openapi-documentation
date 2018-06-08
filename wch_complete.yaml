@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.95
+  version: 1.0.96
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -460,7 +460,7 @@ parameters:
     description: Provide the absolute path of the resource (URL encoded).
     type: string
     required: true
-  expand4JobDefinition35:
+  expand4JobDefinition34:
     name: expand
     in: query
     description: expand (inline) given references
@@ -473,7 +473,7 @@ parameters:
         - profile
         - '*'
         - all
-  include35: &ref_208
+  include34: &ref_208
     name: include
     in: query
     description: >-
@@ -486,7 +486,7 @@ parameters:
       enum:
         - links
         - none
-  offset35:
+  offset34:
     name: offset
     in: query
     description: the index of the first item to be included in the response
@@ -495,7 +495,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit35:
+  limit34:
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -505,14 +505,14 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  id35: &ref_207
+  id34: &ref_207
     name: id
     in: path
     description: The ID of the item
     required: true
     type: string
     maxLength: 64
-  classification35:
+  classification34:
     name: classification
     in: path
     description: The classification of the item
@@ -525,7 +525,7 @@ parameters:
       - site
       - category
       - taxonomy
-  force35:
+  force34:
     name: force
     in: query
     description: >-
@@ -534,7 +534,7 @@ parameters:
     required: false
     default: false
     type: boolean
-  state35:
+  state34:
     name: state
     in: query
     description: Only jobs that have (one of) the specified state(s) will be returned
@@ -1371,7 +1371,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  clientError35: &ref_206
+  clientError34: &ref_206
     description: Unable to handle the request as it does not match the API definition.
     schema: &ref_67
       description: This JSON record represents an error condition.
@@ -2635,12 +2635,14 @@ definitions:
               enum:
                 - '1.0'
             status:
+              type: string
               description: the status of the project.
               enum:
                 - in-progress
                 - publishing
                 - published
                 - failed
+              example: in-progress
             targetDate:
               type: string
               format: date-time
@@ -6359,7 +6361,7 @@ definitions:
         type: array
         description: An array of JSON objects that contain the requested page items.
         items: *ref_64
-  TenantInfo30: &ref_65
+  TenantInfo29: &ref_65
     type: object
     properties:
       baseUrl:
@@ -6369,13 +6371,13 @@ definitions:
         type: string
         description: The tenantId of the available tenant
     description: Object containing the tenantId and baseUrl
-  TenantArray30: &ref_204
+  TenantArray29: &ref_204
     type: array
     items: *ref_65
     minItems: 0
     maxItems: 100
     description: The list of available tenants for the authenticated user
-  Status30: &ref_203
+  Status29: &ref_203
     type: object
     properties:
       service:
@@ -6387,9 +6389,9 @@ definitions:
       httpStatus:
         type: integer
         description: The http return code
-  error35: *ref_66
-  error_message35: *ref_67
-  localizedItem35: &ref_82
+  error34: *ref_66
+  error_message34: *ref_67
+  localizedItem34: &ref_82
     type: object
     required:
       - name
@@ -6400,14 +6402,14 @@ definitions:
       name: &ref_68
         type: object
         description: an object holding the localized title for multiple languages
-  localizedItemCreation35: &ref_84
+  localizedItemCreation34: &ref_84
     type: object
     required:
       - name
     properties:
       name: *ref_68
       description: *ref_69
-  managedItem35: &ref_81
+  managedItem34: &ref_81
     type: object
     required:
       - id
@@ -6481,7 +6483,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  managedItemCreation35: &ref_85
+  managedItemCreation34: &ref_85
     type: object
     properties:
       id:
@@ -6520,7 +6522,7 @@ definitions:
         type: object
         required: *ref_72
         properties: *ref_73
-  managedItemUpdate35: &ref_86
+  managedItemUpdate34: &ref_86
     type: object
     required:
       - rev
@@ -6539,7 +6541,7 @@ definitions:
       creator: *ref_77
       lastModified: *ref_78
       lastModifier: *ref_79
-  itemList35: &ref_87
+  itemList34: &ref_87
     type: object
     required:
       - offset
@@ -6603,7 +6605,7 @@ definitions:
       count:
         type: integer
         description: Number of items in the complete list
-  unmanagedJobDefinition35:
+  unmanagedJobDefinition34:
     type: object
     properties:
       profile: &ref_97
@@ -6687,7 +6689,7 @@ definitions:
               asset: *ref_80
               category: *ref_80
               resource: *ref_80
-  jobDefinitionCore35: &ref_83
+  jobDefinitionCore34: &ref_83
     type: object
     properties:
       profile: &ref_108
@@ -6708,27 +6710,27 @@ definitions:
           id:
             type: string
             maxLength: 64
-  jobDefinition35: &ref_88
+  jobDefinition34: &ref_88
     type: object
     allOf:
       - *ref_81
       - *ref_82
       - *ref_83
-  jobDefinitionCreation35:
+  jobDefinitionCreation34:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_84
       - *ref_85
       - *ref_83
-  jobDefinitionUpdate35:
+  jobDefinitionUpdate34:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_84
       - *ref_86
       - *ref_83
-  jobDefinitions35:
+  jobDefinitions34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobDefinitions. At
@@ -6741,7 +6743,7 @@ definitions:
       items:
         type: array
         items: *ref_88
-  job35: &ref_90
+  job34: &ref_90
     type: object
     allOf:
       - *ref_81
@@ -6777,7 +6779,7 @@ definitions:
         items:
           type: string
           maxLength: 64
-  jobCreation35: &ref_205
+  jobCreation34: &ref_205
     type: object
     description: >-
       When creating a job, you can specify an id that can be used to address the
@@ -6788,7 +6790,7 @@ definitions:
         description: Unique identifier representing a specific job
         maxLength: 64
       mode: *ref_89
-  jobs35:
+  jobs34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobs. At most
@@ -6801,7 +6803,7 @@ definitions:
       items:
         type: array
         items: *ref_90
-  siteRevisionCore35: &ref_91
+  siteRevisionCore34: &ref_91
     type: object
     properties:
       state:
@@ -6834,7 +6836,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  siteRevision35: &ref_92
+  siteRevision34: &ref_92
     type: object
     allOf:
       - *ref_81
@@ -6842,7 +6844,7 @@ definitions:
       - *ref_91
     required:
       - state
-  siteRevisionUpdate35: &ref_210
+  siteRevisionUpdate34: &ref_210
     description: >-
       Only properties autoPublishEnabled, name and description will be updated,
       others will be ignored
@@ -6851,7 +6853,7 @@ definitions:
       - *ref_84
       - *ref_86
       - *ref_91
-  siteRevisions35:
+  siteRevisions34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of site revisions. At
@@ -6864,7 +6866,7 @@ definitions:
       items:
         type: array
         items: *ref_92
-  status35: &ref_209
+  status34: &ref_209
     type: object
     required:
       - id
@@ -6934,36 +6936,36 @@ definitions:
                 - ERROR
                 - INFO
                 - WARNING
-  message35: *ref_95
-  task35: *ref_96
-  profileCore35: *ref_97
-  profile35: &ref_98
+  message34: *ref_95
+  task34: *ref_96
+  profileCore34: *ref_97
+  profile34: &ref_98
     type: object
     allOf:
       - *ref_81
       - *ref_82
       - *ref_97
-  profileCreation35:
+  profileCreation34:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_84
       - *ref_85
       - *ref_97
-  profileUpdate35:
+  profileUpdate34:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_84
       - *ref_86
       - *ref_97
-  profileCreationForJobCreation35:
+  profileCreationForJobCreation34:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_85
       - *ref_97
-  profiles35:
+  profiles34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of profiles. At most
@@ -6976,28 +6978,28 @@ definitions:
       items:
         type: array
         items: *ref_98
-  sourceCore35: *ref_99
-  source35: &ref_100
+  sourceCore34: *ref_99
+  source34: &ref_100
     type: object
     allOf:
       - *ref_81
       - *ref_82
       - *ref_99
-  sourceCreation35:
+  sourceCreation34:
     type: object
     allOf:
       - *ref_84
       - *ref_85
       - *ref_99
-  sourceUpdate35:
+  sourceUpdate34:
     type: object
     allOf:
       - *ref_84
       - *ref_86
       - *ref_99
-  sourceDocs35: *ref_94
-  docEvents35: *ref_80
-  sources35:
+  sourceDocs34: *ref_94
+  docEvents34: *ref_80
+  sources34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of sources. At most
@@ -7010,9 +7012,9 @@ definitions:
       items:
         type: array
         items: *ref_100
-  jobState35: *ref_93
-  httpVerb35: *ref_101
-  itemsDeleteResponse35:
+  jobState34: *ref_93
+  httpVerb34: *ref_101
+  itemsDeleteResponse34:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of items. At most
@@ -7023,30 +7025,30 @@ definitions:
       items:
         type: array
         items: &ref_102 {}
-  itemDeleteResponse35: *ref_102
-  contentFormat35: *ref_103
-  created35: *ref_76
-  lastModified35: *ref_78
-  rev35: *ref_75
-  description35: *ref_69
-  title35: *ref_68
-  jobMode35: *ref_89
-  site35:
+  itemDeleteResponse34: *ref_102
+  contentFormat34: *ref_103
+  created34: *ref_76
+  lastModified34: *ref_78
+  rev34: *ref_75
+  description34: *ref_69
+  title34: *ref_68
+  jobMode34: *ref_89
+  site34:
     type: object
     description: tbd
     properties:
       href:
         type: string
         maxLength: 1024
-  urlSelf35: *ref_74
-  urlFirst35: *ref_104
-  urlPrev35: *ref_105
-  urlNext35: *ref_106
-  urlLast35: *ref_107
-  urlCreator35: *ref_77
-  urlLastModifier35: *ref_79
-  profileRef35: *ref_108
-  siteRevisionRef35:
+  urlSelf34: *ref_74
+  urlFirst34: *ref_104
+  urlPrev34: *ref_105
+  urlNext34: *ref_106
+  urlLast34: *ref_107
+  urlCreator34: *ref_77
+  urlLastModifier34: *ref_79
+  profileRef34: *ref_108
+  siteRevisionRef34:
     type: object
     required:
       - id
@@ -7055,7 +7057,7 @@ definitions:
       id:
         type: string
         maxLength: 64
-  sourceRef35: *ref_109
+  sourceRef34: *ref_109
   ErrorResponse:
     description: This JSON record represents an error condition.
     type: object
@@ -16217,10 +16219,17 @@ paths:
           collectionFormat: csv
         - name: include
           in: query
-          description: >-
-            Specify whether you want the page item to include the page encoded
-            route which is a concatenation of each ancestor page segment field.
-            Include parameter value must be 'route' eg include=route
+          description: >
+            Specify additional fields to include with each result. The following
+            fields can be specified to be included in the page item:
+            'hierarchicalPath', 'route'.
+
+            You can specify multiple fields as a comma-separated value. For
+            example, include=hierarchicalPath,route.
+
+            The hierarchicalPath field is a concatenation of each ancestor page
+            name field and the route field is a concatenation of each ancestor
+            page segment field.
           type: string
           required: false
       responses:
@@ -22737,6 +22746,19 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
         - name: If-None-Match
           in: header
           description: >-
@@ -22830,6 +22852,19 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
         - name: If-None-Match
           in: header
           description: >-
@@ -22934,6 +22969,19 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
         - name: If-None-Match
           in: header
           description: >-
@@ -23031,6 +23079,19 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
         - name: If-None-Match
           in: header
           description: >-
@@ -23137,6 +23198,36 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
+        - name: count
+          in: query
+          description: >-
+            specifies the maximum number of items that should be returned in
+            this request. If this parameter is not specified, up to 100 page
+            items are returned.
+          required: false
+          type: number
+        - name: start
+          in: query
+          description: >-
+            specifies the starting offset of the result set being returned. For
+            example, if the value of this paramter is 5, the first 5 items in
+            the result set are ignored. If this parameter is not specified, the
+            starting offset of the result set is 0.
+          required: false
+          type: number
         - name: If-None-Match
           in: header
           description: >-
@@ -23228,6 +23319,36 @@ paths:
           required: true
           type: string
           format: uuid
+        - name: fields
+          in: query
+          description: >-
+            Reduce the returned content down to just the specified fields.
+            Fields specified by a comma seperated list of field names and should
+            only be used once in query string. To only retrieve `id` and `name`
+            this parameter should look like `id,name`. Undefined fields are
+            ignored.
+          required: false
+          type: string
+          items:
+            type: string
+          collectionFormat: csv
+        - name: count
+          in: query
+          description: >-
+            specifies the maximum number of items that should be returned in
+            this request. If this parameter is not specified, up to 100 page
+            items are returned.
+          required: false
+          type: number
+        - name: start
+          in: query
+          description: >-
+            specifies the starting offset of the result set being returned. For
+            example, if the value of this paramter is 5, the first 5 items in
+            the result set are ignored. If this parameter is not specified, the
+            starting offset of the result set is 0.
+          required: false
+          type: number
         - name: If-None-Match
           in: header
           description: >-
