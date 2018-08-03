@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.101
+  version: 1.0.102
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -1670,6 +1670,121 @@ definitions:
         items:
           type: string
         example: []
+      profiles:
+        type: array
+        description: The IDs of image profiles to add to use on this asset.
+        items:
+          type: string
+        example:
+          - 8b4698e3-6283-4bc5-9e1e-fff69c2b48be
+      profileRenditions:
+        type: array
+        description: >-
+          The transform instructions for each of the renditions in the
+          "profiles" array. If a rendition for one of those image profiles is
+          not defined, a rendition with the best fit will automatically be
+          generated.
+        items:
+          title: Profile Rendition
+          type: object
+          properties:
+            profileId:
+              type: string
+              description: >-
+                The ID of the image profile this rendition belongs to. This ID
+                must also be specified in the "profiles" array.
+            profileName:
+              type: string
+              readOnly: true
+              description: >-
+                The name of the image profile this rendition belongs to. This
+                field will only be included when metadata is provided as a value
+                of the include query parameter.
+            key:
+              type: string
+              description: The key to this rendition.
+            label:
+              type: string
+              readOnly: true
+              description: >-
+                The label to this rendition. This field will only be included
+                when metadata is provided as a value of the include query
+                parameter.
+            uri:
+              type: string
+              readOnly: true
+              description: The URI to the resource in this rendition's dimensions.
+            width:
+              type: number
+              readOnly: true
+              description: The width defined for this rendition.
+            height:
+              type: number
+              readOnly: true
+              description: The height defined for this rendition.
+            transform:
+              title: Transform
+              type: object
+              description: >-
+                The transform instructions to achieve this rendition's
+                dimensions. If not specified, a best fit transformation will
+                automatically be generated.
+              properties:
+                scale:
+                  type: number
+                  description: >-
+                    The scale to perform on the original resource. The value
+                    must be between 0 (exclusive) and 1 (inclusive).
+                crop:
+                  title: Crop
+                  type: object
+                  description: >-
+                    The crop to apply on the resource after any scaling has been
+                    done.
+                  properties:
+                    x:
+                      type: number
+                      description: The X coordinate to start the crop from
+                    'y':
+                      type: number
+                      description: The Y coordinate to start the crop from
+                    width:
+                      type: number
+                      description: The width to crop out
+                    height:
+                      type: number
+                      description: The height to crop out
+        example:
+          - profileId: a35f02ce-9f31-4832-8ed5-2b6d9c8b8d86
+            profileName: Profile E
+            key: renditionF
+            label: Rendition F
+            transform:
+              scale: 0.0862
+              crop:
+                x: 0
+                'y': 0
+                width: 10
+                height: 10
+            uri: >-
+              /authoring/v1/resources/e17b2c51-a74e-4332-80df-0f6d9340426c?resize=10px:10px&crop=10:10;0,0
+            width: 10
+            height: 10
+          - profileId: a35f02ce-9f31-4832-8ed5-2b6d9c8b8d86
+            profileName: Profile E
+            key: renditionG
+            label: Rendition G
+            transform:
+              scale: 0.17241
+              crop:
+                x: 0
+                'y': 0
+                width: 20
+                height: 20
+            uri: >-
+              /authoring/v1/resources/e17b2c51-a74e-4332-80df-0f6d9340426c?resize=20px:20px&crop=20:20;0,0
+            width: 20
+            height: 20
       renditions:
         type: array
         description: >-
@@ -17849,7 +17964,9 @@ paths:
            "elementType": "category",
            "restrictedParents": ["63b5f83684cddba687cb41eca328a41a"],
               - Optional. Indicates that categories can only been chosen from the specified parent. Currently only supports a single entry.
-           "required": true,
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
            "helpText": "Please select a category from the list"
         }
 
@@ -17864,10 +17981,14 @@ paths:
            "label": "My Date Element",
            "elementType": "datetime",
            "fieldType": "date-time",
+           "searchKey": "date1" | "date2" | "sortableDate1" | "sortableDate2",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
            "allowMultipleValues": true,
            "minimumValues": 1,
            "maximumValues": 50,
-           "fieldLabel": "Date"
+           "fieldLabel": "Date",
+           "helpText": "Please select a date and time"
         }
 
         ```
@@ -17881,10 +18002,14 @@ paths:
            "label": "My Date Element",
            "elementType": "datetime",
            "fieldType": "date",
+           "searchKey": "date1" | "date2" | "sortableDate1" | "sortableDate2",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
            "allowMultipleValues": true,
            "minimumValues": 1,
            "maximumValues": 50,
-           "fieldLabel": "Date"
+           "fieldLabel": "Date",
+           "helpText": "Please select a date"
         }
 
         ```
@@ -17897,8 +18022,36 @@ paths:
            "key": "MyFileElement",
            "label": "My File Element",
            "elementType": "file",
-           "acceptType": ["plain-text", "presentation", "rich-document", "spreadsheet", "pdf-document"]
+           "acceptType": ["plain-text", "presentation", "rich-document", "spreadsheet", "pdf-document"],
               - Optional. Specifies the allowed file types.. with the above list comprising the allowed values.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "File",
+           "helpText": "Please select a file"
+        }
+
+        ```
+
+        ### Formatted-Text element
+
+        ```
+
+        {
+           "key": "MyFormattedTextElement",
+           "label": "My Formatted Text Element",
+           "elementType": "formattedtext",
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Text",
+           "helpText": "Enter some text"
         }
 
         ```
@@ -17913,8 +18066,12 @@ paths:
            "elementType": "group",
            "typeRef": {"id":"73b5f83684cddba687cb41eca328a41a"},
               - Must refer to an existing content-type whose `kind` attribute contains the value `embedded`
-           "required": true,
-           "helpText": "Please field in these fields"
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Text",
+           "helpText": "Please fill in these fields"
         }
 
         ```
@@ -17929,8 +18086,16 @@ paths:
            "elementType": "image",
            "acceptType": ["jpg", "jpeg", "png", "gif", "svg"],
               - Optional. Specifies the allowed image types.. with the above list comprising the allowed values.
-           "imageProfileId": "83b5f83684cddba687cb41eca328a4567"
+           "imageProfileId": "83b5f83684cddba687cb41eca328a4567",
               - Optional. Specifies the ID of the image profile that this element is using. If an image profile is selected, then 'svg' is no longer allowed as an acceptType.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Image",
+           "helpText": "Please select an image"
         }
 
         ```
@@ -17942,7 +18107,15 @@ paths:
         {
            "key": "MyLinkElement",
            "label": "My Link Element",
-           "elementType": "link"
+           "elementType": "link",
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Link",
+           "helpText": "Please select a link"
         }
 
         ```
@@ -17954,7 +18127,11 @@ paths:
         {
            "key": "MyLocationElement",
            "label": "My Location element",
-           "elementType": "location"
+           "elementType": "location",
+           "searchKey": "location1",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "helpText": "Please select a location"
         }
 
         ```
@@ -17972,6 +18149,13 @@ paths:
               - Optional. Specifies the lowest accepted number.
            "maximum": 49.9,
               - Optional. Specifies the highest accepted number.
+           "searchKey": "number1" | "number2" | "sortableNumber1" | "sortableNumber2",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Number",
            "helpText": "Enter a number between 10.0 and 49.9"
         }
 
@@ -17990,7 +18174,34 @@ paths:
               - Optional. Specifies the lowest accepted number.
            "maximum": 49,
               - Optional. Specifies the highest accepted number.
+           "searchKey": "number1" | "number2" | "sortableNumber1" | "sortableNumber2",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Number",
            "helpText": "Enter a number between 10 and 49"
+        }
+
+        ```
+
+        ### Option Selection element
+
+        ```
+
+        {
+           "key": "MyOptionSelectionElement",
+           "label": "My Option Selection Element",
+           "elementType": "optionselection",
+           "options": [{"label":"Option 1", "selection": "Value 1"}, {"label":"Option 2", "selection": "Value 2"}],
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "helpText": "Enter make a selection"
         }
 
         ```
@@ -18003,8 +18214,16 @@ paths:
            "key": "MyReferenceElement",
            "label": "My Reference Element",
            "elementType": "reference",
-           "restrictTypes": [{"id":"23b5f83684cddba687cb41eca328a1234"}, {"id":"23fhf83684cddba687cb41eca328a6789"}]
+           "restrictTypes": [{"id":"23b5f83684cddba687cb41eca328a1234"}, {"id":"23fhf83684cddba687cb41eca328a6789"}],
               - Optional. Restricts the allowed content items, to only those from the specified content-types.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Reference",
+           "helpText": "Please select an item"
         }
 
         ```
@@ -18024,6 +18243,13 @@ paths:
            "displayType": "singleLine",
            "displayWidth": 20,
               - Optional. Specifies the width of the text editor in characters.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Text",
            "helpText": "Enter some text between 5 and 50 characters"
         }
 
@@ -18046,6 +18272,13 @@ paths:
               - Optional. Specifies the width of the text editor in characters.
            "displayHeight": 10,
               - Optional. Specifies the number of lines shown within the text editor.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Text",
            "helpText": "Enter some text between 5 and 50 characters"
         }
 
@@ -18059,8 +18292,11 @@ paths:
            "key": "MyToggleElement",
            "label": "My Toggle element",
            "elementType": "toggle",
-           "statement": "Lead in question"
+           "statement": "Lead in question",
               - Optional. Specifies the text (typically a question) to show with the toggle
+           "searchKey": "boolean1" | "boolean2",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "helpText": "Please make a selection"
         }
 
         ```
@@ -18073,8 +18309,16 @@ paths:
            "key": "MyVideoElement",
            "label": "My Video Element",
            "elementType": "video",
-           "acceptType": ["mp4"]
+           "acceptType": ["mp4"],
               - Optional. Specifies the allowed video types.. with the above list comprising the allowed values.
+           "searchKey": "string1" | "string2" | "string3" | "string4" | "sortableString1" | "sortableString2" | "sortableString3" | "sortableString4",
+              - Optional. Indicates that the value of this element will be searchable under the specified key
+           "required": false,
+           "allowMultipleValues": true,
+           "minimumValues": 1,
+           "maximumValues": 50,
+           "fieldLabel": "Video",
+           "helpText": "Please select a video"
         }
 
         ```
@@ -24000,7 +24244,9 @@ paths:
       parameters:
         - name: siteId
           in: path
-          description: The ID of the content item.
+          description: >-
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site item is specified in the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
@@ -24106,7 +24352,9 @@ paths:
       parameters:
         - name: siteId
           in: path
-          description: The ID of the content item.
+          description: >-
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site item is specified in the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
@@ -24223,7 +24471,10 @@ paths:
           format: uuid
         - name: siteId
           in: path
-          description: the ID of the site item that contains the selected page.
+          description: >-
+            the ID of the site item that contains the selected page, or
+            `@current` to indicate that the ID of the site item is specified in
+            the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
@@ -24333,7 +24584,10 @@ paths:
           format: uuid
         - name: siteId
           in: path
-          description: the ID of the site item that contains the selected page.
+          description: >-
+            the ID of the site item that contains the selected page, or
+            `@current` to indicate that the ID of the site item is specified in
+            the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
@@ -24452,7 +24706,9 @@ paths:
           format: uuid
         - name: siteId
           in: path
-          description: The ID of the site item.
+          description: >-
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site item is specified in the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
@@ -24573,7 +24829,9 @@ paths:
           format: uuid
         - name: siteId
           in: path
-          description: The ID of the site item.
+          description: >-
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site item is specified in the `x-ibm-dx-site-id` header.
           required: true
           type: string
           format: uuid
