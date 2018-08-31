@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.102
+  version: 1.0.104
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -3355,6 +3355,30 @@ definitions:
                 type: string
             example:
               href: /authoring/v1/types/b0798e67-3da2-48b4-b044-016495fa3ead
+      thumbnail:
+        type: object
+        description: >
+          The reference to the asset that should act as the thumbnail of this
+          content item.
+
+          The thumbnail can be referred to by either id or path.
+
+          This field is read only, and is determined by the contentThumbnail
+          field on the content type. The type can specify an image element on
+          this content item, or an image from a particular asset.
+        properties:
+          id:
+            type: string
+            description: The ID of the asset.
+            example: 6c622bbb-5f5b-45d4-89e1-fce1c054138f
+          path:
+            type: string
+            description: The path of the asset.
+            example: /sales/images/hub.png
+          url:
+            type: string
+            description: The url of the asset.
+            example: /authoring/v1/resources/47d535ff288b3bd8383009abf82a9ea8
     additionalProperties: false
   UpdateContent5: &ref_158
     type: object
@@ -5174,14 +5198,14 @@ definitions:
           instead of '#' anchors, for example 'https://your.host/products'. The
           'path' mode is recommended for allowing external search crawlers to
           index the pages as separate documents.
-  PageHierarchy15: &ref_187
+  AllPages15:
     type: object
-    title: Hierachy of pages in the site
-    description: Hierachy of pages in the site
+    title: List of all pages
+    description: List of all pages from all sites
     properties:
       items:
         type: array
-        items: &ref_43
+        items: &ref_42
           title: Hierarchical Page Metadata
           description: Page Metadata of page in hierarchy
           type: object
@@ -5239,6 +5263,14 @@ definitions:
                 a parent page, it will override the corresponding flags in all
                 descendant pages. Therefore, hiding a page will hide all its
                 descendants in the site navigation menu.
+  PageHierarchy15: &ref_187
+    type: object
+    title: Hierachy of pages in the site
+    description: Hierachy of pages in the site
+    properties:
+      items:
+        type: array
+        items: *ref_42
   PageList15: &ref_189
     type: object
     title: Modified pages list
@@ -5246,7 +5278,7 @@ definitions:
     properties:
       items:
         type: array
-        items: &ref_42
+        items: &ref_43
           title: Page Metadata
           description: Page Metadata
           type: object
@@ -5427,8 +5459,8 @@ definitions:
           on a parent page, it will override the corresponding flags in all
           descendant pages. Therefore, hiding a page will hide all its
           descendants in the site navigation menu.
-  Page15: *ref_42
-  HierarchicalPage15: *ref_43
+  Page15: *ref_43
+  HierarchicalPage15: *ref_42
   MoveResult15: &ref_191
     title: Target Parent After Move
     description: Target Parent Updated Values After Move
@@ -8425,41 +8457,6 @@ paths:
               status: draft
             required:
               - resource
-        - name: data
-          in: formData
-          required: false
-          type: string
-          description: >
-            Optionally provide some asset data. Only used when creating the
-            asset and resource simultaneously. If an asset exists in the
-            specified path, it is overwritten. The path that you provide must
-            contain a leading slash. The path and name fields are optional and
-            are generated from the resource’s name by default.
-
-            ### Example: ###
-              ~~~
-                {
-                  "path": "/Screen Shot 2016-05-11 at 6.52.22 PM",
-                  "description": "Screenshot",
-                  "name": "Important screenshot",
-                  "tags": {
-                    "values": [
-                      "screenshot"
-                    ]
-                  },
-                  "status": "draft"
-                }
-              ~~~
-            #
-        - name: resource
-          in: formData
-          required: true
-          type: file
-          description: >-
-            The resource binary. This field is only required when creating the
-            asset and resource simultaneously. The filename field on the
-            Content-Disposition header specifies the resource name, and is
-            required. The Content-Type header is also required.
         - name: md5
           in: query
           description: >-
@@ -16766,7 +16763,7 @@ paths:
       responses:
         '201':
           description: succcess.
-          schema: *ref_42
+          schema: *ref_43
           examples:
             application/json:
               id: aw67771c-ec05-4671-951b-18fqwq53f2d
@@ -17166,7 +17163,7 @@ paths:
       responses:
         '200':
           description: succcess.
-          schema: *ref_42
+          schema: *ref_43
           examples:
             application/json:
               id: aw67771c-ec05-4671-951b-18fqwq53f2d
@@ -17476,7 +17473,7 @@ paths:
       responses:
         '200':
           description: Page successfully updated.
-          schema: *ref_42
+          schema: *ref_43
           examples:
             application/json:
               id: aw67771c-ec05-4671-951b-18fqwq53f2d
@@ -17836,7 +17833,7 @@ paths:
       responses:
         '200':
           description: succcess.
-          schema: *ref_42
+          schema: *ref_43
           examples:
             application/json:
               id: aw67771c-ec05-4671-951b-18fqwq53f2d
