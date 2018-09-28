@@ -4,4 +4,4 @@ In addition to <https://developer.ibm.com/api/view/dx-prod:ibm-watson-content-hu
 
 This documentation is in the YAML format and can be accessed via <https://raw.githubusercontent.com/ibm-wch/wch-openapi-documentation/master/wch_complete.yaml>.
 
-For example you can view the API documentation with <http://petstore.swagger.io/?url=https://raw.githubusercontent.com/ibm-wch/wch-openapi-documentation/master/wch_complete.yaml>.
+You can browse and search this YAML API documentation with <https://ibm-wch.github.io/wch-openapi-documentation/>.
