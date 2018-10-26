@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.108
+  version: 1.0.109
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -438,7 +438,11 @@ parameters:
     name: id
     description: >-
       Provide the ID of the resource. Note that IDs are always the IDs of
-      published item, even if a draft exists with a different ID.
+      published item, even if a draft exists with a different ID. For a site,
+      use `@current` to indicate that the ID of the site is derived from the
+      addressed URL via custom domain site mapping or URL path based site
+      addressing. For further details consult the Watson Content Hub
+      documentation.
     type: string
     required: true
   FieldQueryParameter21: &ref_227
@@ -7219,6 +7223,9 @@ definitions:
         type: string
       isEdgeSideEnabled:
         type: boolean
+      maxUserSessions:
+        type: integer
+        description: Max number of User sessions
       corsWhitelist:
         type: array
         items:
@@ -7433,7 +7440,7 @@ definitions:
     description: The unique internal identifier of the user
   ExternalId34: &ref_82
     type: string
-    format: email
+    format: 'email | ^[0-9a-f]{10}$'
     description: >-
       The unique external identifier of the user (e.g. BlueID). Although, this
       field can store email addresses, other types of unique identifiers may be
@@ -7444,7 +7451,8 @@ definitions:
     x-ibm-dx-api-visibility: private
     type: string
     description: The IBM internal unique external identifier of the user in IBMid.
-    maxLength: 512
+    format: ''''' | ^[0-9A-Z]{10}$'
+    maxLength: 10
   FirstName34: &ref_83
     type: string
     description: The first name of the user
@@ -7727,6 +7735,7 @@ definitions:
       lastName: *ref_84
       ibmUniqueID: *ref_85
       displayName: *ref_86
+      email: *ref_87
       roles: *ref_96
     additionalProperties: false
   UserUpdate34: &ref_256
