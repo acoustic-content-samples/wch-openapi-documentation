@@ -1,7 +1,10 @@
 swagger: '2.0'
 info:
-  version: 1.0.109
+  version: 1.0.110
   x-ibm-name: ibm-watson-content-hub-api
+  contact:
+    name: Andres Wickenhaeuser
+    email: wic@de.ibm.com
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
 schemes:
@@ -334,6 +337,2411 @@ tags:
       instance is created. The job instance is used to track the status of the
       job.
        A site revision represents a specific revision of a site.
+securityDefinitions:
+  X-IBM-Client-Secret:
+    type: apiKey
+    description: Client secret for the API
+    in: header
+    name: X-IBM-Client-Secret
+  X-IBM-Client-Id:
+    type: apiKey
+    description: Client ID for the API
+    in: header
+    name: X-IBM-Client-Id
+security:
+  - X-IBM-Client-Secret: []
+    X-IBM-Client-Id: []
+x-ibm-configuration:
+  enforced: true
+  phase: realized
+  testable: true
+  cors:
+    enabled: true
+  properties:
+    backendURL:
+      value: 'https://{DomainName}/{path}'
+      description: >-
+        The API URL, that means the tenant-specific, constant suffix of the URLs
+        of the IBM Watson Content Hub API.
+      encoded: false
+  assembly:
+    execute:
+      - operation-switch:
+          case:
+            - operations:
+                - verb: get
+                  path: /authoring/v1/assets
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets?limit={limit}&offset={offset}&fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/assets
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets?md5={md5}&fields={fields}&include={include}&analyze={analyze}&autocurate={autocurate}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/assets/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/assets/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/assets/{id}'
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/assets/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/{id}?fields={fields}&include={include}&forceOverride={forceOverride}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/assets/record
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/record?path={path}&fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/assets/{id}/analyze'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/{id}/analyze?autocurate={autocurate}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/assets/{id}/create-draft'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/{id}/create-draft?include={include}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/assets/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-asset
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/assets/views/by-modified?start={start}&end={end}&offset={offset}&limit={limit}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/categories
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/categories?offset={offset}&limit={limit}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/categories
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/categories
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/categories/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/categories/{id}'
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/categories/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/categories/{id}'
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/categories/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/categories/{id}'
+            - operations:
+                - verb: get
+                  path: /authoring/v1/categories/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/categories/views/by-modified?start={start}&end={end}&fields={fields}&offset={offset}&limit={limit}&order={order}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/categories/{id}/children'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/categories/{id}/children?recurse={recurse}
+            - operations:
+                - verb: get
+                  path: /authoring/v2/categories
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-category
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v2/categories?offset={offset}&limit={limit}&depth={depth}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/changes/status/ready
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/changes/status/ready
+            - operations:
+                - verb: post
+                  path: /authoring/v1/changes/status/retire
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/changes/status/retire
+            - operations:
+                - verb: post
+                  path: /authoring/v1/changes/delete
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/changes/delete
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/changes/{uid}/status/ready'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/changes/{uid}/status/ready?rev={rev}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/changes/{uid}/status/retire'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/changes/{uid}/status/retire?rev={rev}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/changes/{classification}/{id}/status/ready'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/changes/{classification}/{id}/status/ready?rev={rev}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/changes/{classification}/{id}/status/retire'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-changes
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/changes/{classification}/{id}/status/retire?rev={rev}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/comments
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/comments
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/comments/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/comments/{id}?fields={fields}'
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/comments/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/comments/{id}?fields={fields}'
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/comments/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/comments/{id}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/comments/by-item/{classification}/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/comments/by-item/{classification}/{id}?since={since}&offset={offset}&limit={limit}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/comments/by-user/{userId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-comments
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/comments/by-user/{userId}?since={since}&offset={offset}&limit={limit}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/content
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content?offset={offset}&fields={fields}&limit={limit}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/content
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/content
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/content/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content/{id}?include={include}&fields={fields}
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/content/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content/{id}?include={include}&fields={fields}&forceOverride={forceOverride}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/content/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/content/{id}'
+            - operations:
+                - verb: get
+                  path: /authoring/v1/content/views/by-type
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content/views/by-type?id={id}&fields={fields}&offset={offset}&limit={limit}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/content/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content/views/by-modified?start={start}&end={end}&startId={startId}&endId={endId}&limit={limit}&format={format}&offset={offset}&pageMode={pageMode}&fields={fields}&order={order}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/content/{id}/create-draft'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/content/{id}/create-draft?include={include}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/content/count
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/content/count
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/content/{id}/analyze'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/content/{id}/analyze'
+            - operations:
+                - verb: post
+                  path: /authoring/v1/layouts
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/layouts
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layouts
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts?offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/layouts/by-content/{content-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/by-content/{content-id}?projectId={projectId}&filter={filter}&offset={offset}&limit={limit}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layouts/by-path
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/by-path?path={path}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layouts/count
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/layouts/count
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/layouts/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/{id}?forceOverride={forceOverride}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/layouts/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/layouts/{id}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/layouts/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layouts/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/views/by-modified?start={start}&end={end}&startId={startId}&endId={endId}&offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layouts/views/by-name
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layouts/views/by-name?name={name}&offset={offset}&limit={limit}&fields={fields}&format={format}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/layout-mappings
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/layout-mappings
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layout-mappings
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings?offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layout-mappings/by-path
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/by-path?path={path}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/layout-mappings/by-type/{type-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/by-type/{type-id}?fields={fields}&include={include}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/layout-mappings/by-type/{type-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/by-type/{type-id}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/layout-mappings/by-type/{type-id}/copy'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/by-type/{type-id}/copy?targetTypeId={targetTypeId}&name={name}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layout-mappings/count
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/layout-mappings/count
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/layout-mappings/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/{id}?forceOverride={forceOverride}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/layout-mappings/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/layout-mappings/{id}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/layout-mappings/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/layout-mappings/{id}/copy'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/{id}/copy?typeId={typeId}&name={name}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layout-mappings/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/views/by-modified?start={start}&end={end}&startId={startId}&endId={endId}&offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/layout-mappings/views/by-name
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-layout
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/layout-mappings/views/by-name?name={name}&offset={offset}&limit={limit}&fields={fields}&format={format}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/references/outgoing
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-reference
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/references/outgoing
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/references/outgoing/{classification}/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-reference
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/references/outgoing/{classification}/{id}?filterType={filterType}&depth={depth}&classifications={classifications}&statuses={statuses}&include={include}&fl={fl}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/references/incoming/{classification}/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-reference
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/references/incoming/{classification}/{id}?fl={fl}&include={include}&offset={offset}&limit={limit}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/renditions
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-rendition
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/renditions?offset={offset}&limit={limit}&fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/renditions
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-rendition
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/renditions?fields={fields}&include={include}&projectId={projectId}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/renditions/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-rendition
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/renditions/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/renditions/views/by-created
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-rendition
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/renditions/views/by-created?start={start}&end={end}&fields={fields}&offset={offset}&limit={limit}&order={order}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/image-profiles
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/image-profiles
+            - operations:
+                - verb: get
+                  path: /authoring/v1/image-profiles
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/image-profiles?offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/image-profiles/count
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/image-profiles/count
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/image-profiles/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/image-profiles/{id}?forceOverride={forceOverride}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/image-profiles/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/image-profiles/{id}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/image-profiles/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/image-profiles/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/image-profiles/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-renditionprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/image-profiles/views/by-modified?start={start}&end={end}&startId={startId}&endId={endId}&offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/resources
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/resources?name={name}&md5={md5}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/resources/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/resources/{id}?mode={mode}&bypass-cache={bypass-cache}
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/resources/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/resources/{id}?name={name}&md5={md5}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/resources/views/by-created
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/resources/views/by-created?start={start}&end={end}&offset={offset}&limit={limit}&order={order}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/search
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-search-facade
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/search?defType={defType}&df={df}&facet={facet}&facet.contains={facet.contains}&facet.containsIgnoreCase={facet.containsIgnoreCase}&facet.field={facet.field}&facet.limit={facet.limit}&facet.offset={facet.offset}&facet.prefix={facet.prefix}&facet.range={facet.range}&facet.range.end={facet.range.end}&facet.range.gap={facet.range.gap}&facet.range.start={facet.range.start}&fl={fl}&fq={fq}&f.<fieldName>.<FacetParam>={f.<fieldName>.<FacetParam>}&indent={indent}&q={q}&qf={qf}&rows={rows}&sort={sort}&start={start}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/sites
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/sites?fields={fields}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/sites/{site-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/sites/{site-id}?fields={fields}'
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/sites/{site-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}?forceOverride={forceOverride}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/sites/{site-id}/pages'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages?fields={fields}&include={include}&responseFormat={responseFormat}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/sites/{site-id}/pages'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/sites/{site-id}/pages'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/sites/{site-id}/pages/views/by-modified'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages/views/by-modified?start={start}&end={end}&fields={fields}&order={order}&include={include}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/sites/{site-id}/pages/{page-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages/{page-id}?fields={fields}&include={include}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/sites/{site-id}/pages/{page-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages/{page-id}?delete-content={delete-content}
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/sites/{site-id}/pages/{page-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages/{page-id}?forceOverride={forceOverride}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/sites/{site-id}/pages/move'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/{site-id}/pages/move?sourceId={sourceId}&sourceRev={sourceRev}&targetId={targetId}&targetRev={targetRev}&targetPosition={targetPosition}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/sites/pages/{page-id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/sites/pages/{page-id}?fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: /authoring/v1/types
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/types
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types?offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types/by-path
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/by-path?path={path}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types/count
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/types/count
+            - operations:
+                - verb: put
+                  path: '/authoring/v1/types/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/{id}?forceOverride={forceOverride}&options={options}
+            - operations:
+                - verb: delete
+                  path: '/authoring/v1/types/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/types/{id}?cascade={cascade}'
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/types/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/types/{id}/copy'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/{id}/copy?name={name}&cascade={cascade}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/types/{id}/new-content'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/{id}/new-content?include={include}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/types/{id}/schema'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/types/{id}/schema'
+            - operations:
+                - verb: post
+                  path: '/authoring/v1/types/{id}/validate'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/authoring/v1/types/{id}/validate'
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types/new
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/authoring/v1/types/new
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types/views/by-modified
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/views/by-modified?start={start}&end={end}&startId={startId}&endId={endId}&offset={offset}&limit={limit}&format={format}&pageMode={pageMode}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/types/views/by-name
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/types/views/by-name?name={name}&offset={offset}&limit={limit}&fields={fields}&format={format}
+            - operations:
+                - verb: get
+                  path: '/authoring/v1/elementdefs/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/elementdefs/{id}?fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/elementdefs
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-authoring-type
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/elementdefs?offset={offset}&limit={limit}&order={order}&fields={fields}&include={include}
+            - operations:
+                - verb: get
+                  path: /authoring/v1/contextualsearch
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-contextual-content-service
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/authoring/v1/contextualsearch?filter={filter}&position={position}&distance={distance}&metric={metric}&similar-source-id={similar-source-id}&similar-source-classification={similar-source-classification}&df={df}&defType={defType}&facet={facet}&facet.contains={facet.contains}&facet.containsIgnoreCase={facet.containsIgnoreCase}&facet.field={facet.field}&facet.limit={facet.limit}&facet.offset={facet.offset}&facet.prefix={facet.prefix}&facet.range={facet.range}&facet.range.gap={facet.range.gap}&facet.range.start={facet.range.start}&facet.range.end={facet.range.end}&fl={fl}&fq={fq}&f.<fieldName>.<FacetParam>={f.<fieldName>.<FacetParam>}&indent={indent}&q={q}&qf={qf}&rows={rows}&start={start}&sort={sort}
+            - operations:
+                - verb: get
+                  path: /delivery/v1/contextualsearch
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-contextual-content-service
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/contextualsearch?filter={filter}&position={position}&distance={distance}&metric={metric}&similar-source-id={similar-source-id}&similar-source-classification={similar-source-classification}&df={df}&defType={defType}&facet={facet}&facet.contains={facet.contains}&facet.containsIgnoreCase={facet.containsIgnoreCase}&facet.field={facet.field}&facet.limit={facet.limit}&facet.offset={facet.offset}&facet.prefix={facet.prefix}&facet.range={facet.range}&facet.range.gap={facet.range.gap}&facet.range.start={facet.range.start}&facet.range.end={facet.range.end}&fl={fl}&fq={fq}&f.<fieldName>.<FacetParam>={f.<fieldName>.<FacetParam>}&indent={indent}&q={q}&qf={qf}&rows={rows}&start={start}&sort={sort}
+            - operations:
+                - verb: post
+                  path: /delivery/v1/content/bulk_retrieve
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/delivery/v1/content/bulk_retrieve
+            - operations:
+                - verb: post
+                  path: /mydelivery/v1/content/bulk_retrieve
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/mydelivery/v1/content/bulk_retrieve
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/content/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/delivery/v1/content/{id}?fields={fields}'
+            - operations:
+                - verb: get
+                  path: '/mydelivery/v1/content/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-content
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/mydelivery/v1/content/{id}?fields={fields}'
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/rendering/sites/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-render
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/rendering/sites/{id}?callback={callback}
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/rendering/context/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-render
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/rendering/context/{id}?callback={callback}
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/rendering/type/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-render
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/rendering/type/{id}?callback={callback}
+            - operations:
+                - verb: get
+                  path: /delivery/v1/rendering/search
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-render
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/rendering/search?q={q}&fq={fq}&callback={callback}
+            - operations:
+                - verb: get
+                  path: '/mydelivery/v1/rendering/type/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-render
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/mydelivery/v1/rendering/type/{id}?callback={callback}
+            - operations:
+                - verb: get
+                  path: /delivery/v1/resources
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/delivery/v1/resources?path={path}'
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/resources/{fileIdentifier}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-resource
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/delivery/v1/resources/{fileIdentifier}'
+            - operations:
+                - verb: get
+                  path: /delivery/v1/search
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-search-facade
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/search?defType={defType}&df={df}&facet={facet}&facet.contains={facet.contains}&facet.containsIgnoreCase={facet.containsIgnoreCase}&facet.field={facet.field}&facet.limit={facet.limit}&facet.offset={facet.offset}&facet.prefix={facet.prefix}&facet.range={facet.range}&facet.range.end={facet.range.end}&facet.range.gap={facet.range.gap}&facet.range.start={facet.range.start}&fl={fl}&fq={fq}&f.<fieldName>.<FacetParam>={f.<fieldName>.<FacetParam>}&indent={indent}&q={q}&qf={qf}&rows={rows}&sort={sort}&start={start}
+            - operations:
+                - verb: get
+                  path: /mydelivery/v1/search
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-search-facade
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/mydelivery/v1/search?defType={defType}&df={df}&facet={facet}&facet.contains={facet.contains}&facet.containsIgnoreCase={facet.containsIgnoreCase}&facet.field={facet.field}&facet.limit={facet.limit}&facet.offset={facet.offset}&facet.prefix={facet.prefix}&facet.range={facet.range}&facet.range.end={facet.range.end}&facet.range.gap={facet.range.gap}&facet.range.start={facet.range.start}&fl={fl}&fq={fq}&f.<fieldName>.<FacetParam>={f.<fieldName>.<FacetParam>}&indent={indent}&q={q}&qf={qf}&rows={rows}&sort={sort}&start={start}
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/sites/{siteId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/delivery/v1/sites/{siteId}?fields={fields}'
+            - operations:
+                - verb: get
+                  path: '/mydelivery/v1/sites/{siteId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/mydelivery/v1/sites/{siteId}?fields={fields}'
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/sites/{siteId}/pages/{pageId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/sites/{siteId}/pages/{pageId}?fields={fields}
+            - operations:
+                - verb: get
+                  path: '/mydelivery/v1/sites/{siteId}/pages/{pageId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/mydelivery/v1/sites/{siteId}/pages/{pageId}?fields={fields}
+            - operations:
+                - verb: get
+                  path: '/delivery/v1/sites/{siteId}/pages/by-parent/{parentPageId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/delivery/v1/sites/{siteId}/pages/by-parent/{parentPageId}?fields={fields}&count={count}&start={start}
+            - operations:
+                - verb: get
+                  path: '/mydelivery/v1/sites/{siteId}/pages/by-parent/{parentPageId}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-delivery-sites
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor,viewer,authenticatedVisitor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/mydelivery/v1/sites/{siteId}/pages/by-parent/{parentPageId}?fields={fields}&count={count}&start={start}
+            - operations:
+                - verb: get
+                  path: /registry/v1/currenttenant
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-rtp-tenant-registry-service
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/registry/v1/currenttenant?fields={fields}'
+            - operations:
+                - verb: put
+                  path: /registry/v1/currenttenant
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-rtp-tenant-registry-service
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/registry/v1/currenttenant
+            - operations:
+                - verb: get
+                  path: /login/v1/redirect
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-login
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - proxy:
+                    title: proxy
+                    timeout: 60
+                    verb: keep
+                    cache-response: protocol
+                    cache-ttl: 900
+                    target-url: >-
+                      $(backendURL)/login/v1/redirect?targetUrl={targetUrl}&targetTenant={targetTenant}
+            - operations:
+                - verb: get
+                  path: /login/v1/removecookies
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-login
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - proxy:
+                    title: proxy
+                    timeout: 60
+                    verb: keep
+                    cache-response: protocol
+                    cache-ttl: 900
+                    target-url: $(backendURL)/login/v1/removecookies
+            - operations:
+                - verb: get
+                  path: /login/v1/basicauth
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-login
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - proxy:
+                    title: proxy
+                    timeout: 60
+                    verb: keep
+                    cache-response: protocol
+                    cache-ttl: 900
+                    target-url: >-
+                      $(backendURL)/login/v1/basicauth?accept-privacy-notice={accept-privacy-notice}
+            - operations:
+                - verb: post
+                  path: /login/v1/basicauth
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-login
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - proxy:
+                    title: proxy
+                    timeout: 60
+                    verb: keep
+                    cache-response: protocol
+                    cache-ttl: 900
+                    target-url: >-
+                      $(backendURL)/login/v1/basicauth?accept-privacy-notice={accept-privacy-notice}
+            - operations:
+                - verb: get
+                  path: /user-profile/v1/users/currentuser
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: >-
+                          admin,manager,editor,viewer,authenticatedVisitor,anonymous
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/user-profile/v1/users/currentuser
+            - operations:
+                - verb: get
+                  path: /user-profile/v1/users
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/user-profile/v1/users?external-id={external-id}&privacy-notice={privacy-notice}&offset={offset}&limit={limit}&include={include}
+            - operations:
+                - verb: post
+                  path: /user-profile/v1/users
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/user-profile/v1/users
+            - operations:
+                - verb: get
+                  path: '/user-profile/v1/users/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/user-profile/v1/users/{id}?privacy-notice={privacy-notice}
+            - operations:
+                - verb: put
+                  path: '/user-profile/v1/users/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/user-profile/v1/users/{id}'
+            - operations:
+                - verb: delete
+                  path: '/user-profile/v1/users/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-security-userprofile
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/user-profile/v1/users/{id}?privacy-notice={privacy-notice}
+            - operations:
+                - verb: get
+                  path: /webhook/v1/profile
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-webhook
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/webhook/v1/profile?fields={fields}'
+            - operations:
+                - verb: put
+                  path: /webhook/v1/profile
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-webhook
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/webhook/v1/profile
+            - operations:
+                - verb: delete
+                  path: /webhook/v1/profile
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-infra-webhook
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: admin
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/webhook/v1/profile
+            - operations:
+                - verb: post
+                  path: /publishing/v1/jobs
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-publishing-manager-rest
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/publishing/v1/jobs
+            - operations:
+                - verb: get
+                  path: '/publishing/v1/jobs/{id}'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-publishing-manager-rest
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/publishing/v1/jobs/{id}?include={include}'
+            - operations:
+                - verb: get
+                  path: '/publishing/v1/jobs/{id}/status'
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-publishing-manager-rest
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: '$(backendURL)/publishing/v1/jobs/{id}/status'
+            - operations:
+                - verb: get
+                  path: /publishing/v1/site-revisions/default
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-publishing-manager-rest
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager,editor'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: >-
+                      $(backendURL)/publishing/v1/site-revisions/default?include={include}
+            - operations:
+                - verb: put
+                  path: /publishing/v1/site-revisions/default
+              execute:
+                - set-variable:
+                    title: set-variable
+                    actions:
+                      - set: message.headers.x-ibm-dx-service
+                        value: prod-publishing-manager-rest
+                      - set: message.headers.x-ibm-dx-user-roles
+                        value: 'admin,manager'
+                - invoke:
+                    title: PROXY
+                    tls-profile: ''
+                    target-url: $(backendURL)/publishing/v1/site-revisions/default
 parameters:
   baseInclude16: &ref_201
     name: include
@@ -433,6 +2841,18 @@ parameters:
       instead of the content item.
     type: string
     required: false
+  IDQueryParameter21:
+    in: query
+    name: id
+    description: >-
+      Provide the ID of the resource. Note that IDs are always the IDs of
+      published item, even if a draft exists with a different ID. For a site,
+      use `@current` to indicate that the ID of the site is derived from the
+      addressed URL via custom domain site mapping or URL path based site
+      addressing. For further details consult the Watson Content Hub
+      documentation.
+    type: string
+    required: true
   IDPathParameter21: &ref_222
     in: path
     name: id
@@ -25235,7 +27655,9 @@ paths:
           in: path
           description: >-
             The ID of the site item, or `@current` to indicate that the ID of
-            the site item is specified in the `x-ibm-dx-site-id` header.
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
@@ -25343,7 +27765,9 @@ paths:
           in: path
           description: >-
             The ID of the site item, or `@current` to indicate that the ID of
-            the site item is specified in the `x-ibm-dx-site-id` header.
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
@@ -25461,9 +27885,10 @@ paths:
         - name: siteId
           in: path
           description: >-
-            the ID of the site item that contains the selected page, or
-            `@current` to indicate that the ID of the site item is specified in
-            the `x-ibm-dx-site-id` header.
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
@@ -25574,9 +27999,10 @@ paths:
         - name: siteId
           in: path
           description: >-
-            the ID of the site item that contains the selected page, or
-            `@current` to indicate that the ID of the site item is specified in
-            the `x-ibm-dx-site-id` header.
+            The ID of the site item, or `@current` to indicate that the ID of
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
@@ -25697,7 +28123,9 @@ paths:
           in: path
           description: >-
             The ID of the site item, or `@current` to indicate that the ID of
-            the site item is specified in the `x-ibm-dx-site-id` header.
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
@@ -25820,7 +28248,9 @@ paths:
           in: path
           description: >-
             The ID of the site item, or `@current` to indicate that the ID of
-            the site item is specified in the `x-ibm-dx-site-id` header.
+            the site is derived from the addressed URL via custom domain site
+            mapping or URL path based site addressing. For further details
+            consult the Watson Content Hub documentation.
           required: true
           type: string
           format: uuid
