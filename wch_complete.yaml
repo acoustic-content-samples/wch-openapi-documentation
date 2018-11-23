@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.115
+  version: 1.0.116
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -310,7 +310,7 @@ tags:
       tenant for the current user automated, the API login requires to get
       called using a valid baseUrl (as described above).
   - name: Administering user profiles
-  - name: Infra Webhooks
+  - name: Webhook profiles - Beta
     description: >
       Use the Watson Content Hub webhook service Rest APIs to work with webhook
       profiles. You can create, retrieve and update webhook profiles in a
@@ -335,7 +335,7 @@ tags:
       job.
        A site revision represents a specific revision of a site.
 parameters:
-  baseInclude16: &ref_203
+  baseInclude16: &ref_204
     name: include
     in: query
     description: >
@@ -350,7 +350,7 @@ parameters:
       option are returned.
     required: false
     type: string
-  getInclude16: &ref_205
+  getInclude16: &ref_206
     name: include
     in: query
     description: >
@@ -368,7 +368,7 @@ parameters:
       option are returned.
     required: false
     type: string
-  updateOptions16: &ref_207
+  updateOptions16: &ref_208
     name: options
     in: query
     description: |
@@ -377,7 +377,7 @@ parameters:
          * rebuild-path-filename: Instructs the service to re-generate the last fragment of the specified document path, by converting the specified document name into a filesystem friendly filename.
     required: false
     type: string
-  bulkRequest20: &ref_212
+  bulkRequest20: &ref_213
     name: bulkRequest
     in: body
     description: >-
@@ -398,14 +398,14 @@ parameters:
           items:
             type: string
     required: true
-  id20: &ref_217
+  id20: &ref_218
     name: id
     in: path
     description: The ID of the content item.
     type: string
     format: uuid
     required: true
-  fields20: &ref_218
+  fields20: &ref_219
     name: fields
     in: query
     description: >-
@@ -418,13 +418,13 @@ parameters:
       type: string
     collectionFormat: csv
     required: false
-  HeaderContentType20: &ref_213
+  HeaderContentType20: &ref_214
     name: Content-Type
     in: header
     description: 'Content type of the request body, should be ''application/json''.'
     type: string
     required: true
-  HeaderIfNoneMatch20: &ref_219
+  HeaderIfNoneMatch20: &ref_220
     name: If-None-Match
     in: header
     description: >-
@@ -445,7 +445,7 @@ parameters:
       documentation.
     type: string
     required: true
-  IDPathParameter21: &ref_224
+  IDPathParameter21: &ref_225
     in: path
     name: id
     description: >-
@@ -457,19 +457,19 @@ parameters:
       documentation.
     type: string
     required: true
-  FieldQueryParameter21: &ref_229
+  FieldQueryParameter21: &ref_230
     name: fq
     description: The Solr "fq" parameter applies a filter query to the search results.
     in: query
     required: false
     type: string
-  QueryParameter21: &ref_228
+  QueryParameter21: &ref_229
     name: q
     description: The Solr "q" parameter uses Solr/Lucene standard query syntax.
     in: query
     required: false
     type: string
-  JSONPCallbackParameter21: &ref_225
+  JSONPCallbackParameter21: &ref_226
     name: callback
     description: >-
       Provide the JSONP callback name for JSONP support. The callback name must
@@ -478,7 +478,7 @@ parameters:
     in: query
     required: false
     type: string
-  fileIdentifier22: &ref_235
+  fileIdentifier22: &ref_236
     name: fileIdentifier
     in: path
     description: >
@@ -488,27 +488,27 @@ parameters:
       to the id.
     type: string
     required: true
-  path22: &ref_231
+  path22: &ref_232
     name: path
     in: query
     description: Provide the absolute path of the resource (URL encoded).
     type: string
     required: true
-  HeaderAuthCookie34: &ref_256
+  HeaderAuthCookie34: &ref_257
     x-ibm-dx-user-auth: private
     in: header
     name: x-ibm-dx-user-auth
     description: JWT encrypted user context set by login process
     required: false
     type: string
-  id34: &ref_255
+  id34: &ref_256
     in: path
     name: id
     description: The unique internal identifier of the entity that should be processed
     required: true
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  externalId34: &ref_248
+  externalId34: &ref_249
     in: query
     name: external-id
     description: The unique external identifier of the user (e.g. BlueID).
@@ -516,7 +516,7 @@ parameters:
     type: string
     format: email
     maxLength: 512
-  offset34: &ref_250
+  offset34: &ref_251
     name: offset
     in: query
     description: The index of the first item to be included in the response
@@ -525,7 +525,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit34: &ref_251
+  limit34: &ref_252
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -549,14 +549,14 @@ parameters:
     required: false
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  privacyNotice34: &ref_249
+  privacyNotice34: &ref_250
     name: privacy-notice
     in: query
     description: Parameter which must be set if the users privacy notice should be returned
     required: false
     type: boolean
     default: false
-  include34: &ref_252
+  include34: &ref_253
     name: include
     in: query
     description: Include additional information sections
@@ -580,7 +580,7 @@ parameters:
         - profile
         - '*'
         - all
-  include41: &ref_264
+  include41: &ref_265
     name: include
     in: query
     description: >-
@@ -612,7 +612,7 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  id41: &ref_263
+  id41: &ref_264
     name: id
     in: path
     description: The ID of the item
@@ -827,7 +827,7 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  UnexpectedError10: &ref_181
+  UnexpectedError10: &ref_182
     description: Unexpected error.
     schema: &ref_1
       type: object
@@ -913,10 +913,10 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  DataStoreUnavailable10: &ref_180
+  DataStoreUnavailable10: &ref_181
     description: Connection failed to datastore.
     schema: *ref_1
-  UnexpectedError12: &ref_187
+  UnexpectedError12: &ref_188
     description: Unexpected error.
     schema: &ref_2
       type: object
@@ -997,10 +997,10 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  DataStoreUnavailable12: &ref_186
+  DataStoreUnavailable12: &ref_187
     description: Connection failed to data store.
     schema: *ref_2
-  BulkGetSuccess20: &ref_214
+  BulkGetSuccess20: &ref_215
     description: Success
     schema: &ref_65
       type: array
@@ -1210,7 +1210,7 @@ responses:
                 /b7e6dfb7-76cf-44a9-a354-2e212d4a878c/dxresources/d7a1/d7a1a2b9-47e4-4131-9c3c-18c464e84e68.JPG
           kind: []
           type: Sample Article
-  BulkBadRequest20: &ref_215
+  BulkBadRequest20: &ref_216
     description: Bad request
     schema: &ref_4
       type: object
@@ -1260,7 +1260,7 @@ responses:
           level: ERROR
           description: The content id list was not passed or was empty.
           locale: en
-  GetByIdSuccess20: &ref_220
+  GetByIdSuccess20: &ref_221
     description: Success
     schema: *ref_3
     headers:
@@ -1338,7 +1338,7 @@ responses:
               /b7e6dfb7-76cf-44a9-a354-2e212d4a878c/dxresources/d7a1/d7a1a2b9-47e4-4131-9c3c-18c464e84e68.JPG
         kind: []
         type: Sample Article
-  GetByIdBadRequest20: &ref_222
+  GetByIdBadRequest20: &ref_223
     description: Bad request
     schema: *ref_4
     examples:
@@ -1354,7 +1354,7 @@ responses:
             spaces or empty values, e.g. 'fields=rev,,last-modified' is
             considered invalid.
           locale: en
-  ItemNotFound20: &ref_223
+  ItemNotFound20: &ref_224
     description: Not found
     schema: *ref_4
     examples:
@@ -1367,11 +1367,11 @@ responses:
           level: ERROR
           description: A content item with the specified id was not found in the system.
           locale: en
-  NotModified20: &ref_221
+  NotModified20: &ref_222
     description: >-
       Not modified is returned when the If-None-Match header is used and the
       Etag value matches the most recent version of the response.
-  UnexpectedError20: &ref_216
+  UnexpectedError20: &ref_217
     description: Unexpected error
     schema: *ref_4
     examples:
@@ -1386,7 +1386,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  GetResourceSuccess22: &ref_232
+  GetResourceSuccess22: &ref_233
     description: The requested resource.
     schema:
       type: string
@@ -1395,7 +1395,7 @@ responses:
       Content-Type:
         description: Media type of resource.
         type: string
-  GetByPathNotFound22: &ref_233
+  GetByPathNotFound22: &ref_234
     description: Not found
     schema: &ref_5
       type: object
@@ -1429,7 +1429,7 @@ responses:
           level: ERROR
           description: The resource at the specified path could not be found.
           locale: en
-  GetByIdNotFound22: &ref_236
+  GetByIdNotFound22: &ref_237
     description: Not found
     schema: *ref_5
     examples:
@@ -1442,7 +1442,7 @@ responses:
           level: ERROR
           description: The resource with the specified resourceId could not be found.
           locale: en
-  UnexpectedError22: &ref_234
+  UnexpectedError22: &ref_235
     description: Unexpected error
     schema: &ref_70
       type: object
@@ -1478,7 +1478,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  clientError41: &ref_262
+  clientError41: &ref_263
     description: Unable to handle the request as it does not match the API definition.
     schema: &ref_103
       description: This JSON record represents an error condition.
@@ -3792,12 +3792,31 @@ definitions:
       items:
         type: array
         items: *ref_18
-  Count8: &ref_172
+  ValidationResult5: &ref_168
+    type: object
+    description: a validation response.
+    properties:
+      failedIds:
+        type: array
+        description: The submitted ID which failed validation.
+        items:
+          type: string
+          description: The ID of the content item which failed validation
+          example: b0798e67-3da2-48b4-b044-016495fa3ead
+      messages:
+        type: object
+        description: The validation errors which occurred for the content item
+        properties:
+          SOME_ID:
+            type: array
+            description: The array of error messages for this id
+            items: *ref_17
+  Count8: &ref_173
     type: object
     properties:
       count:
         type: integer
-  NewLayout8: &ref_168
+  NewLayout8: &ref_169
     type: object
     description: A new layout.
     properties:
@@ -3878,7 +3897,7 @@ definitions:
     required:
       - name
       - template
-  NewLayoutMapping8: &ref_173
+  NewLayoutMapping8: &ref_174
     type: object
     description: A new layout mapping.
     properties:
@@ -4342,7 +4361,7 @@ definitions:
 
               This field is read only.
             example: /authoring/v1/resources/d45c83a8-2738-48a2-89e1-35256ee16283.jpg
-  LayoutQueryResult8: &ref_170
+  LayoutQueryResult8: &ref_171
     type: object
     description: A query result that returns layouts.
     properties:
@@ -4368,7 +4387,7 @@ definitions:
       items:
         type: array
         items: *ref_22
-  ResolvedLayoutQueryResult8: &ref_171
+  ResolvedLayoutQueryResult8: &ref_172
     type: object
     description: A query result that returns resolved layouts.
     properties:
@@ -4394,7 +4413,7 @@ definitions:
       items:
         type: array
         items: *ref_23
-  LayoutMappingQueryResult8: &ref_174
+  LayoutMappingQueryResult8: &ref_175
     type: object
     description: A query result that returns layout mappings.
     properties:
@@ -4423,7 +4442,7 @@ definitions:
   TypeMapping8: *ref_20
   LayoutMappingEntry8: *ref_21
   LayoutReference8: *ref_19
-  ErrorResult8: &ref_169
+  ErrorResult8: &ref_170
     type: object
     description: an error response.
     properties:
@@ -4546,7 +4565,7 @@ definitions:
         items:
           type: string
     additionalProperties: false
-  OutgoingReferencesResponse9: &ref_176
+  OutgoingReferencesResponse9: &ref_177
     type: object
     properties:
       result:
@@ -4601,7 +4620,7 @@ definitions:
       references:
         type: object
         additionalProperties: *ref_28
-  OutgoingReferenceRequest9: &ref_175
+  OutgoingReferenceRequest9: &ref_176
     type: object
     properties:
       filters:
@@ -4638,7 +4657,7 @@ definitions:
         items:
           type: string
     additionalProperties: false
-  IncomingReferencesResponse9: &ref_178
+  IncomingReferencesResponse9: &ref_179
     type: object
     properties:
       limit:
@@ -4667,7 +4686,7 @@ definitions:
       items:
         type: array
         items: *ref_29
-  ErrorResponse9: &ref_177
+  ErrorResponse9: &ref_178
     type: object
     description: an error response.
     properties:
@@ -4879,7 +4898,7 @@ definitions:
     type: object
     properties: *ref_32
     required: *ref_33
-  QueryResult10: &ref_179
+  QueryResult10: &ref_180
     type: object
     properties:
       limit:
@@ -4907,12 +4926,12 @@ definitions:
       - items
   ErrorResponse10: *ref_1
   Error10: *ref_35
-  Count11: &ref_185
+  Count11: &ref_186
     type: object
     properties:
       count:
         type: integer
-  NewImageProfile11: &ref_182
+  NewImageProfile11: &ref_183
     type: object
     description: An new image profile.
     properties:
@@ -5187,7 +5206,7 @@ definitions:
               id: 9560c8de-b37c-4874-93fe-7e585339e9f9
             locale: en-US
   Dimension11: *ref_36
-  ImageProfileQueryResult11: &ref_184
+  ImageProfileQueryResult11: &ref_185
     type: object
     description: A query result that returns image profiles.
     properties:
@@ -5213,7 +5232,7 @@ definitions:
       items:
         type: array
         items: *ref_37
-  ErrorResult11: &ref_183
+  ErrorResult11: &ref_184
     type: object
     description: an error response.
     properties:
@@ -5235,7 +5254,7 @@ definitions:
   Message11: *ref_38
   ErrorResponse12: *ref_2
   Error12: *ref_39
-  QueryResult12: &ref_188
+  QueryResult12: &ref_189
     type: object
     properties:
       limit:
@@ -5277,7 +5296,7 @@ definitions:
       - href
       - items
   ResourceMetadata12: *ref_40
-  ErrorMessage14: &ref_189
+  ErrorMessage14: &ref_190
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -5339,7 +5358,7 @@ definitions:
       - requestId
       - errors
   Error14: *ref_41
-  SiteCreatedUpdatedResponse15: &ref_194
+  SiteCreatedUpdatedResponse15: &ref_195
     title: Site Metadata update response
     description: Site Metadata update response
     type: object
@@ -5417,7 +5436,7 @@ definitions:
           instead of '#' anchors, for example 'https://your.host/products'. The
           'path' mode is recommended for allowing external search crawlers to
           index the pages as separate documents.
-  SiteList15: &ref_190
+  SiteList15: &ref_191
     type: object
     title: List of available sites
     description: List of available sites
@@ -5425,7 +5444,7 @@ definitions:
       items:
         type: array
         items: *ref_42
-  SiteCreate15: &ref_192
+  SiteCreate15: &ref_193
     title: Creating Site Metadata
     description: Create Site Metadata
     type: object
@@ -5459,7 +5478,7 @@ definitions:
           'https://your.host/products'. The 'path' mode is recommended for
           allowing external search crawlers to index the pages as separate
           documents.
-  SiteUpdate15: &ref_193
+  SiteUpdate15: &ref_194
     title: Updating Site Metadata
     description: Updating Site Metadata
     type: object
@@ -5550,7 +5569,7 @@ definitions:
                 a parent page, it will override the corresponding flags in all
                 descendant pages. Therefore, hiding a page will hide all its
                 descendants in the site navigation menu.
-  PageHierarchy15: &ref_196
+  PageHierarchy15: &ref_197
     type: object
     title: Hierachy of pages in the site
     description: Hierachy of pages in the site
@@ -5558,7 +5577,7 @@ definitions:
       items:
         type: array
         items: *ref_43
-  PageList15: &ref_198
+  PageList15: &ref_199
     type: object
     title: Modified pages list
     description: A list of pages in the site modified between certain dates
@@ -5636,7 +5655,7 @@ definitions:
                 a parent page, it will override the corresponding flags in all
                 descendant pages. Therefore, hiding a page will hide all its
                 descendants in the site navigation menu.
-  PageNew15: &ref_197
+  PageNew15: &ref_198
     title: Create Page Metadata
     description: Creation of Page Metadata
     type: object
@@ -5691,7 +5710,7 @@ definitions:
           on a parent page, it will override the corresponding flags in all
           descendant pages. Therefore, hiding a page will hide all its
           descendants in the site navigation menu.
-  PageUpdate15: &ref_199
+  PageUpdate15: &ref_200
     title: Update of Page Metadata
     description: Update of Page Metadata
     type: object
@@ -5766,7 +5785,7 @@ definitions:
         description: List of failed Ids
         items:
           type: string
-  MoveResult15: &ref_200
+  MoveResult15: &ref_201
     title: Target Parent After Move
     description: Target Parent Updated Values After Move
     type: object
@@ -5777,7 +5796,7 @@ definitions:
       rev:
         type: string
         description: (optional) The latest revision of the parent page item document.
-  DraftPageIds15: &ref_195
+  DraftPageIds15: &ref_196
     title: List of draft page ids in specified site to ready
     description: Publish the list of draft page Ids
     type: object
@@ -5908,7 +5927,7 @@ definitions:
             type: string
       locale:
         type: string
-  ErrorMessage15: &ref_191
+  ErrorMessage15: &ref_192
     title: ErrorMessage
     description: ErrorMessage
     type: object
@@ -5922,7 +5941,7 @@ definitions:
       errors:
         type: array
         items: *ref_49
-  BlankContent16: &ref_208
+  BlankContent16: &ref_209
     type: object
     description: An blank content document.
     properties:
@@ -5937,7 +5956,7 @@ definitions:
       elements:
         type: object
         description: Represents the elements present on this content document.
-  NewType16: &ref_201
+  NewType16: &ref_202
     type: object
     description: An new type document.
     properties:
@@ -6397,7 +6416,7 @@ definitions:
             type: string
           type:
             type: string
-  TypeQueryResult16: &ref_204
+  TypeQueryResult16: &ref_205
     type: object
     description: A query result that returns type documents.
     properties:
@@ -6423,7 +6442,7 @@ definitions:
       items:
         type: array
         items: *ref_56
-  ElementDefQueryResult16: &ref_210
+  ElementDefQueryResult16: &ref_211
     type: object
     description: A query result that returns element definitions.
     properties:
@@ -6457,12 +6476,12 @@ definitions:
   TypeIcon16: *ref_54
   TypeUIExtensions16: *ref_53
   ElementDefClassification16: *ref_59
-  Count16: &ref_206
+  Count16: &ref_207
     type: object
     properties:
       count:
         type: integer
-  ErrorResult16: &ref_202
+  ErrorResult16: &ref_203
     type: object
     description: an error response.
     properties:
@@ -6526,7 +6545,7 @@ definitions:
         type: string
         description: The current request uri.
   Message16: *ref_60
-  ValidationResult16: &ref_209
+  ValidationResult16: &ref_210
     type: object
     description: a validation response.
     properties:
@@ -6573,7 +6592,7 @@ definitions:
             type: string
       locale:
         type: string
-  ErrorMessage19: &ref_211
+  ErrorMessage19: &ref_212
     title: ErrorMessage
     description: ErrorMessage
     type: object
@@ -6679,7 +6698,7 @@ definitions:
       previewDeliveryUrl: *ref_66
       authoringUIBaseUrl: *ref_66
   Url21: *ref_66
-  SiteMetaData21: &ref_226
+  SiteMetaData21: &ref_227
     title: Site Metadata
     description: Site Metadata
     type: object
@@ -6788,7 +6807,7 @@ definitions:
                 hierarchical page.
         description: The page hierarchy of the site.
   PageMetaData21: *ref_67
-  SearchEntry21: &ref_230
+  SearchEntry21: &ref_231
     title: RenderingContextSearchEntry
     type: object
     properties:
@@ -6858,7 +6877,7 @@ definitions:
             type: string
             description: The link to the content type document this content is based on.
   RenderingContext21: *ref_68
-  ErrorMessage21: &ref_227
+  ErrorMessage21: &ref_228
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -6922,7 +6941,7 @@ definitions:
   Error21: *ref_69
   ErrorDefault22: *ref_70
   Error22: *ref_5
-  ErrorMessage23: &ref_237
+  ErrorMessage23: &ref_238
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -6984,7 +7003,7 @@ definitions:
       - requestId
       - errors
   Error23: *ref_71
-  Site24: &ref_238
+  Site24: &ref_239
     title: Site
     type: object
     properties:
@@ -7114,7 +7133,7 @@ definitions:
       route: /categorydefaultpage
       id: 288c1fc1-48b5-48b9-8254-f8d596a3a64e
       url: /664052ba-bdb9-49bf-8d33-dbe4a79b6520/categorydefaultpage
-  Error24: &ref_239
+  Error24: &ref_240
     type: object
     properties:
       service:
@@ -7152,7 +7171,7 @@ definitions:
           locale:
             type: string
             description: The locale setting of the message and description text.
-  MultiPages24: &ref_240
+  MultiPages24: &ref_241
     title: MultiPages
     type: object
     properties:
@@ -7160,7 +7179,7 @@ definitions:
         type: array
         description: An array of JSON objects that contain the requested page items.
         items: *ref_72
-  Tenant30: &ref_241
+  Tenant30: &ref_242
     type: object
     required:
       - _id
@@ -7305,7 +7324,7 @@ definitions:
         type: string
         description: DEPRECATED - read-only - UUID of the domain.  Use 'id' instead of _id
       ibmCommerce: *ref_73
-  TenantPut30: &ref_243
+  TenantPut30: &ref_244
     type: object
     properties:
       name:
@@ -7347,7 +7366,7 @@ definitions:
   AssetPublishApproval30: *ref_74
   ContentPublishApproval30: *ref_75
   DeliveryAccess30: *ref_76
-  Error30: &ref_242
+  Error30: &ref_243
     type: object
     properties:
       code:
@@ -7368,13 +7387,13 @@ definitions:
         type: string
         description: The tenantId of the available tenant
     description: Object containing the tenantId and baseUrl
-  TenantArray32: &ref_245
+  TenantArray32: &ref_246
     type: array
     items: *ref_77
     minItems: 0
     maxItems: 100
     description: The list of available tenants for the authenticated user
-  Status32: &ref_244
+  Status32: &ref_245
     type: object
     properties:
       service:
@@ -7433,7 +7452,7 @@ definitions:
     required:
       - code
       - message
-  ErrorMessage34: &ref_247
+  ErrorMessage34: &ref_248
     description: This JSON record represents an error condition.
     type: object
     properties:
@@ -7463,7 +7482,6 @@ definitions:
       email address.
     maxLength: 512
   IbmUniqueID34: &ref_85
-    x-ibm-dx-api-visibility: private
     type: string
     description: The IBM internal unique external identifier of the user in IBMid.
     format: ''''' | ^[0-9A-Z]{10}$'
@@ -7656,7 +7674,7 @@ definitions:
           Single value object where key is the locale and value is the display
           name
         type: object
-  User34: &ref_246
+  User34: &ref_247
     description: The user object that might be returned.
     type: object
     required:
@@ -7685,7 +7703,7 @@ definitions:
       lastModifier: *ref_94
       privacyNotice: *ref_95
     additionalProperties: false
-  EnrichedUser34: &ref_257
+  EnrichedUser34: &ref_258
     description: The user object that might be returned.
     type: object
     required:
@@ -7738,7 +7756,7 @@ definitions:
       displayName: *ref_86
       roles: *ref_96
     additionalProperties: false
-  UserCreation34: &ref_254
+  UserCreation34: &ref_255
     description: The user object that might be sent for user creation.
     type: object
     required:
@@ -7753,7 +7771,7 @@ definitions:
       email: *ref_87
       roles: *ref_96
     additionalProperties: false
-  UserUpdate34: &ref_258
+  UserUpdate34: &ref_259
     description: >-
       The user object that might be sent to replace the user. The fields id,
       externalId, links, created, creator, lastModified, and lastModifier will
@@ -7826,7 +7844,7 @@ definitions:
     properties:
       href:
         type: string
-  ItemList34: &ref_253
+  ItemList34: &ref_254
     type: object
     required:
       - offset
@@ -7876,7 +7894,7 @@ definitions:
       limit:
         type: integer
         description: Maximum number of items in the current sublist
-  WebhookProfile38: &ref_259
+  WebhookProfile38: &ref_260
     type: object
     description: A webhook profile.
     properties:
@@ -7943,6 +7961,19 @@ definitions:
                 seed). Webhook receivers can generate their own `HmacSHA1` hash
                 of the request body and compare it to the one sent to verify
                 that the request came from Watson Content Hub.
+
+                Once the webhook has been saved, a `secretId` will be returned
+                instead of the actual secret.
+            secretId:
+              type: string
+              description: >
+                The ID which was generated to represent your secret.
+
+                When updating a webhook, include the `secretId` to continue
+                using the same secret.
+
+                You may also provide a new `secret` to change it or exclude the
+                `secretId` to remove the secret.
             active:
               type: boolean
               description: Optional flag to indicate whether the webhook is active.
@@ -8030,7 +8061,7 @@ definitions:
           required:
             - url
   WebhookDef38: *ref_100
-  ErrorResult38: &ref_260
+  ErrorResult38: &ref_261
     type: object
     description: an error response.
     properties:
@@ -8484,7 +8515,7 @@ definitions:
         items:
           type: string
           maxLength: 64
-  jobCreation41: &ref_261
+  jobCreation41: &ref_262
     type: object
     description: >-
       When creating a job, you can specify an id that can be used to address the
@@ -8549,7 +8580,7 @@ definitions:
       - *ref_127
     required:
       - state
-  siteRevisionUpdate41: &ref_266
+  siteRevisionUpdate41: &ref_267
     description: >-
       Only properties autoPublishEnabled, name and description will be updated,
       others will be ignored
@@ -8571,7 +8602,7 @@ definitions:
       items:
         type: array
         items: *ref_128
-  status41: &ref_265
+  status41: &ref_266
     type: object
     required:
       - id
@@ -11911,6 +11942,53 @@ paths:
         - admin
         - manager
         - editor
+  '/authoring/v1/content/{id}/validate':
+    post:
+      summary: Validate the specified content item against its type.
+      description: >-
+        Use the /content/{id}/validate end-point to validate if the content item
+        specified matches its recorded content type.<br />User roles: admin,
+        manager, editor
+      parameters:
+        - name: id
+          in: path
+          description: Provide the ID of the content document that you want to validate.
+          type: string
+          required: true
+      tags:
+        - Authoring content
+      responses:
+        '200':
+          description: >-
+            Completed the validation, which failed for this content item. See
+            the results to find out what validation errors occurred.
+          schema: *ref_168
+        '204':
+          description: Successfully completed the validation; validation passed.
+        '400':
+          description: 'The ID that you provided is invalid, provide a valid ID.'
+          schema: *ref_163
+        '401':
+          description: You do not have authorization to validate this content item.
+          schema: *ref_163
+        '404':
+          description: >-
+            A content item with the ID {id} was not found or the current
+            tenant's database is not provisioned.
+          schema: *ref_163
+        '429': *ref_149
+        '503':
+          description: >-
+            Unable to validate the content item as the service is unavailable.
+            Try again later.
+          schema: *ref_163
+        default:
+          description: Unexpected error.
+          schema: *ref_163
+      x-ibm-dx-security-user-roles:
+        - admin
+        - manager
+        - editor
   /authoring/v1/layouts:
     post:
       tags:
@@ -11924,26 +12002,26 @@ paths:
           in: body
           description: Contains the layout to create.
           required: true
-          schema: *ref_168
+          schema: *ref_169
       responses:
         '201':
           description: Success.
           schema: *ref_22
         '400':
           description: Empty body or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: Current tenant's database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '409':
           description: Layout with the same path exists.
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12018,7 +12096,7 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_170
+          schema: *ref_171
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12105,15 +12183,15 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_171
+          schema: *ref_172
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The content with ID {contentId} was not found OR Current tenant's
             database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12178,15 +12256,15 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid path OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with path {path} was not found OR Current tenant's
             database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12204,11 +12282,11 @@ paths:
       responses:
         '200':
           description: layout count
-          schema: *ref_172
+          schema: *ref_173
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12245,27 +12323,27 @@ paths:
           schema: *ref_22
         '400':
           description: Invalid ID or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '409':
           description: >-
             Another user updated the document since it was last retrieved OR
             when changing the path, there is an existing document at that path.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12287,22 +12365,22 @@ paths:
           description: Success.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12363,15 +12441,15 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12498,10 +12576,10 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_170
+          schema: *ref_171
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12563,13 +12641,13 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_170
+          schema: *ref_171
         '400':
           description: Invalid name or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12589,20 +12667,20 @@ paths:
           in: body
           description: Contains the layout mapping to create.
           required: true
-          schema: *ref_173
+          schema: *ref_174
       responses:
         '201':
           description: Success.
           schema: *ref_24
         '400':
           description: Empty body or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: Current tenant's database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '409':
           description: >-
             A layout mapping associated with the same content-type OR path
@@ -12610,7 +12688,7 @@ paths:
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12684,7 +12762,7 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_174
+          schema: *ref_175
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12751,15 +12829,15 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid path OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with path {path} was not found OR Current tenant's
             database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12826,13 +12904,13 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             There is no layout-mapping associated with the specified
             content-type OR Current tenant's database is not provisioned OR the
             operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12858,15 +12936,15 @@ paths:
           description: Success.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             There is no layout-mapping associated with the specified
             content-type OR Current tenant's database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12913,7 +12991,7 @@ paths:
           description: >-
             A document with the ID {id} was not found or the current tenant's
             database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -12930,11 +13008,11 @@ paths:
       responses:
         '200':
           description: layout mapping count
-          schema: *ref_172
+          schema: *ref_173
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -12971,29 +13049,29 @@ paths:
           schema: *ref_24
         '400':
           description: Invalid ID or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '409':
           description: >-
             Another user updated the document since it was last retrieved OR
             when changing the mapped content-type, there is an existing mapping
             with the chosen content-type OR when changing the path, there is an
             existing mapping at that path.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -13015,22 +13093,22 @@ paths:
           description: Success.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_169
+          schema: *ref_170
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -13093,15 +13171,15 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -13149,7 +13227,7 @@ paths:
           description: >-
             A document with the ID {id} was not found or the current tenant's
             database is not provisioned.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -13277,10 +13355,10 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_174
+          schema: *ref_175
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -13342,13 +13420,13 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_174
+          schema: *ref_175
         '400':
           description: Invalid name or Invalid input.
-          schema: *ref_169
+          schema: *ref_170
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_169
+          schema: *ref_170
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -13728,7 +13806,7 @@ paths:
           in: body
           description: Provide the request details in the body.
           required: true
-          schema: *ref_175
+          schema: *ref_176
       consumes:
         - application/json
       produces:
@@ -13742,11 +13820,11 @@ paths:
             but is still able to return an incomplete result set. For example,
             the query can end due to the current limit for a max depth of
             recursion of 10 and max total references of 500.
-          schema: *ref_176
+          schema: *ref_177
         '429': *ref_149
         default:
           description: Unexpected error.
-          schema: *ref_177
+          schema: *ref_178
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14106,11 +14184,11 @@ paths:
             still able to return an incomplete result set. For example, the
             query can end due to the current limit for a max depth of recursion
             of 10 and a max total references of 500.
-          schema: *ref_176
+          schema: *ref_177
         '429': *ref_149
         default:
           description: Unexpected error.
-          schema: *ref_177
+          schema: *ref_178
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14309,7 +14387,7 @@ paths:
       responses:
         '200':
           description: Successfully returns the incoming references paged result.
-          schema: *ref_178
+          schema: *ref_179
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -14369,10 +14447,10 @@ paths:
           description: >-
             Successfully lists a paged result view of all the renditions in the
             database.
-          schema: *ref_179
+          schema: *ref_180
         '429': *ref_149
-        '503': *ref_180
-        default: *ref_181
+        '503': *ref_181
+        default: *ref_182
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14445,8 +14523,8 @@ paths:
           description: A rendition already exists with the given ID.
           schema: *ref_1
         '429': *ref_149
-        '503': *ref_180
-        default: *ref_181
+        '503': *ref_181
+        default: *ref_182
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14504,8 +14582,8 @@ paths:
           description: The rendition with the provided ID was not found.
           schema: *ref_1
         '429': *ref_149
-        '503': *ref_180
-        default: *ref_181
+        '503': *ref_181
+        default: *ref_182
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14581,15 +14659,15 @@ paths:
           description: >-
             Successfully lists a paged result view of all renditions that was
             created within the date range specified.
-          schema: *ref_179
+          schema: *ref_180
         '400':
           description: >-
             The provided parameters are invalid. Please read the error message
             and alter the request accordingly.
           schema: *ref_1
         '429': *ref_149
-        '503': *ref_180
-        default: *ref_181
+        '503': *ref_181
+        default: *ref_182
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14606,23 +14684,23 @@ paths:
           in: body
           description: Contains the image profile to create.
           required: true
-          schema: *ref_182
+          schema: *ref_183
       responses:
         '200':
           description: Success.
           schema: *ref_37
         '400':
           description: Empty body or Invalid input.
-          schema: *ref_183
+          schema: *ref_184
         '404':
           description: Current tenant's database is not provisioned.
-          schema: *ref_183
+          schema: *ref_184
         '409':
           description: Image profile with the same name exists.
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_183
+          schema: *ref_184
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14709,7 +14787,7 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_184
+          schema: *ref_185
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -14728,11 +14806,11 @@ paths:
       responses:
         '200':
           description: image-profile count
-          schema: *ref_185
+          schema: *ref_186
         '429': *ref_149
         default:
           description: Unexpected error.
-          schema: *ref_183
+          schema: *ref_184
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14769,25 +14847,25 @@ paths:
           schema: *ref_37
         '400':
           description: Invalid ID or Invalid input.
-          schema: *ref_183
+          schema: *ref_184
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_183
+          schema: *ref_184
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_183
+          schema: *ref_184
         '409':
           description: >-
             Another user updated the document since it was last retrieved OR
             when changing the document name, there is an existing document with
             the chosen name.
-          schema: *ref_183
+          schema: *ref_184
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_183
+          schema: *ref_184
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14809,19 +14887,19 @@ paths:
           description: Success.
         '400':
           description: Invalid ID OR Invalid input.
-          schema: *ref_183
+          schema: *ref_184
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_183
+          schema: *ref_184
         '404':
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_183
+          schema: *ref_184
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_183
+          schema: *ref_184
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -14886,7 +14964,7 @@ paths:
           description: >-
             The document with ID {id} was not found OR Current tenant's database
             is not provisioned.
-          schema: *ref_183
+          schema: *ref_184
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -15027,7 +15105,7 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_184
+          schema: *ref_185
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -15069,8 +15147,8 @@ paths:
             read the error message and alter the request accordingly.
           schema: *ref_2
         '429': *ref_149
-        '503': *ref_186
-        default: *ref_187
+        '503': *ref_187
+        default: *ref_188
       parameters:
         - name: binary
           in: body
@@ -15162,8 +15240,8 @@ paths:
           description: The resource with the provided ID was not found.
           schema: *ref_2
         '429': *ref_149
-        '503': *ref_186
-        default: *ref_187
+        '503': *ref_187
+        default: *ref_188
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -15199,8 +15277,8 @@ paths:
           description: A resource with a different checksum exists at the given ID.
           schema: *ref_2
         '429': *ref_149
-        '503': *ref_186
-        default: *ref_187
+        '503': *ref_187
+        default: *ref_188
       parameters:
         - name: binary
           in: body
@@ -15294,15 +15372,15 @@ paths:
           description: >-
             Successfully lists a paged result view of all resources that was
             created within the date range specified.
-          schema: *ref_188
+          schema: *ref_189
         '400':
           description: >-
             The provided parameters are invalid. Please read the error message
             and alter the request accordingly.
           schema: *ref_2
         '429': *ref_149
-        '503': *ref_186
-        default: *ref_187
+        '503': *ref_187
+        default: *ref_188
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -17044,21 +17122,21 @@ paths:
             See the description above for examples of response data for
             different queries.
         '400':
-          schema: *ref_189
+          schema: *ref_190
           description: >-
             Bad request - Unable to complete your request due to missing
             parameters. Provide all required parameters and try again.
         '404':
-          schema: *ref_189
+          schema: *ref_190
           description: Not found - The authoring collection was not found.
         '414':
-          schema: *ref_189
+          schema: *ref_190
           description: >-
             The request URL that addresses the search service is larger than the
             supported size of 4,096 bytes. Reduce the length of the query.
         '429': *ref_149
         '500':
-          schema: *ref_189
+          schema: *ref_190
           description: >-
             Internal server error - Unable to complete your request due to an
             exception. Try again later.
@@ -17095,7 +17173,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema: *ref_190
+          schema: *ref_191
           examples:
             application/json:
               items:
@@ -17111,7 +17189,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17168,7 +17246,7 @@ paths:
           in: body
           description: The metadata for the new site
           required: true
-          schema: *ref_192
+          schema: *ref_193
         - name: copySourceSiteId
           in: query
           description: >
@@ -17198,7 +17276,7 @@ paths:
               rev: 68-8f553a9520a1f3be3b21fd6cc8684dd5
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17214,7 +17292,7 @@ paths:
                     field: linkedDocId
         '409':
           description: Conflict
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17234,7 +17312,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17304,7 +17382,7 @@ paths:
               rev: 1-76a0d8566675d83395d8878fab7d4e5e
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17320,7 +17398,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17336,7 +17414,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17383,7 +17461,7 @@ paths:
             current revision (`rev`) and the site name (`name`) fields must be
             provided in order to update the site metadata.
           required: true
-          schema: *ref_193
+          schema: *ref_194
         - name: Content-Type
           in: header
           description: 'Content type of the request body, should be ''application/json'''
@@ -17402,7 +17480,7 @@ paths:
       responses:
         '200':
           description: 'Success, returns updated site'
-          schema: *ref_194
+          schema: *ref_195
           examples:
             application/json:
               name: default
@@ -17411,7 +17489,7 @@ paths:
               classification: site
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17426,7 +17504,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17441,7 +17519,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17456,7 +17534,7 @@ paths:
                   locale: en
         '409':
           description: Conflict
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17472,7 +17550,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17487,7 +17565,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17525,7 +17603,7 @@ paths:
           description: Site successfully deleted.
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17541,7 +17619,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17556,7 +17634,7 @@ paths:
                   locale: en
         '409':
           description: conflict
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17573,7 +17651,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17615,7 +17693,7 @@ paths:
           schema: *ref_42
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17631,7 +17709,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17646,7 +17724,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17661,7 +17739,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17676,7 +17754,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17691,7 +17769,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17730,7 +17808,7 @@ paths:
           description: Successfully cancelled the draft site metadata.
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17746,7 +17824,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17761,7 +17839,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17776,7 +17854,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17791,7 +17869,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17806,7 +17884,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17848,7 +17926,7 @@ paths:
           in: body
           description: The array of draft page Ids to ready
           required: true
-          schema: *ref_195
+          schema: *ref_196
       responses:
         '204':
           description: >-
@@ -17856,7 +17934,7 @@ paths:
             from draft to ready.
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17872,7 +17950,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17887,7 +17965,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17902,7 +17980,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17917,7 +17995,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -17932,7 +18010,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18012,7 +18090,7 @@ paths:
       responses:
         '200':
           description: succcess.
-          schema: *ref_196
+          schema: *ref_197
           examples:
             application/json:
               items:
@@ -18060,7 +18138,7 @@ paths:
                   children: []
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18076,7 +18154,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18091,7 +18169,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18106,7 +18184,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18121,7 +18199,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18136,7 +18214,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18195,7 +18273,7 @@ paths:
           in: body
           description: The metadata for the new page.
           required: true
-          schema: *ref_197
+          schema: *ref_198
         - name: cloneContentId
           in: query
           description: >
@@ -18234,7 +18312,7 @@ paths:
               creatorId: 00000000-0000-0000-0000-000000000009
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18250,7 +18328,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18265,7 +18343,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18280,7 +18358,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18295,7 +18373,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18310,7 +18388,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18413,7 +18491,7 @@ paths:
       responses:
         '200':
           description: succcess.
-          schema: *ref_198
+          schema: *ref_199
           examples:
             application/json:
               items:
@@ -18456,7 +18534,7 @@ paths:
                   classification: page
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18472,7 +18550,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18487,7 +18565,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18502,7 +18580,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18517,7 +18595,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18532,7 +18610,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18629,7 +18707,7 @@ paths:
               hideFromNavigation: false
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18645,7 +18723,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18660,7 +18738,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18675,7 +18753,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18690,7 +18768,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18705,7 +18783,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18762,7 +18840,7 @@ paths:
           description: Page successfully deleted.
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18778,7 +18856,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18793,7 +18871,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18808,7 +18886,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18823,7 +18901,7 @@ paths:
                   locale: en
         '409':
           description: Conflict
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18840,7 +18918,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18855,7 +18933,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18908,7 +18986,7 @@ paths:
           in: body
           description: The metadata for the updated page.
           required: true
-          schema: *ref_199
+          schema: *ref_200
         - name: forceOverride
           in: query
           description: >
@@ -18944,7 +19022,7 @@ paths:
               creatorId: 00000000-0000-0000-0000-000000000009
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18960,7 +19038,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18975,7 +19053,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -18990,7 +19068,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19005,7 +19083,7 @@ paths:
                   locale: en
         '409':
           description: Conflict
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19024,7 +19102,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19039,7 +19117,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19126,10 +19204,10 @@ paths:
       responses:
         '200':
           description: succcess.
-          schema: *ref_200
+          schema: *ref_201
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19147,7 +19225,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19162,7 +19240,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19177,7 +19255,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19192,7 +19270,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19207,7 +19285,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19253,7 +19331,7 @@ paths:
           schema: *ref_44
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19272,7 +19350,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19287,7 +19365,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19302,7 +19380,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19317,7 +19395,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19332,7 +19410,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19424,7 +19502,7 @@ paths:
               hideFromNavigation: false
         '400':
           description: Bad request
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19440,7 +19518,7 @@ paths:
                   locale: en
         '401':
           description: Unauthorized
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19455,7 +19533,7 @@ paths:
                   locale: en
         '403':
           description: Forbidden
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19470,7 +19548,7 @@ paths:
                   locale: en
         '404':
           description: Not found
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19485,7 +19563,7 @@ paths:
                   locale: en
         '429':
           description: Too Many Requests
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19500,7 +19578,7 @@ paths:
                   locale: en
         default:
           description: Unexpected error
-          schema: *ref_191
+          schema: *ref_192
           examples:
             application/json:
               service: prod-authoring-sites
@@ -19908,7 +19986,7 @@ paths:
             Provide all the type fields that are needed to create the new
             content type.
           required: true
-          schema: *ref_201
+          schema: *ref_202
       responses:
         '200':
           description: >-
@@ -19919,10 +19997,10 @@ paths:
           description: >-
             The body parameter is empty or has an invalid input. Provide valid
             type fields that are required to create the new content type.
-          schema: *ref_202
+          schema: *ref_203
         '404':
           description: Current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '409':
           description: >-
             A content type document with the same name or path exists in the
@@ -19930,7 +20008,7 @@ paths:
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_202
+          schema: *ref_203
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -20002,11 +20080,11 @@ paths:
             specified as a comma-separated list.
           type: string
           required: false
-        - *ref_203
+        - *ref_204
       responses:
         '200':
           description: Successfully lists all content type documents that are requested.
-          schema: *ref_204
+          schema: *ref_205
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20035,7 +20113,7 @@ paths:
             value.
           type: string
           required: false
-        - *ref_205
+        - *ref_206
         - name: If-None-Match
           in: header
           description: >-
@@ -20060,15 +20138,15 @@ paths:
             value matches the latest version of the item.
         '400':
           description: Invalid path OR Invalid input.
-          schema: *ref_202
+          schema: *ref_203
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_202
+          schema: *ref_203
         '404':
           description: >-
             The document with path {path} was not found OR Current tenant's
             database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20087,11 +20165,11 @@ paths:
       responses:
         '200':
           description: types count
-          schema: *ref_206
+          schema: *ref_207
         '429': *ref_149
         default:
           description: Unexpected error.
-          schema: *ref_202
+          schema: *ref_203
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -20117,7 +20195,7 @@ paths:
           type: boolean
           default: false
           required: false
-        - *ref_207
+        - *ref_208
         - name: body
           in: body
           description: >-
@@ -20133,26 +20211,26 @@ paths:
           schema: *ref_56
         '400':
           description: The ID that you provided is invalid. Provide a valid ID.
-          schema: *ref_202
+          schema: *ref_203
         '401':
           description: You do not have authorization to update this content type document.
-          schema: *ref_202
+          schema: *ref_203
         '404':
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '409':
           description: >-
             The content type document was updated by another user since you
             retrieved it. If you are changing the document path, a content type
             document with the same path exists in the database. Provide a new
             path for this content type.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_202
+          schema: *ref_203
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -20189,19 +20267,19 @@ paths:
             The ID provided is invalid, provide a valid ID. Or a draft item that
             is created from the content type document exists. Therefore, the
             content type document cannot be deleted.
-          schema: *ref_202
+          schema: *ref_203
         '401':
           description: You do not have authorization to delete this content type document.
-          schema: *ref_202
+          schema: *ref_203
         '404':
           description: >-
             A content type document with the ID {id} was not found OR Current
             tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_202
+          schema: *ref_203
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -20228,7 +20306,7 @@ paths:
             specified as a comma-separated list.
           type: string
           required: false
-        - *ref_205
+        - *ref_206
         - name: If-None-Match
           in: header
           description: >-
@@ -20257,7 +20335,7 @@ paths:
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20305,7 +20383,7 @@ paths:
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20343,7 +20421,7 @@ paths:
       responses:
         '200':
           description: Successfully created the blank content item.
-          schema: *ref_208
+          schema: *ref_209
           headers:
             Etag:
               description: The Etag value helps identify this document in future requests.
@@ -20356,7 +20434,7 @@ paths:
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20405,7 +20483,7 @@ paths:
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20441,20 +20519,20 @@ paths:
           description: >-
             Successfully completed the validation. See the results to find out
             whether the validation passed or failed.
-          schema: *ref_209
+          schema: *ref_210
         '400':
           description: 'The ID that you provided is invalid, provide a valid ID.'
-          schema: *ref_209
+          schema: *ref_210
         '401':
           description: >-
             You do not have authorization to validate this content type
             document.
-          schema: *ref_202
+          schema: *ref_203
         '404':
           description: >-
             A content type document with the ID {id} was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20483,7 +20561,7 @@ paths:
       responses:
         '200':
           description: Successfully retrieved a blank content type document.
-          schema: *ref_201
+          schema: *ref_202
           headers:
             Etag:
               description: The Etag value helps identify this document in future requests.
@@ -20496,7 +20574,7 @@ paths:
           description: >-
             Existing initial blank content type document was not found or the
             current tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20622,13 +20700,13 @@ paths:
             specified as a comma-separated list.
           type: string
           required: false
-        - *ref_203
+        - *ref_204
       responses:
         '200':
           description: >-
             All content type documents that are requested are listed in the
             order of the last modified date.
-          schema: *ref_204
+          schema: *ref_205
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20690,13 +20768,13 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_204
+          schema: *ref_205
         '400':
           description: Invalid name or Invalid input.
-          schema: *ref_202
+          schema: *ref_203
         '403':
           description: The operation is not available based on the current tenant's tier.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20737,7 +20815,7 @@ paths:
             value and can be specified as a comma-separated list.
           type: string
           required: false
-        - *ref_203
+        - *ref_204
         - name: If-None-Match
           in: header
           description: >-
@@ -20766,7 +20844,7 @@ paths:
           description: >-
             The element definition with ID {id} was not found or the current
             tenant's database is not provisioned.
-          schema: *ref_202
+          schema: *ref_203
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -20831,11 +20909,11 @@ paths:
             value and can be specified as a comma-separated list.
           type: string
           required: false
-        - *ref_203
+        - *ref_204
       responses:
         '200':
           description: Successfully lists all element definitions that are requested.
-          schema: *ref_210
+          schema: *ref_211
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -21293,7 +21371,7 @@ paths:
           description: >-
             Unable to complete your request due to an unexpected error. Try
             again later.
-          schema: *ref_211
+          schema: *ref_212
           examples:
             application/json:
               service: prod-contextual-content-service
@@ -21737,7 +21815,7 @@ paths:
           description: >-
             Bad request - Unable to complete your request due to missing
             parameters. Provide all required parameters and try again.
-          schema: *ref_211
+          schema: *ref_212
           examples:
             application/json:
               service: prod-contextual-content-service
@@ -21755,7 +21833,7 @@ paths:
           description: >-
             Unable to complete your request due to an unexpected error. Try
             again later.
-          schema: *ref_211
+          schema: *ref_212
           examples:
             application/json:
               service: prod-contextual-content-service
@@ -21824,13 +21902,13 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_212
         - *ref_213
+        - *ref_214
       responses:
-        '200': *ref_214
-        '400': *ref_215
+        '200': *ref_215
+        '400': *ref_216
         '429': *ref_149
-        default: *ref_216
+        default: *ref_217
   /mydelivery/v1/content/bulk_retrieve:
     post:
       tags:
@@ -21884,13 +21962,13 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_212
         - *ref_213
+        - *ref_214
       responses:
-        '200': *ref_214
-        '400': *ref_215
+        '200': *ref_215
+        '400': *ref_216
         '429': *ref_149
-        default: *ref_216
+        default: *ref_217
   '/delivery/v1/content/{id}':
     get:
       tags:
@@ -21916,16 +21994,16 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_217
         - *ref_218
         - *ref_219
+        - *ref_220
       responses:
-        '200': *ref_220
-        '304': *ref_221
-        '400': *ref_222
-        '404': *ref_223
+        '200': *ref_221
+        '304': *ref_222
+        '400': *ref_223
+        '404': *ref_224
         '429': *ref_149
-        default: *ref_216
+        default: *ref_217
   '/mydelivery/v1/content/{id}':
     get:
       tags:
@@ -21945,16 +22023,16 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_217
         - *ref_218
         - *ref_219
+        - *ref_220
       responses:
-        '200': *ref_220
-        '304': *ref_221
-        '400': *ref_222
-        '404': *ref_223
+        '200': *ref_221
+        '304': *ref_222
+        '400': *ref_223
+        '404': *ref_224
         '429': *ref_149
-        default: *ref_216
+        default: *ref_217
   '/delivery/v1/rendering/sites/{id}':
     get:
       produces:
@@ -21965,25 +22043,25 @@ paths:
         hierarchy<br />User roles: admin, manager, editor, viewer,
         authenticatedVisitor, anonymous
       parameters:
-        - *ref_224
         - *ref_225
+        - *ref_226
       responses:
         '200':
           description: Successful operation
           schema:
             type: object
-            items: *ref_226
+            items: *ref_227
         '304':
           description: Not modified
         '404':
           description: >-
             The delivery site information for the specified site ID was not
             found.
-          schema: *ref_227
+          schema: *ref_228
         '429': *ref_149
         '500':
           description: Server Error
-          schema: *ref_227
+          schema: *ref_228
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -22027,8 +22105,8 @@ paths:
         <br />User roles: admin, manager, editor, viewer, authenticatedVisitor,
         anonymous
       parameters:
-        - *ref_224
         - *ref_225
+        - *ref_226
       responses:
         '200':
           description: Successfully retrieved the delivery rendering context.
@@ -22039,11 +22117,11 @@ paths:
           description: Not modified
         '404':
           description: The delivery rendering context for the specified ID was not found.
-          schema: *ref_227
+          schema: *ref_228
         '429': *ref_149
         '500':
           description: Server Error
-          schema: *ref_227
+          schema: *ref_228
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -22063,8 +22141,8 @@ paths:
         TBD<br />User roles: admin, manager, editor, viewer,
         authenticatedVisitor, anonymous
       parameters:
-        - *ref_224
         - *ref_225
+        - *ref_226
       responses:
         '200':
           description: Successfully retrieved the delivery type information.
@@ -22075,11 +22153,11 @@ paths:
           description: Not modified
         '404':
           description: The delivery type for the specified ID was not found.
-          schema: *ref_227
+          schema: *ref_228
         '429': *ref_149
         '500':
           description: Server Error
-          schema: *ref_227
+          schema: *ref_228
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -22106,22 +22184,22 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_228
         - *ref_229
-        - *ref_225
+        - *ref_230
+        - *ref_226
       responses:
         '200':
           description: Successfully retrieved the delivery rendering context.
           schema:
             type: array
-            items: *ref_230
+            items: *ref_231
         '304':
           description: Not modified
         '404':
           description: >-
             The delivery rendering context for the specified search query was
             not found.
-          schema: *ref_227
+          schema: *ref_228
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
@@ -22142,8 +22220,8 @@ paths:
         TBD<br />User roles: admin, manager, editor, viewer,
         authenticatedVisitor
       parameters:
-        - *ref_224
         - *ref_225
+        - *ref_226
       responses:
         '200':
           description: Successfully retrieved the delivery type information.
@@ -22154,11 +22232,11 @@ paths:
           description: Not modified
         '404':
           description: The delivery type for the specified ID was not found.
-          schema: *ref_227
+          schema: *ref_228
         '429': *ref_149
         '500':
           description: Server Error
-          schema: *ref_227
+          schema: *ref_228
       x-ibm-dx-security-user-roles:
         - admin
         - manager
@@ -22214,12 +22292,12 @@ paths:
         - file
         - application/json
       parameters:
-        - *ref_231
+        - *ref_232
       responses:
-        '200': *ref_232
-        '404': *ref_233
+        '200': *ref_233
+        '404': *ref_234
         '429': *ref_149
-        default: *ref_234
+        default: *ref_235
   '/delivery/v1/resources/{fileIdentifier}':
     get:
       tags:
@@ -22257,12 +22335,12 @@ paths:
         - file
         - application/json
       parameters:
-        - *ref_235
+        - *ref_236
       responses:
-        '200': *ref_232
-        '404': *ref_236
+        '200': *ref_233
+        '404': *ref_237
         '429': *ref_149
-        default: *ref_234
+        default: *ref_235
   /delivery/v1/search:
     get:
       x-ibm-dx-security-user-roles:
@@ -24080,21 +24158,21 @@ paths:
             See the description above for examples of response data for
             different queries.
         '400':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             Bad request - Unable to complete your request due to missing
             parameters. Provide all required parameters and try again.
         '404':
-          schema: *ref_237
+          schema: *ref_238
           description: Not found - The delivery collection was not found.
         '414':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             The request URL that addresses the search service is larger than the
             supported size of 4,096 bytes. Reduce the length of the query.
         '429': *ref_149
         '500':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             Internal server error - Unable to complete your request due to an
             exception. Try again later.
@@ -25915,21 +25993,21 @@ paths:
             See the description above for examples of response data for
             different queries.
         '400':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             Bad request - Unable to complete your request due to missing
             parameters. Provide all required parameters and try again.
         '404':
-          schema: *ref_237
+          schema: *ref_238
           description: Not found - The delivery collection was not found.
         '414':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             The request URL that addresses the search service is larger than the
             supported size of 4,096 bytes. Reduce the length of the query.
         '429': *ref_149
         '500':
-          schema: *ref_237
+          schema: *ref_238
           description: >-
             Internal server error - Unable to complete your request due to an
             exception. Try again later.
@@ -25986,7 +26064,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema: *ref_238
+          schema: *ref_239
           headers:
             Etag:
               description: The etag value identifies this site item for future requests.
@@ -26000,7 +26078,7 @@ paths:
           description: |
             Bad request. 
              This error status is returned if a parameter value is invalid.
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26016,7 +26094,7 @@ paths:
                 locale: en
         '404':
           description: Not found
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26032,7 +26110,7 @@ paths:
           description: |
             Unexpected error 
               An internal error has occurred. For example, a dependant service is not running.
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26096,7 +26174,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema: *ref_238
+          schema: *ref_239
           headers:
             Etag:
               description: The etag value identifies this site item for future requests.
@@ -26110,7 +26188,7 @@ paths:
           description: |
             Bad request. 
              This error status is returned if a parameter value is invalid.
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26126,7 +26204,7 @@ paths:
                 locale: en
         '404':
           description: Not found
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26142,7 +26220,7 @@ paths:
           description: |
             Unexpected error 
               An internal error has occurred. For example, a dependant service is not running.
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26229,7 +26307,7 @@ paths:
             content item.
         '400':
           description: Bad request
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26245,7 +26323,7 @@ paths:
                 locale: en
         '404':
           description: Not found
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26259,7 +26337,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26343,7 +26421,7 @@ paths:
             content item.
         '400':
           description: Bad request
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26359,7 +26437,7 @@ paths:
                 locale: en
         '404':
           description: Not found
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26373,7 +26451,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26471,7 +26549,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema: *ref_240
+          schema: *ref_241
           headers:
             Etag:
               description: The etag value identifies this site item for future requests.
@@ -26483,7 +26561,7 @@ paths:
             content item.
         '400':
           description: Bad request
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26500,7 +26578,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26596,7 +26674,7 @@ paths:
       responses:
         '200':
           description: Success
-          schema: *ref_240
+          schema: *ref_241
           headers:
             Etag:
               description: The etag value identifies this site item for future requests.
@@ -26608,7 +26686,7 @@ paths:
             content item.
         '400':
           description: Bad request
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26625,7 +26703,7 @@ paths:
         '429': *ref_149
         default:
           description: Unexpected error
-          schema: *ref_239
+          schema: *ref_240
           examples:
             application/json:
               service: prod-delivery-sites
@@ -26682,13 +26760,13 @@ paths:
       responses:
         '200':
           description: Successful response
-          schema: *ref_241
+          schema: *ref_242
         '400':
           description: Error response
-          schema: *ref_242
+          schema: *ref_243
         '404':
           description: Indicates the tenant does not exist
-          schema: *ref_242
+          schema: *ref_243
         '429': *ref_149
     put:
       x-ibm-dx-security-user-roles:
@@ -26716,17 +26794,17 @@ paths:
           name: tenant_definition
           description: Definition of the new tenant
           required: true
-          schema: *ref_243
+          schema: *ref_244
       responses:
         '200':
           description: Successful response
-          schema: *ref_241
+          schema: *ref_242
         '400':
           description: Error response
-          schema: *ref_242
+          schema: *ref_243
         '404':
           description: Indicates the tenant does not exist
-          schema: *ref_242
+          schema: *ref_243
         '429': *ref_149
   /login/v1/redirect:
     get:
@@ -26782,7 +26860,7 @@ paths:
             set-cookie2:
               description: Sending cookies to client
               type: string
-          schema: *ref_244
+          schema: *ref_245
         '429': *ref_149
       tags:
         - Login service
@@ -26812,7 +26890,7 @@ paths:
             set-cookie2:
               description: Sending cookies to client
               type: string
-          schema: *ref_244
+          schema: *ref_245
         '429': *ref_149
       tags:
         - Login service
@@ -26852,7 +26930,7 @@ paths:
       responses:
         '200':
           description: Success for login.
-          schema: *ref_245
+          schema: *ref_246
           headers:
             x-ibm-dx-tenant-id:
               description: Sending tenant-id to client
@@ -26871,23 +26949,23 @@ paths:
               type: string
         '401':
           description: Authentication failed with credentials (incorrect or missing)
-          schema: *ref_244
+          schema: *ref_245
         '403':
           description: Access forbidden (e.g. no access to tenant or enterprise federation)
-          schema: *ref_244
+          schema: *ref_245
         '404':
           description: Tenant not found
-          schema: *ref_244
+          schema: *ref_245
         '412':
           description: Precondition Failed for credentials (incorrect format or missing)
-          schema: *ref_244
+          schema: *ref_245
         '423':
           description: The tenant is locked
-          schema: *ref_244
+          schema: *ref_245
         '429': *ref_149
         '503':
           description: Downstream service not available (e.g. IBMid)
-          schema: *ref_244
+          schema: *ref_245
       tags:
         - Login service
     post:
@@ -26927,7 +27005,7 @@ paths:
       responses:
         '200':
           description: Success for login.
-          schema: *ref_245
+          schema: *ref_246
           headers:
             x-ibm-dx-tenant-id:
               description: Sending tenant-id to client
@@ -26946,23 +27024,23 @@ paths:
               type: string
         '401':
           description: Authentication failed with credentials (incorrect or missing)
-          schema: *ref_244
+          schema: *ref_245
         '403':
           description: Access forbidden (e.g. no access to tenant or enterprise federation)
-          schema: *ref_244
+          schema: *ref_245
         '404':
           description: Tenant not found
-          schema: *ref_244
+          schema: *ref_245
         '412':
           description: Precondition Failed for credentials (incorrect format or missing)
-          schema: *ref_244
+          schema: *ref_245
         '423':
           description: The tenant is locked
-          schema: *ref_244
+          schema: *ref_245
         '429': *ref_149
         '503':
           description: Downstream service not available (e.g. IBMid)
-          schema: *ref_244
+          schema: *ref_245
       tags:
         - Login service
   /user-profile/v1/users/currentuser:
@@ -26985,10 +27063,10 @@ paths:
       responses:
         '200':
           description: Returns the current user
-          schema: *ref_246
+          schema: *ref_247
         '400':
           description: Response indicating a client error
-          schema: *ref_247
+          schema: *ref_248
         '429': *ref_149
   /user-profile/v1/users:
     parameters: []
@@ -27004,11 +27082,11 @@ paths:
       produces:
         - application/json
       parameters:
-        - *ref_248
         - *ref_249
         - *ref_250
         - *ref_251
         - *ref_252
+        - *ref_253
       responses:
         '200':
           description: >-
@@ -27017,16 +27095,16 @@ paths:
           schema:
             type: object
             allOf:
-              - *ref_253
+              - *ref_254
             required:
               - items
             properties:
               items:
                 type: array
-                items: *ref_246
+                items: *ref_247
         '400':
           description: Response indicating a client error.
-          schema: *ref_247
+          schema: *ref_248
         '429': *ref_149
     post:
       tags:
@@ -27044,21 +27122,21 @@ paths:
           name: body
           description: User object that needs to be added.
           required: true
-          schema: *ref_254
+          schema: *ref_255
       responses:
         '201':
           description: User was created successfully.
-          schema: *ref_246
+          schema: *ref_247
         '400':
           description: Response indicating a client error.
-          schema: *ref_247
+          schema: *ref_248
         '409':
           description: A user with same externalID does already exist.
-          schema: *ref_247
+          schema: *ref_248
         '429': *ref_149
   '/user-profile/v1/users/{id}':
     parameters:
-      - *ref_255
+      - *ref_256
     get:
       tags:
         - Administering user profiles
@@ -27079,15 +27157,15 @@ paths:
           type: string
           pattern: >-
             ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|currentuser
-        - *ref_249
-        - *ref_256
+        - *ref_250
+        - *ref_257
       responses:
         '200':
           description: Returns the user object for the given user.
-          schema: *ref_257
+          schema: *ref_258
         '400':
           description: Response indicating a client error.
-          schema: *ref_247
+          schema: *ref_248
         '404':
           description: The given ID cannot be resolved.
         '429': *ref_149
@@ -27111,14 +27189,14 @@ paths:
             The existing user object is replaced by the given object. Some
             fields will be ignored.
           required: true
-          schema: *ref_258
+          schema: *ref_259
       responses:
         '200':
           description: The user was updated successfully.
-          schema: *ref_246
+          schema: *ref_247
         '400':
           description: Response indicating a client error.
-          schema: *ref_247
+          schema: *ref_248
         '404':
           description: The given ID cannot be resolved.
         '429': *ref_149
@@ -27142,13 +27220,13 @@ paths:
           type: string
           pattern: >-
             ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$|currentuser
-        - *ref_249
+        - *ref_250
       responses:
         '204':
           description: User was deleted successfully.
         '400':
           description: Response indicating a client error.
-          schema: *ref_247
+          schema: *ref_248
         '404':
           description: The given ID cannot be resolved.
         '429': *ref_149
@@ -27180,7 +27258,7 @@ paths:
       responses:
         '200':
           description: Success.
-          schema: *ref_259
+          schema: *ref_260
           headers:
             Etag:
               description: The Etag value helps identify this document in future requests.
@@ -27191,12 +27269,12 @@ paths:
             value matches the latest version of the item.
         '404':
           description: There is no existing webhook profile.
-          schema: *ref_260
+          schema: *ref_261
         '429': *ref_149
       x-ibm-dx-security-user-roles:
         - admin
       tags:
-        - Infra Webhooks
+        - Webhook profiles - Beta
     put:
       summary: Beta - Creates or updates the webhook profile for the current tenant
       description: >-
@@ -27224,25 +27302,25 @@ paths:
           in: body
           description: Contains the webhook profile to save.
           required: true
-          schema: *ref_259
+          schema: *ref_260
       responses:
         '200':
           description: Success.
-          schema: *ref_259
+          schema: *ref_260
         '400':
           description: Invalid input.
-          schema: *ref_260
+          schema: *ref_261
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_260
+          schema: *ref_261
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_260
+          schema: *ref_261
       x-ibm-dx-security-user-roles:
         - admin
       tags:
-        - Infra Webhooks
+        - Webhook profiles - Beta
     delete:
       summary: Beta - Deletes the webhook profile for the current tenant.
       description: >-
@@ -27253,18 +27331,18 @@ paths:
           description: Success.
         '401':
           description: The user is not authorized to run this action.
-          schema: *ref_260
+          schema: *ref_261
         '404':
           description: There is no existing webhook profile.
-          schema: *ref_260
+          schema: *ref_261
         '429': *ref_149
         '500':
           description: Unexpected error.
-          schema: *ref_260
+          schema: *ref_261
       x-ibm-dx-security-user-roles:
         - admin
       tags:
-        - Infra Webhooks
+        - Webhook profiles - Beta
   /publishing/v1/jobs:
     x-ibm-dx-security-user-roles:
       - admin
@@ -27281,7 +27359,7 @@ paths:
         - name: newJob
           in: body
           required: false
-          schema: *ref_261
+          schema: *ref_262
       responses:
         '200':
           description: >-
@@ -27291,7 +27369,7 @@ paths:
         '201':
           description: Successfully triggered a new job.
           schema: *ref_126
-        '400': *ref_262
+        '400': *ref_263
         '429': *ref_149
   '/publishing/v1/jobs/{id}':
     x-ibm-dx-security-user-roles:
@@ -27310,8 +27388,8 @@ paths:
         ID you provide from the database.<br />User roles: admin, manager,
         editor
       parameters:
-        - *ref_263
         - *ref_264
+        - *ref_265
       responses:
         '200':
           description: >-
@@ -27350,13 +27428,13 @@ paths:
         for the job that matches the ID that you provide.<br />User roles:
         admin, manager, editor
       parameters:
-        - *ref_263
+        - *ref_264
       responses:
         '200':
           description: >-
             Successfully retrieved the status for the job that matches the ID
             you provided.
-          schema: *ref_265
+          schema: *ref_266
         '400':
           description: >-
             Unable to handle the request as it does not match the API
@@ -27382,7 +27460,7 @@ paths:
         Use the /site-revisions/default endpoint to retrieve the default site
         revision<br />User roles: admin, manager, editor
       parameters:
-        - *ref_264
+        - *ref_265
       responses:
         '200':
           description: The default site revision
@@ -27411,7 +27489,7 @@ paths:
         - name: siteRevision
           in: body
           required: true
-          schema: *ref_266
+          schema: *ref_267
       responses:
         '200':
           description: Successfully updated the site revision.
