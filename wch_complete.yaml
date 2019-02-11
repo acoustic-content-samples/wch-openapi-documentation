@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.119
+  version: 1.0.120
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -513,6 +513,13 @@ parameters:
     in: header
     name: x-ibm-dx-user-auth
     description: JWT encrypted user context set by login process
+    required: false
+    type: string
+  HeaderDataCenter36:
+    x-ibm-dx-dc-mapping-key: private
+    in: header
+    name: x-ibm-dx-dc-mapping-key
+    description: The data center for the replication mapping
     required: false
     type: string
   id36: &ref_259
