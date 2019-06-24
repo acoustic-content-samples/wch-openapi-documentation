@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.126
+  version: 1.0.128
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -335,20 +335,20 @@ tags:
       job.
        A site revision represents a specific revision of a site.
 parameters:
-  commitTime17:
+  commitTime16:
     name: commitTime
     in: query
     description: commit time for indexing - default is 60 000 (ms)
     required: false
     type: number
     format: int
-  softCommit17:
+  softCommit16:
     name: softCommit
     in: query
     description: do a soft commit right after indexing - default is true
     required: false
     type: boolean
-  documents17:
+  documents16:
     name: documents
     in: body
     description: the list of documents to be added
@@ -366,7 +366,7 @@ parameters:
               id:
                 type: string
                 description: Unique identifier for the document
-  baseInclude19: &ref_209
+  baseInclude18: &ref_209
     name: include
     in: query
     description: >
@@ -381,7 +381,7 @@ parameters:
       option are returned.
     required: false
     type: string
-  getInclude19: &ref_211
+  getInclude18: &ref_211
     name: include
     in: query
     description: >
@@ -399,7 +399,7 @@ parameters:
       option are returned.
     required: false
     type: string
-  updateOptions19: &ref_213
+  updateOptions18: &ref_213
     name: options
     in: query
     description: |
@@ -408,7 +408,7 @@ parameters:
          * rebuild-path-filename: Instructs the service to re-generate the last fragment of the specified document path, by converting the specified document name into a filesystem friendly filename.
     required: false
     type: string
-  bulkRequest23: &ref_218
+  bulkRequest22: &ref_218
     name: bulkRequest
     in: body
     description: >-
@@ -429,14 +429,14 @@ parameters:
           items:
             type: string
     required: true
-  id23: &ref_223
+  id22: &ref_223
     name: id
     in: path
     description: The ID of the content item.
     type: string
     format: uuid
     required: true
-  fields23: &ref_224
+  fields22: &ref_224
     name: fields
     in: query
     description: >-
@@ -449,13 +449,13 @@ parameters:
       type: string
     collectionFormat: csv
     required: false
-  HeaderContentType23: &ref_219
+  HeaderContentType22: &ref_219
     name: Content-Type
     in: header
     description: 'Content type of the request body, should be ''application/json''.'
     type: string
     required: true
-  HeaderIfNoneMatch23: &ref_225
+  HeaderIfNoneMatch22: &ref_225
     name: If-None-Match
     in: header
     description: >-
@@ -464,7 +464,7 @@ parameters:
       instead of the content item.
     type: string
     required: false
-  ContentTypeQueryParameter24: &ref_232
+  ContentTypeQueryParameter23: &ref_232
     in: query
     name: contentType
     description: >-
@@ -472,13 +472,13 @@ parameters:
       text/html.
     type: string
     required: false
-  LayoutIdQueryParameter24: &ref_231
+  LayoutIdQueryParameter23: &ref_231
     in: query
     name: layoutId
     description: Provide the ID of the layout to be used to pre-render the resource.
     type: string
     required: false
-  IDQueryParameter24:
+  IDQueryParameter23:
     in: query
     name: id
     description: >-
@@ -490,7 +490,7 @@ parameters:
       documentation.
     type: string
     required: true
-  IDPathParameter24: &ref_230
+  IDPathParameter23: &ref_230
     in: path
     name: id
     description: >-
@@ -502,19 +502,19 @@ parameters:
       documentation.
     type: string
     required: true
-  FieldQueryParameter24: &ref_237
+  FieldQueryParameter23: &ref_237
     name: fq
     description: The Solr "fq" parameter applies a filter query to the search results.
     in: query
     required: false
     type: string
-  QueryParameter24: &ref_236
+  QueryParameter23: &ref_236
     name: q
     description: The Solr "q" parameter uses Solr/Lucene standard query syntax.
     in: query
     required: false
     type: string
-  JSONPCallbackParameter24: &ref_233
+  JSONPCallbackParameter23: &ref_233
     name: callback
     description: >-
       Provide the JSONP callback name for JSONP support. The callback name must
@@ -523,7 +523,7 @@ parameters:
     in: query
     required: false
     type: string
-  fileIdentifier25: &ref_243
+  fileIdentifier24: &ref_243
     name: fileIdentifier
     in: path
     description: >
@@ -533,26 +533,26 @@ parameters:
       to the id.
     type: string
     required: true
-  path25: &ref_239
+  path24: &ref_239
     name: path
     in: query
     description: Provide the absolute path of the resource (URL encoded).
     type: string
     required: true
-  commitTime26:
+  commitTime25:
     name: commitTime
     in: query
     description: commit time for indexing - default is 60 000 (ms)
     required: false
     type: number
     format: int
-  softCommit26:
+  softCommit25:
     name: softCommit
     in: query
     description: do a soft commit right after indexing - default is true
     required: false
     type: boolean
-  documents26:
+  documents25:
     name: documents
     in: body
     description: the list of documents to be added
@@ -570,14 +570,14 @@ parameters:
               id:
                 type: string
                 description: Unique identifier for the document
-  HeaderAuthCookie40: &ref_254
+  HeaderAuthCookie38: &ref_254
     x-ibm-dx-user-auth: private
     in: header
     name: x-ibm-dx-user-auth
     description: JWT encrypted user context set by login process
     required: false
     type: string
-  HeaderDataCenter40:
+  HeaderDataCenter38:
     x-ibm-dx-dc-mapping-key: private
     in: header
     name: x-ibm-dx-dc-mapping-key
@@ -586,14 +586,14 @@ parameters:
       impact)
     required: false
     type: string
-  id40: &ref_264
+  id38: &ref_264
     in: path
     name: id
     description: The unique internal identifier of the entity that should be processed
     required: true
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  externalId40: &ref_257
+  externalId38: &ref_257
     in: query
     name: external-id
     description: The unique external identifier of the user (e.g. BlueID).
@@ -601,7 +601,7 @@ parameters:
     type: string
     format: email
     maxLength: 512
-  offset40: &ref_259
+  offset38: &ref_259
     name: offset
     in: query
     description: The index of the first item to be included in the response
@@ -610,7 +610,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit40: &ref_260
+  limit38: &ref_260
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -620,28 +620,28 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  startkey40:
+  startkey38:
     name: startkey
     in: query
     description: The start position of items to be included in the response
     required: false
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  endkey40:
+  endkey38:
     name: endkey
     in: query
     description: The start position of items to be included in the response
     required: false
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  privacyNotice40: &ref_258
+  privacyNotice38: &ref_258
     name: privacy-notice
     in: query
     description: Parameter which must be set if the users privacy notice should be returned
     required: false
     type: boolean
     default: false
-  include40: &ref_261
+  include38: &ref_261
     name: include
     in: query
     description: Include additional information sections
@@ -652,7 +652,7 @@ parameters:
       enum:
         - links
         - none
-  expand4JobDefinition47:
+  expand4JobDefinition45:
     name: expand
     in: query
     description: expand (inline) given references
@@ -665,7 +665,7 @@ parameters:
         - profile
         - '*'
         - all
-  include47: &ref_272
+  include45: &ref_272
     name: include
     in: query
     description: >-
@@ -678,7 +678,7 @@ parameters:
       enum:
         - links
         - none
-  offset47:
+  offset45:
     name: offset
     in: query
     description: the index of the first item to be included in the response
@@ -687,7 +687,7 @@ parameters:
     minimum: 0
     type: integer
     format: int32
-  limit47:
+  limit45:
     name: limit
     in: query
     description: The maximum number of items to be included in the response
@@ -697,14 +697,14 @@ parameters:
     maximum: 100
     type: integer
     format: int32
-  id47: &ref_271
+  id45: &ref_271
     name: id
     in: path
     description: The ID of the item
     required: true
     type: string
     maxLength: 64
-  classification47:
+  classification45:
     name: classification
     in: path
     description: The classification of the item
@@ -717,7 +717,7 @@ parameters:
       - site
       - category
       - taxonomy
-  force47:
+  force45:
     name: force
     in: query
     description: >-
@@ -726,7 +726,7 @@ parameters:
     required: false
     default: false
     type: boolean
-  state47:
+  state45:
     name: state
     in: query
     description: Only jobs that have (one of) the specified state(s) will be returned
@@ -912,7 +912,7 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  UnexpectedError13: &ref_187
+  UnexpectedError12: &ref_187
     description: Unexpected error.
     schema: &ref_1
       type: object
@@ -998,10 +998,10 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  DataStoreUnavailable13: &ref_186
+  DataStoreUnavailable12: &ref_186
     description: Connection failed to datastore.
     schema: *ref_1
-  UnexpectedError15: &ref_193
+  UnexpectedError14: &ref_193
     description: Unexpected error.
     schema: &ref_2
       type: object
@@ -1082,10 +1082,10 @@ responses:
         - requestMethod
         - requestUri
         - errors
-  DataStoreUnavailable15: &ref_192
+  DataStoreUnavailable14: &ref_192
     description: Connection failed to data store.
     schema: *ref_2
-  BulkGetSuccess23: &ref_220
+  BulkGetSuccess22: &ref_220
     description: Success
     schema: &ref_66
       type: array
@@ -1295,7 +1295,7 @@ responses:
                 /b7e6dfb7-76cf-44a9-a354-2e212d4a878c/dxresources/d7a1/d7a1a2b9-47e4-4131-9c3c-18c464e84e68.JPG
           kind: []
           type: Sample Article
-  BulkBadRequest23: &ref_221
+  BulkBadRequest22: &ref_221
     description: Bad request
     schema: &ref_4
       type: object
@@ -1345,7 +1345,7 @@ responses:
           level: ERROR
           description: The content id list was not passed or was empty.
           locale: en
-  GetByIdSuccess23: &ref_226
+  GetByIdSuccess22: &ref_226
     description: Success
     schema: *ref_3
     headers:
@@ -1423,7 +1423,7 @@ responses:
               /b7e6dfb7-76cf-44a9-a354-2e212d4a878c/dxresources/d7a1/d7a1a2b9-47e4-4131-9c3c-18c464e84e68.JPG
         kind: []
         type: Sample Article
-  GetByIdBadRequest23: &ref_228
+  GetByIdBadRequest22: &ref_228
     description: Bad request
     schema: *ref_4
     examples:
@@ -1439,7 +1439,7 @@ responses:
             spaces or empty values, e.g. 'fields=rev,,last-modified' is
             considered invalid.
           locale: en
-  ItemNotFound23: &ref_229
+  ItemNotFound22: &ref_229
     description: Not found
     schema: *ref_4
     examples:
@@ -1452,11 +1452,11 @@ responses:
           level: ERROR
           description: A content item with the specified id was not found in the system.
           locale: en
-  NotModified23: &ref_227
+  NotModified22: &ref_227
     description: >-
       Not modified is returned when the If-None-Match header is used and the
       Etag value matches the most recent version of the response.
-  UnexpectedError23: &ref_222
+  UnexpectedError22: &ref_222
     description: Unexpected error
     schema: *ref_4
     examples:
@@ -1471,7 +1471,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  GetResourceSuccess25: &ref_240
+  GetResourceSuccess24: &ref_240
     description: The requested resource.
     schema:
       type: string
@@ -1480,7 +1480,7 @@ responses:
       Content-Type:
         description: Media type of resource.
         type: string
-  GetByPathNotFound25: &ref_241
+  GetByPathNotFound24: &ref_241
     description: Not found
     schema: &ref_5
       type: object
@@ -1514,7 +1514,7 @@ responses:
           level: ERROR
           description: The resource at the specified path could not be found.
           locale: en
-  GetByIdNotFound25: &ref_244
+  GetByIdNotFound24: &ref_244
     description: Not found
     schema: *ref_5
     examples:
@@ -1527,7 +1527,7 @@ responses:
           level: ERROR
           description: The resource with the specified resourceId could not be found.
           locale: en
-  UnexpectedError25: &ref_242
+  UnexpectedError24: &ref_242
     description: Unexpected error
     schema: &ref_71
       type: object
@@ -1563,7 +1563,7 @@ responses:
             Unable to complete the request due to an unexpected error. Try again
             or contact IBM support if problem persists.
           locale: en
-  clientError47: &ref_270
+  clientError45: &ref_270
     description: Unable to handle the request as it does not match the API definition.
     schema: &ref_106
       description: This JSON record represents an error condition.
@@ -4625,7 +4625,7 @@ definitions:
         type: string
         description: The current request uri.
   Message9: *ref_24
-  IncomingReferenceMetadata12: &ref_28
+  IncomingReferenceMetadata11: &ref_28
     type: object
     properties:
       id:
@@ -4650,7 +4650,7 @@ definitions:
         example:
           - name: Article 1
           - id: 'content:9aefea92-2dd4-42c3-8999-10acbcfcc054'
-  BatchIncomingReferenceMetadata12: &ref_183
+  BatchIncomingReferenceMetadata11: &ref_183
     type: array
     items:
       type: object
@@ -4665,9 +4665,9 @@ definitions:
           description: 'Basic meatadata like name, and does not include search metadata.'
           example:
             - name: Article 1
-  Classification12: *ref_25
-  SearchMetadata12: *ref_26
-  OutgoingReferenceMetadata12: &ref_27
+  Classification11: *ref_25
+  SearchMetadata11: *ref_26
+  OutgoingReferenceMetadata11: &ref_27
     type: object
     properties:
       id:
@@ -4699,7 +4699,7 @@ definitions:
         items:
           type: string
     additionalProperties: false
-  OutgoingReferencesResponse12: &ref_180
+  OutgoingReferencesResponse11: &ref_180
     type: object
     properties:
       result:
@@ -4754,7 +4754,7 @@ definitions:
       references:
         type: object
         additionalProperties: *ref_27
-  OutgoingReferenceRequest12: &ref_179
+  OutgoingReferenceRequest11: &ref_179
     type: object
     properties:
       filters:
@@ -4791,7 +4791,7 @@ definitions:
         items:
           type: string
     additionalProperties: false
-  IncomingReferencesResponse12: &ref_184
+  IncomingReferencesResponse11: &ref_184
     type: object
     properties:
       limit:
@@ -4820,7 +4820,7 @@ definitions:
       items:
         type: array
         items: *ref_28
-  ErrorResponse12: &ref_181
+  ErrorResponse11: &ref_181
     type: object
     description: an error response.
     properties:
@@ -4900,8 +4900,8 @@ definitions:
       - requestMethod
       - requestUri
       - errors
-  Error12: *ref_29
-  IncomingReferenceRequest12: &ref_182
+  Error11: *ref_29
+  IncomingReferenceRequest11: &ref_182
     type: object
     properties:
       limit:
@@ -4920,7 +4920,7 @@ definitions:
         items:
           type: string
     additionalProperties: false
-  RenditionParameters13: &ref_30
+  RenditionParameters12: &ref_30
     type: object
     properties:
       locationX:
@@ -4962,7 +4962,7 @@ definitions:
         example: 0a800487f06d71eaf4cffdfde1ab28bc
     required:
       - asset
-  Rendition13: &ref_33
+  Rendition12: &ref_33
     allOf:
       - *ref_30
       - type: object
@@ -5047,11 +5047,11 @@ definitions:
           - fileName
           - mediaType
           - resource
-  Link13:
+  Link12:
     type: object
     properties: *ref_31
     required: *ref_32
-  QueryResult13: &ref_185
+  QueryResult12: &ref_185
     type: object
     properties:
       limit:
@@ -5077,14 +5077,14 @@ definitions:
       - offset
       - href
       - items
-  ErrorResponse13: *ref_1
-  Error13: *ref_34
-  Count14: &ref_191
+  ErrorResponse12: *ref_1
+  Error12: *ref_34
+  Count13: &ref_191
     type: object
     properties:
       count:
         type: integer
-  NewImageProfile14: &ref_188
+  NewImageProfile13: &ref_188
     type: object
     description: An new image profile.
     properties:
@@ -5140,7 +5140,7 @@ definitions:
       - name
       - classification
       - dimensions
-  ExistingImageProfile14: &ref_36
+  ExistingImageProfile13: &ref_36
     type: object
     description: An existing image profile.
     properties:
@@ -5220,7 +5220,7 @@ definitions:
       - classification
       - creatorId
       - dimensions
-  MultiImageProfile14:
+  MultiImageProfile13:
     type: object
     properties:
       notFound:
@@ -5358,8 +5358,8 @@ definitions:
               classification: image-profile
               id: 9560c8de-b37c-4874-93fe-7e585339e9f9
             locale: en-US
-  Dimension14: *ref_35
-  ImageProfileQueryResult14: &ref_190
+  Dimension13: *ref_35
+  ImageProfileQueryResult13: &ref_190
     type: object
     description: A query result that returns image profiles.
     properties:
@@ -5385,7 +5385,7 @@ definitions:
       items:
         type: array
         items: *ref_36
-  ErrorResult14: &ref_189
+  ErrorResult13: &ref_189
     type: object
     description: an error response.
     properties:
@@ -5404,10 +5404,10 @@ definitions:
       requestUri:
         type: string
         description: The current request uri.
-  Message14: *ref_37
-  ErrorResponse15: *ref_2
-  Error15: *ref_38
-  QueryResult15: &ref_194
+  Message13: *ref_37
+  ErrorResponse14: *ref_2
+  Error14: *ref_38
+  QueryResult14: &ref_194
     type: object
     properties:
       limit:
@@ -5446,10 +5446,10 @@ definitions:
       - offset
       - href
       - items
-  ResourceMetadata15: *ref_39
-  Documents17: *ref_40
-  Document17: *ref_41
-  collection17:
+  ResourceMetadata14: *ref_39
+  Documents16: *ref_40
+  Document16: *ref_41
+  collection16:
     type: object
     properties:
       fields:
@@ -5515,7 +5515,7 @@ definitions:
         description: >-
           Specifies the required field that is used as the unique key of
           documents in a search collection.
-  ErrorMessage17: &ref_195
+  ErrorMessage16: &ref_195
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -5576,8 +5576,8 @@ definitions:
     required:
       - requestId
       - errors
-  Error17: *ref_42
-  SiteCreatedUpdatedResponse18: &ref_200
+  Error16: *ref_42
+  SiteCreatedUpdatedResponse17: &ref_200
     title: Site Metadata update response
     description: Site Metadata update response
     type: object
@@ -5606,7 +5606,7 @@ definitions:
           instead of '#' anchors, for example 'https://your.host/products'. The
           'path' mode is recommended for allowing external search crawlers to
           index the pages as separate documents.
-  SiteMetaData18: &ref_43
+  SiteMetaData17: &ref_43
     title: Site Metadata
     description: Site Metadata
     type: object
@@ -5655,7 +5655,7 @@ definitions:
           instead of '#' anchors, for example 'https://your.host/products'. The
           'path' mode is recommended for allowing external search crawlers to
           index the pages as separate documents.
-  SiteList18: &ref_196
+  SiteList17: &ref_196
     type: object
     title: List of available sites
     description: List of available sites
@@ -5663,7 +5663,7 @@ definitions:
       items:
         type: array
         items: *ref_43
-  SiteCreate18: &ref_198
+  SiteCreate17: &ref_198
     title: Creating Site Metadata
     description: Create Site Metadata
     type: object
@@ -5697,7 +5697,7 @@ definitions:
           'https://your.host/products'. The 'path' mode is recommended for
           allowing external search crawlers to index the pages as separate
           documents.
-  SiteUpdate18: &ref_199
+  SiteUpdate17: &ref_199
     title: Updating Site Metadata
     description: Updating Site Metadata
     type: object
@@ -5723,7 +5723,7 @@ definitions:
           instead of '#' anchors, for example 'https://your.host/products'. The
           'path' mode is recommended for allowing external search crawlers to
           index the pages as separate documents.
-  AllPages18:
+  AllPages17:
     type: object
     title: List of all pages
     description: List of all pages from all sites
@@ -5788,7 +5788,7 @@ definitions:
                 a parent page, it will override the corresponding flags in all
                 descendant pages. Therefore, hiding a page will hide all its
                 descendants in the site navigation menu.
-  PageHierarchy18: &ref_202
+  PageHierarchy17: &ref_202
     type: object
     title: Hierachy of pages in the site
     description: Hierachy of pages in the site
@@ -5796,7 +5796,7 @@ definitions:
       items:
         type: array
         items: *ref_44
-  PageList18: &ref_204
+  PageList17: &ref_204
     type: object
     title: Modified pages list
     description: A list of pages in the site modified between certain dates
@@ -5874,7 +5874,7 @@ definitions:
                 a parent page, it will override the corresponding flags in all
                 descendant pages. Therefore, hiding a page will hide all its
                 descendants in the site navigation menu.
-  PageNew18: &ref_203
+  PageNew17: &ref_203
     title: Create Page Metadata
     description: Creation of Page Metadata
     type: object
@@ -5929,7 +5929,7 @@ definitions:
           on a parent page, it will override the corresponding flags in all
           descendant pages. Therefore, hiding a page will hide all its
           descendants in the site navigation menu.
-  PageUpdate18: &ref_205
+  PageUpdate17: &ref_205
     title: Update of Page Metadata
     description: Update of Page Metadata
     type: object
@@ -5984,9 +5984,9 @@ definitions:
           on a parent page, it will override the corresponding flags in all
           descendant pages. Therefore, hiding a page will hide all its
           descendants in the site navigation menu.
-  Page18: *ref_45
-  HierarchicalPage18: *ref_44
-  DeletePagesInBulkRequest18:
+  Page17: *ref_45
+  HierarchicalPage17: *ref_44
+  DeletePagesInBulkRequest17:
     title: Delete pages listed in the list of page ids
     description: Delete pages
     type: object
@@ -5996,7 +5996,7 @@ definitions:
         description: List of page Ids
         items:
           type: string
-  DeletePagesInBulkResponse18:
+  DeletePagesInBulkResponse17:
     type: object
     properties:
       failedId:
@@ -6004,7 +6004,7 @@ definitions:
         description: List of failed Ids
         items:
           type: string
-  MoveResult18: &ref_206
+  MoveResult17: &ref_206
     title: Target Parent After Move
     description: Target Parent Updated Values After Move
     type: object
@@ -6015,7 +6015,7 @@ definitions:
       rev:
         type: string
         description: (optional) The latest revision of the parent page item document.
-  DraftPageIds18: &ref_201
+  DraftPageIds17: &ref_201
     title: List of draft page ids in specified site to ready
     description: Publish the list of draft page Ids
     type: object
@@ -6025,7 +6025,7 @@ definitions:
         description: List of draft page Ids
         items:
           type: string
-  ReadyPagesInBulkRequest18:
+  ReadyPagesInBulkRequest17:
     title: Ready pages in bulk
     description: Publish the list of draft pages.
     type: object
@@ -6057,9 +6057,9 @@ definitions:
           publishDate:
             type: string
             description: The time that the project was published
-  ReadyPagesIds18: *ref_46
-  ProjectContext18: *ref_47
-  ReadyPagesInBulkResponse18:
+  ReadyPagesIds17: *ref_46
+  ProjectContext17: *ref_47
+  ReadyPagesInBulkResponse17:
     type: object
     properties:
       failedId:
@@ -6067,7 +6067,7 @@ definitions:
         description: List of failed Ids
         items:
           type: string
-  CreateDraftPagesInBulkRequest18:
+  CreateDraftPagesInBulkRequest17:
     title: Create draft pages in bulk
     description: List of draft pages to create.
     type: object
@@ -6104,9 +6104,9 @@ definitions:
           isPublishingJob:
             type: boolean
             description: Whether the project is a publishing job or not.
-  DraftPagesToCreateIds18: *ref_48
-  DraftsProjectContext18: *ref_49
-  CreateDraftPagesInBulkResponse18:
+  DraftPagesToCreateIds17: *ref_48
+  DraftsProjectContext17: *ref_49
+  CreateDraftPagesInBulkResponse17:
     type: object
     properties:
       successes:
@@ -6124,7 +6124,7 @@ definitions:
         description: List of failed Ids
         items:
           type: string
-  Error18: &ref_50
+  Error17: &ref_50
     title: Error
     description: Error
     type: object
@@ -6146,7 +6146,7 @@ definitions:
             type: string
       locale:
         type: string
-  ErrorMessage18: &ref_197
+  ErrorMessage17: &ref_197
     title: ErrorMessage
     description: ErrorMessage
     type: object
@@ -6160,7 +6160,7 @@ definitions:
       errors:
         type: array
         items: *ref_50
-  BlankContent19: &ref_214
+  BlankContent18: &ref_214
     type: object
     description: An blank content document.
     properties:
@@ -6175,7 +6175,7 @@ definitions:
       elements:
         type: object
         description: Represents the elements present on this content document.
-  NewType19: &ref_207
+  NewType18: &ref_207
     type: object
     description: An new type document.
     properties:
@@ -6419,7 +6419,7 @@ definitions:
       - tags
       - status
       - elements
-  ExistingType19: &ref_57
+  ExistingType18: &ref_57
     type: object
     description: An existing type document.
     properties:
@@ -6576,7 +6576,7 @@ definitions:
       - tags
       - status
       - elements
-  ElementDef19: &ref_58
+  ElementDef18: &ref_58
     type: object
     description: An element definition.
     properties:
@@ -6635,7 +6635,7 @@ definitions:
             type: string
           type:
             type: string
-  TypeQueryResult19: &ref_210
+  TypeQueryResult18: &ref_210
     type: object
     description: A query result that returns type documents.
     properties:
@@ -6661,7 +6661,7 @@ definitions:
       items:
         type: array
         items: *ref_57
-  ElementDefQueryResult19: &ref_216
+  ElementDefQueryResult18: &ref_216
     type: object
     description: A query result that returns element definitions.
     properties:
@@ -6687,20 +6687,20 @@ definitions:
       items:
         type: array
         items: *ref_58
-  TypeElement19: *ref_56
-  DocumentLinks19: *ref_59
-  WorkflowStatus19: *ref_53
-  TypeClassification19: *ref_51
-  TypeKind19: *ref_52
-  TypeIcon19: *ref_55
-  TypeUIExtensions19: *ref_54
-  ElementDefClassification19: *ref_60
-  Count19: &ref_212
+  TypeElement18: *ref_56
+  DocumentLinks18: *ref_59
+  WorkflowStatus18: *ref_53
+  TypeClassification18: *ref_51
+  TypeKind18: *ref_52
+  TypeIcon18: *ref_55
+  TypeUIExtensions18: *ref_54
+  ElementDefClassification18: *ref_60
+  Count18: &ref_212
     type: object
     properties:
       count:
         type: integer
-  ErrorResult19: &ref_208
+  ErrorResult18: &ref_208
     type: object
     description: an error response.
     properties:
@@ -6763,8 +6763,8 @@ definitions:
       requestUri:
         type: string
         description: The current request uri.
-  Message19: *ref_61
-  ValidationResult19: &ref_215
+  Message18: *ref_61
+  ValidationResult18: &ref_215
     type: object
     description: a validation response.
     properties:
@@ -6789,7 +6789,7 @@ definitions:
           The array of error messages, only present if the result has error
           messages.
         items: *ref_61
-  Error22:
+  Error21:
     title: Error
     description: Error
     type: object
@@ -6811,7 +6811,7 @@ definitions:
             type: string
       locale:
         type: string
-  ErrorMessage22: &ref_217
+  ErrorMessage21: &ref_217
     title: ErrorMessage
     description: ErrorMessage
     type: object
@@ -6827,13 +6827,13 @@ definitions:
         description: Error
         title: Error
         properties: *ref_62
-  BulkRetrievalRequest23: *ref_63
-  Content23: *ref_3
-  Error23: *ref_4
-  IdsListForBulkRetrieval23: *ref_64
-  FieldsListForBulkRetrieval23: *ref_65
-  ContentArray23: *ref_66
-  ConfigObject24:
+  BulkRetrievalRequest22: *ref_63
+  Content22: *ref_3
+  Error22: *ref_4
+  IdsListForBulkRetrieval22: *ref_64
+  FieldsListForBulkRetrieval22: *ref_65
+  ContentArray22: *ref_66
+  ConfigObject23:
     title: Config
     description: Configuration information for a tenant
     type: object
@@ -6916,8 +6916,8 @@ definitions:
       previewApiUrl: *ref_67
       previewDeliveryUrl: *ref_67
       authoringUIBaseUrl: *ref_67
-  Url24: *ref_67
-  SiteMetaData24: &ref_235
+  Url23: *ref_67
+  SiteMetaData23: &ref_235
     title: Site Metadata
     description: Site Metadata
     type: object
@@ -7025,8 +7025,8 @@ definitions:
                 This is an array of the hierarchical child pages of this
                 hierarchical page.
         description: The page hierarchy of the site.
-  PageMetaData24: *ref_68
-  SearchEntry24: &ref_238
+  PageMetaData23: *ref_68
+  SearchEntry23: &ref_238
     title: RenderingContextSearchEntry
     type: object
     properties:
@@ -7095,8 +7095,8 @@ definitions:
           type:
             type: string
             description: The link to the content type document this content is based on.
-  RenderingContext24: *ref_69
-  ErrorMessage24: &ref_234
+  RenderingContext23: *ref_69
+  ErrorMessage23: &ref_234
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -7157,12 +7157,12 @@ definitions:
     required:
       - requestId
       - errors
-  Error24: *ref_70
-  ErrorDefault25: *ref_71
-  Error25: *ref_5
-  Documents26: *ref_72
-  Document26: *ref_73
-  collection26:
+  Error23: *ref_70
+  ErrorDefault24: *ref_71
+  Error24: *ref_5
+  Documents25: *ref_72
+  Document25: *ref_73
+  collection25:
     type: object
     properties:
       fields:
@@ -7228,7 +7228,7 @@ definitions:
         description: >-
           Specifies the required field that is used as the unique key of
           documents in a search collection.
-  ErrorMessage26: &ref_245
+  ErrorMessage25: &ref_245
     type: object
     description: This JSON object describes an error condition.
     properties:
@@ -7289,8 +7289,8 @@ definitions:
     required:
       - requestId
       - errors
-  Error26: *ref_74
-  Site27: &ref_246
+  Error25: *ref_74
+  Site26: &ref_246
     title: Site
     type: object
     properties:
@@ -7333,7 +7333,7 @@ definitions:
       creatorId: 00000000-0000-0000-0000-000000000009
       created: '2018-01-10T12:01:57.188Z'
       id: 949c298a-03c9-21b5-9386-b8ea3c3e0ee3
-  Page27: &ref_75
+  Page26: &ref_75
     title: Page
     type: object
     properties:
@@ -7420,7 +7420,7 @@ definitions:
       route: /categorydefaultpage
       id: 288c1fc1-48b5-48b9-8254-f8d596a3a64e
       url: /664052ba-bdb9-49bf-8d33-dbe4a79b6520/categorydefaultpage
-  Error27: &ref_247
+  Error26: &ref_247
     type: object
     properties:
       service:
@@ -7458,7 +7458,7 @@ definitions:
           locale:
             type: string
             description: The locale setting of the message and description text.
-  MultiPages27: &ref_248
+  MultiPages26: &ref_248
     title: MultiPages
     type: object
     properties:
@@ -7466,7 +7466,7 @@ definitions:
         type: array
         description: An array of JSON objects that contain the requested page items.
         items: *ref_75
-  Tenant34: &ref_249
+  Tenant33: &ref_249
     type: object
     required:
       - _id
@@ -7610,7 +7610,7 @@ definitions:
       edgeToken:
         type: string
         description: string to hold edge config
-  TenantAnonymous34:
+  TenantAnonymous33:
     type: object
     properties:
       name:
@@ -7627,7 +7627,7 @@ definitions:
         type: object
         description: Properties for WCA integration
         readOnly: true
-  TenantPut34: &ref_251
+  TenantPut33: &ref_251
     type: object
     properties:
       name:
@@ -7682,10 +7682,10 @@ definitions:
       edgeToken:
         type: string
         description: string to hold edge config
-  AssetPublishApproval34: *ref_77
-  ContentPublishApproval34: *ref_78
-  DeliveryAccess34: *ref_79
-  Error34: &ref_250
+  AssetPublishApproval33: *ref_77
+  ContentPublishApproval33: *ref_78
+  DeliveryAccess33: *ref_79
+  Error33: &ref_250
     type: object
     properties:
       code:
@@ -7695,8 +7695,8 @@ definitions:
         type: string
       fields:
         type: string
-  IbmCommerce34: *ref_76
-  TenantInfo36: &ref_80
+  IbmCommerce33: *ref_76
+  TenantInfo35: &ref_80
     type: object
     properties:
       baseUrl:
@@ -7706,13 +7706,13 @@ definitions:
         type: string
         description: The tenantId of the available tenant
     description: Object containing the tenantId and baseUrl
-  TenantArray36: &ref_253
+  TenantArray35: &ref_253
     type: array
     items: *ref_80
     minItems: 0
     maxItems: 100
     description: The list of available tenants for the authenticated user
-  Status36: &ref_252
+  Status35: &ref_252
     type: object
     properties:
       service:
@@ -7724,7 +7724,7 @@ definitions:
       httpStatus:
         type: integer
         description: The http return code
-  Error40: &ref_81
+  Error38: &ref_81
     description: >-
       This JSON record represents an individual error or warning contained in an
       error message.
@@ -7771,7 +7771,7 @@ definitions:
     required:
       - code
       - message
-  ErrorMessage40: &ref_256
+  ErrorMessage38: &ref_256
     description: This JSON record represents an error condition.
     type: object
     properties:
@@ -7787,11 +7787,11 @@ definitions:
     required:
       - errors
       - requestId
-  Id40: &ref_84
+  Id38: &ref_84
     type: string
     pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
     description: The unique internal identifier of the user
-  ExternalId40: &ref_85
+  ExternalId38: &ref_85
     type: string
     pattern: >-
       ^[0-9A-Z]{10}$|^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$,
@@ -7801,29 +7801,29 @@ definitions:
       stored too. Do not use this field as a replacement for the user attribute
       email address.
     maxLength: 512
-  IbmUniqueID40: &ref_88
+  IbmUniqueID38: &ref_88
     type: string
     description: The IBM internal unique external identifier of the user in IBMid.
     pattern: '^$|^[0-9A-Z]{10}$,'
     maxLength: 10
-  FirstName40: &ref_86
+  FirstName38: &ref_86
     type: string
     description: The first name of the user
     maxLength: 512
-  LastName40: &ref_87
+  LastName38: &ref_87
     type: string
     description: The last name of the user
     maxLength: 512
-  DisplayName40: &ref_89
+  DisplayName38: &ref_89
     type: string
     description: The name of the user that can be displayed in the UI
     maxLength: 512
-  Email40: &ref_90
+  Email38: &ref_90
     type: string
     description: The email of the user that can be displayed in the UI
     format: email
     maxLength: 512
-  Roles40: &ref_99
+  Roles38: &ref_99
     type: array
     items:
       type: string
@@ -7837,7 +7837,7 @@ definitions:
     maxItems: 1
     uniqueItems: true
     description: The roles of the user that will be used for access control
-  RolesRetrieval40: &ref_91
+  RolesRetrieval38: &ref_91
     type: array
     items:
       type: string
@@ -7851,19 +7851,19 @@ definitions:
     description: >-
       The roles of the user that will be used for access control (empty for the
       anonymous user)
-  LastLogin40: &ref_93
+  LastLogin38: &ref_93
     type: string
     format: date-time
     description: Date when this user logged in for the last time before current session
-  Created40: &ref_94
+  Created38: &ref_94
     type: string
     format: date-time
     description: Date when this item was created
-  LastModified40: &ref_96
+  LastModified38: &ref_96
     type: string
     format: date-time
     description: Date when this item was modified for the last time
-  HttpVerb40: &ref_83
+  HttpVerb38: &ref_83
     type: string
     description: The supported HTTP methods
     enum:
@@ -7871,7 +7871,7 @@ definitions:
       - POST
       - PUT
       - DELETE
-  Creator40: &ref_95
+  Creator38: &ref_95
     description: URI pointing to the User who has created the item
     type: object
     required:
@@ -7880,7 +7880,7 @@ definitions:
       id:
         type: string
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  LastModifier40: &ref_97
+  LastModifier38: &ref_97
     description: URI pointing to the User who has modified the item
     type: object
     required:
@@ -7889,7 +7889,7 @@ definitions:
       id:
         type: string
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$'
-  PrivacyNotices40:
+  PrivacyNotices38:
     description: The privacy notices that the user has accepted
     type: object
     required:
@@ -7927,8 +7927,8 @@ definitions:
       acceptRequired:
         type: boolean
         description: Defines if an acceptance of the latest privacy notice is required. _id
-  PrivacyNoticeHistory40: *ref_82
-  PrivacyNotice40:
+  PrivacyNoticeHistory38: *ref_82
+  PrivacyNotice38:
     description: The privacy notice that the user has accepted
     type: object
     required:
@@ -7953,7 +7953,7 @@ definitions:
         type: boolean
         description: Defines if an acceptance of the latest privacy notice is required.
     additionalProperties: false
-  PrivacyNoticeResponse40: &ref_98
+  PrivacyNoticeResponse38: &ref_98
     description: The privacy notice that the user has accepted
     type: object
     required:
@@ -7977,7 +7977,7 @@ definitions:
         type: boolean
         description: Defines if an acceptance of the latest privacy notice is required.
     additionalProperties: false
-  UriSelf40: &ref_92
+  UriSelf38: &ref_92
     description: URI pointing to this document
     type: object
     required:
@@ -7994,7 +7994,7 @@ definitions:
           Single value object where key is the locale and value is the display
           name
         type: object
-  User40: &ref_255
+  User38: &ref_255
     description: The user object that might be returned.
     type: object
     required:
@@ -8023,7 +8023,7 @@ definitions:
       lastModifier: *ref_97
       privacyNotice: *ref_98
     additionalProperties: false
-  EnrichedUser40: &ref_265
+  EnrichedUser38: &ref_265
     description: The user object that might be returned.
     type: object
     required:
@@ -8051,7 +8051,7 @@ definitions:
       lastModifier: *ref_97
       privacyNotice: *ref_98
     additionalProperties: true
-  Approver40:
+  Approver38:
     description: The approver object that might be returned.
     type: object
     required:
@@ -8063,7 +8063,7 @@ definitions:
       ibmUniqueID: *ref_88
       displayName: *ref_89
     additionalProperties: false
-  EditorManagerAdmin40:
+  EditorManagerAdmin38:
     description: The match object that might be returned.
     type: object
     required:
@@ -8076,7 +8076,7 @@ definitions:
       displayName: *ref_89
       roles: *ref_99
     additionalProperties: false
-  UserCreation40: &ref_263
+  UserCreation38: &ref_263
     description: The user object that might be sent for user creation.
     type: object
     required:
@@ -8091,7 +8091,7 @@ definitions:
       email: *ref_90
       roles: *ref_99
     additionalProperties: false
-  UserUpdate40: &ref_266
+  UserUpdate38: &ref_266
     description: >-
       The user object that might be sent to replace the user. The fields id,
       externalId, links, created, creator, lastModified, and lastModifier will
@@ -8115,7 +8115,7 @@ definitions:
       lastModified: *ref_96
       lastModifier: *ref_97
     additionalProperties: false
-  UserUpdateLogin40:
+  UserUpdateLogin38:
     description: >-
       The user object that might be sent to replace the user. The fields id,
       externalId, links, created, creator, lastModified, and lastModifier will
@@ -8140,7 +8140,7 @@ definitions:
       lastModified: *ref_96
       lastModifier: *ref_97
     additionalProperties: false
-  UriFirst40: &ref_100
+  UriFirst38: &ref_100
     description: URI pointing to the first sublist of items of the complete list
     type: object
     required:
@@ -8148,7 +8148,7 @@ definitions:
     properties:
       href:
         type: string
-  UriPrev40: &ref_101
+  UriPrev38: &ref_101
     description: URI pointing to the previous sublist of items of the complete list
     type: object
     required:
@@ -8156,7 +8156,7 @@ definitions:
     properties:
       href:
         type: string
-  UriNext40: &ref_102
+  UriNext38: &ref_102
     description: URI pointing to the next sublist of items of the complete list
     type: object
     required:
@@ -8164,7 +8164,7 @@ definitions:
     properties:
       href:
         type: string
-  ItemList40: &ref_262
+  ItemList38: &ref_262
     type: object
     required:
       - offset
@@ -8188,7 +8188,7 @@ definitions:
       limit:
         type: integer
         description: Maximum number of items in the current sublist
-  ApproverList40:
+  ApproverList38:
     type: object
     required:
       - limit
@@ -8214,7 +8214,7 @@ definitions:
       limit:
         type: integer
         description: Maximum number of items in the current sublist
-  WebhookProfile44: &ref_267
+  WebhookProfile42: &ref_267
     type: object
     description: A webhook profile.
     properties:
@@ -8380,8 +8380,8 @@ definitions:
                     - processMe
           required:
             - url
-  WebhookDef44: *ref_103
-  ErrorResult44: &ref_268
+  WebhookDef42: *ref_103
+  ErrorResult42: &ref_268
     type: object
     description: an error response.
     properties:
@@ -8444,10 +8444,10 @@ definitions:
       requestUri:
         type: string
         description: The current request uri.
-  Message44: *ref_104
-  error47: *ref_105
-  error_message47: *ref_106
-  localizedItem47: &ref_121
+  Message42: *ref_104
+  error45: *ref_105
+  error_message45: *ref_106
+  localizedItem45: &ref_121
     type: object
     required:
       - name
@@ -8458,14 +8458,14 @@ definitions:
       name: &ref_107
         type: object
         description: an object holding the localized title for multiple languages
-  localizedItemCreation47: &ref_123
+  localizedItemCreation45: &ref_123
     type: object
     required:
       - name
     properties:
       name: *ref_107
       description: *ref_108
-  managedItem47: &ref_120
+  managedItem45: &ref_120
     type: object
     required:
       - id
@@ -8539,7 +8539,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  managedItemCreation47: &ref_124
+  managedItemCreation45: &ref_124
     type: object
     properties:
       id:
@@ -8578,7 +8578,7 @@ definitions:
         type: object
         required: *ref_111
         properties: *ref_112
-  managedItemUpdate47: &ref_125
+  managedItemUpdate45: &ref_125
     type: object
     required:
       - rev
@@ -8597,7 +8597,7 @@ definitions:
       creator: *ref_116
       lastModified: *ref_117
       lastModifier: *ref_118
-  itemList47: &ref_126
+  itemList45: &ref_126
     type: object
     required:
       - offset
@@ -8661,7 +8661,7 @@ definitions:
       count:
         type: integer
         description: Number of items in the complete list
-  unmanagedJobDefinition47:
+  unmanagedJobDefinition45:
     type: object
     properties:
       profile: &ref_136
@@ -8745,7 +8745,7 @@ definitions:
               asset: *ref_119
               category: *ref_119
               resource: *ref_119
-  jobDefinitionCore47: &ref_122
+  jobDefinitionCore45: &ref_122
     type: object
     properties:
       profile: &ref_147
@@ -8766,27 +8766,27 @@ definitions:
           id:
             type: string
             maxLength: 64
-  jobDefinition47: &ref_127
+  jobDefinition45: &ref_127
     type: object
     allOf:
       - *ref_120
       - *ref_121
       - *ref_122
-  jobDefinitionCreation47:
+  jobDefinitionCreation45:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_123
       - *ref_124
       - *ref_122
-  jobDefinitionUpdate47:
+  jobDefinitionUpdate45:
     type: object
     description: 'TBD: Give a little help on job definition creation here...'
     allOf:
       - *ref_123
       - *ref_125
       - *ref_122
-  jobDefinitions47:
+  jobDefinitions45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobDefinitions. At
@@ -8799,7 +8799,7 @@ definitions:
       items:
         type: array
         items: *ref_127
-  job47: &ref_129
+  job45: &ref_129
     type: object
     allOf:
       - *ref_120
@@ -8835,7 +8835,7 @@ definitions:
         items:
           type: string
           maxLength: 64
-  jobCreation47: &ref_269
+  jobCreation45: &ref_269
     type: object
     description: >-
       When creating a job, you can specify an id that can be used to address the
@@ -8846,7 +8846,7 @@ definitions:
         description: Unique identifier representing a specific job
         maxLength: 64
       mode: *ref_128
-  jobs47:
+  jobs45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of jobs. At most
@@ -8859,7 +8859,7 @@ definitions:
       items:
         type: array
         items: *ref_129
-  siteRevisionCore47: &ref_130
+  siteRevisionCore45: &ref_130
     type: object
     properties:
       state:
@@ -8892,7 +8892,7 @@ definitions:
           id:
             type: string
             maxLength: 64
-  siteRevision47: &ref_131
+  siteRevision45: &ref_131
     type: object
     allOf:
       - *ref_120
@@ -8900,7 +8900,7 @@ definitions:
       - *ref_130
     required:
       - state
-  siteRevisionUpdate47: &ref_274
+  siteRevisionUpdate45: &ref_274
     description: >-
       Only properties autoPublishEnabled, name and description will be updated,
       others will be ignored
@@ -8909,7 +8909,7 @@ definitions:
       - *ref_123
       - *ref_125
       - *ref_130
-  siteRevisions47:
+  siteRevisions45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of site revisions. At
@@ -8922,7 +8922,7 @@ definitions:
       items:
         type: array
         items: *ref_131
-  status47: &ref_273
+  status45: &ref_273
     type: object
     required:
       - id
@@ -8992,36 +8992,36 @@ definitions:
                 - ERROR
                 - INFO
                 - WARNING
-  message47: *ref_134
-  task47: *ref_135
-  profileCore47: *ref_136
-  profile47: &ref_137
+  message45: *ref_134
+  task45: *ref_135
+  profileCore45: *ref_136
+  profile45: &ref_137
     type: object
     allOf:
       - *ref_120
       - *ref_121
       - *ref_136
-  profileCreation47:
+  profileCreation45:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_123
       - *ref_124
       - *ref_136
-  profileUpdate47:
+  profileUpdate45:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_123
       - *ref_125
       - *ref_136
-  profileCreationForJobCreation47:
+  profileCreationForJobCreation45:
     description: 'TBD: '
     type: object
     allOf:
       - *ref_124
       - *ref_136
-  profiles47:
+  profiles45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of profiles. At most
@@ -9034,28 +9034,28 @@ definitions:
       items:
         type: array
         items: *ref_137
-  sourceCore47: *ref_138
-  source47: &ref_139
+  sourceCore45: *ref_138
+  source45: &ref_139
     type: object
     allOf:
       - *ref_120
       - *ref_121
       - *ref_138
-  sourceCreation47:
+  sourceCreation45:
     type: object
     allOf:
       - *ref_123
       - *ref_124
       - *ref_138
-  sourceUpdate47:
+  sourceUpdate45:
     type: object
     allOf:
       - *ref_123
       - *ref_125
       - *ref_138
-  sourceDocs47: *ref_133
-  docEvents47: *ref_119
-  sources47:
+  sourceDocs45: *ref_133
+  docEvents45: *ref_119
+  sources45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of sources. At most
@@ -9068,9 +9068,9 @@ definitions:
       items:
         type: array
         items: *ref_139
-  jobState47: *ref_132
-  httpVerb47: *ref_140
-  itemsDeleteResponse47:
+  jobState45: *ref_132
+  httpVerb45: *ref_140
+  itemsDeleteResponse45:
     type: object
     description: >-
       Returns a (sub-)list of items from the complete list of items. At most
@@ -9081,30 +9081,30 @@ definitions:
       items:
         type: array
         items: &ref_141 {}
-  itemDeleteResponse47: *ref_141
-  contentFormat47: *ref_142
-  created47: *ref_115
-  lastModified47: *ref_117
-  rev47: *ref_114
-  description47: *ref_108
-  title47: *ref_107
-  jobMode47: *ref_128
-  site47:
+  itemDeleteResponse45: *ref_141
+  contentFormat45: *ref_142
+  created45: *ref_115
+  lastModified45: *ref_117
+  rev45: *ref_114
+  description45: *ref_108
+  title45: *ref_107
+  jobMode45: *ref_128
+  site45:
     type: object
     description: tbd
     properties:
       href:
         type: string
         maxLength: 1024
-  urlSelf47: *ref_113
-  urlFirst47: *ref_143
-  urlPrev47: *ref_144
-  urlNext47: *ref_145
-  urlLast47: *ref_146
-  urlCreator47: *ref_116
-  urlLastModifier47: *ref_118
-  profileRef47: *ref_147
-  siteRevisionRef47:
+  urlSelf45: *ref_113
+  urlFirst45: *ref_143
+  urlPrev45: *ref_144
+  urlNext45: *ref_145
+  urlLast45: *ref_146
+  urlCreator45: *ref_116
+  urlLastModifier45: *ref_118
+  profileRef45: *ref_147
+  siteRevisionRef45:
     type: object
     required:
       - id
@@ -9113,7 +9113,7 @@ definitions:
       id:
         type: string
         maxLength: 64
-  sourceRef47: *ref_148
+  sourceRef45: *ref_148
   ErrorResponse:
     description: This JSON record represents an error condition.
     type: object
