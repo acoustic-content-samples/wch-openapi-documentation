@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.0.128
+  version: 1.0.129
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
   description: Copyright IBM Corporation 2018
@@ -7610,6 +7610,9 @@ definitions:
       edgeToken:
         type: string
         description: string to hold edge config
+      importZip:
+        type: object
+        description: Information on most recent zip imported
   TenantAnonymous33:
     type: object
     properties:
@@ -7682,6 +7685,9 @@ definitions:
       edgeToken:
         type: string
         description: string to hold edge config
+      importZip:
+        type: object
+        description: Information on most recent zip imported
   AssetPublishApproval33: *ref_77
   ContentPublishApproval33: *ref_78
   DeliveryAccess33: *ref_79
