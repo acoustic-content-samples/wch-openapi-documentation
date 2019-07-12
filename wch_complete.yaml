@@ -1,9 +1,9 @@
 swagger: '2.0'
 info:
-  version: 1.0.129
+  version: 1.0.130
   x-ibm-name: ibm-watson-content-hub-api
   title: IBM Watson Content Hub API
-  description: Copyright IBM Corporation 2018
+  description: Copyright IBM Corporation 2019
 schemes:
   - https
 consumes:
