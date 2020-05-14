@@ -2,8 +2,8 @@ swagger: '2.0'
 info:
   version: 1.0.133
   x-ibm-name: ibm-watson-content-hub-api
-  title: IBM Watson Content Hub API
-  description: Copyright IBM Corporation 2019
+  title: Acoustic Content API Reference
+  description: Copyright 2020 Acoustic, L.P.
 schemes:
   - https
 consumes:
