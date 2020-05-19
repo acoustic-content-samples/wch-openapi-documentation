@@ -175,7 +175,7 @@ tags:
       mode. For more information on the
 
       preview mode and previewing in general, please refer to
-      https://developer.ibm.com/customer-engagement/docs/wch/preview-content/.
+      https://developer.goacoustic.com/acoustic-content/docs/preview-content.
   - name: Delivery render
     description: >
       The IBM Watson Content Hub Delivery rendering REST API provides
@@ -218,7 +218,7 @@ tags:
 
 
       The API supports the previewing of content information as described
-      [here](https://developer.ibm.com/customer-engagement/docs/wch/preview-content/).
+      [here](https://developer.goacoustic.com/acoustic-content/docs/preview-content).
 
 
 
@@ -265,7 +265,7 @@ tags:
       which is a static file access.
 
       For more information see
-      [here](https://developer.ibm.com/customer-engagement/docs/wch/publishing-and-delivering-content/accessing-published-assets/).
+      [here](https://developer.goacoustic.com/acoustic-content/docs/publishing-and-delivering-content).
 
 
       You can use the /delivery/v1/resources routes to access resources as an
@@ -284,7 +284,7 @@ tags:
       For more information on the
 
       preview mode and previewing in general, please refer to
-      https://developer.ibm.com/customer-engagement/docs/wch/preview-content/.
+      https://developer.goacoustic.com/acoustic-content/docs/preview-content.
   - name: Delivery search
     description: >-
       Use the Watson Content Hub delivery search REST API to search for
@@ -297,7 +297,7 @@ tags:
       only. To include draft items into your search, you can access this
       delivery search via the preview host. For more information on the preview
       host and previewing in general, please refer to
-      https://developer.ibm.com/customer-engagement/docs/wch/preview-content/
+      https://developer.goacoustic.com/acoustic-content/docs/preview-content
   - name: Delivery sites
     description: >
       Use the Watson Content Hub delivery sites service Rest APIs to retrieve
@@ -3250,7 +3250,7 @@ definitions:
           example, to include a text element include
           \"someTextElement\":{\"elementType\": \"text\", \"value\": \"some text
           goes here\" }. For a complete list of content elements, see
-          https://developer.ibm.com/customer-engagement/docs/wch/authoring-content
+          https://developer.goacoustic.com/acoustic-content/docs/authoring-content-with-the-acoustic-content-rest-api
     required:
       - name
       - typeId
@@ -3342,7 +3342,7 @@ definitions:
           the typeId attribute. A content can have multiple elements such as
           text, number, video, images etc. For a complete list of content
           elements see,
-          https://developer.ibm.com/customer-engagement/docs/wch/authoring-content/
+          https://developer.goacoustic.com/acoustic-content/docs/authoring-content-with-the-acoustic-content-rest-api
         example:
           videokey:
             elementType: video
@@ -3373,7 +3373,7 @@ definitions:
             value: true
           linkkey:
             elementType: link
-            linkURL: 'http://ibm.com'
+            linkURL: 'http://acoustic.com'
             linkText: IBM
           imagekey:
             elementType: image
@@ -3668,7 +3668,7 @@ definitions:
           video, images. For example, to include a text element include
           \"someTextElement\":{\"elementType\": \"text\", \"value\": \"some text
           goes here\" }. For a complete list of default content elements, see
-          https://developer.ibm.com/customer-engagement/docs/wch/authoring-content
+          https://developer.goacoustic.com/acoustic-content/docs/authoring-content-with-the-acoustic-content-rest-api
     required:
       - name
       - typeId
@@ -3748,7 +3748,7 @@ definitions:
           referenced through the typeId attribute. A default content can have
           multiple elements such as text, number, video, images etc. For a
           complete list of default content elements see,
-          https://developer.ibm.com/customer-engagement/docs/wch/authoring-content/
+          https://developer.goacoustic.com/acoustic-content/docs/authoring-content-with-the-acoustic-content-rest-api
         example:
           videokey:
             elementType: video
@@ -3779,7 +3779,7 @@ definitions:
             value: true
           linkkey:
             elementType: link
-            linkURL: 'http://ibm.com'
+            linkURL: 'http://acoustic.com'
             linkText: IBM
           imagekey:
             elementType: image
