@@ -27917,8 +27917,7 @@ paths:
       description: >-
         Browser flow to redirect to IBMid for authentication and update user and
         redirect to authoring UI. This redirect flow leverages the IBMid UI and
-        also supports enterprise federation (details:
-        https://ibm.ent.box.com/notes/78040808400?s=nhuzrhlsn0ly338zddomx329tlpmfghc)
+        also supports enterprise federation
         while basicauth logins do not work with enterprise federated
         accounts.<br />User roles: admin, manager, editor, viewer,
         authenticatedVisitor, anonymous
