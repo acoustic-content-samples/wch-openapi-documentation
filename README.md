@@ -1,4 +1,4 @@
-# wch-openapi-documentation
+Acoustic Content API Documentation
 
 This repository contains the API documentation for Acoustic Content in the OpenAPI version 2.0 specification format.
 
