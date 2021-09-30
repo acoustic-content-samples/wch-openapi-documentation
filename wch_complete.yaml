@@ -24905,6 +24905,9 @@ paths:
   '/delivery/v1/rendering/render/content/{id}':
     get:
       summary: Applies server side rendering to the specified content item
+      description: >-
+        Applies server side rendering to the specified content item<br />User
+        roles: admin, manager, editor, viewer, authenticatedVisitor, anonymous
       produces:
         - text/html
       parameters:
@@ -24930,9 +24933,6 @@ paths:
         - authenticatedVisitor
         - anonymous
       x-ibm-dx-vary: []
-      description: >-
-        <br />User roles: admin, manager, editor, viewer, authenticatedVisitor,
-        anonymous
       tags:
         - Delivery render
   '/delivery/v1/rendering/sites/{id}':
@@ -25040,8 +25040,8 @@ paths:
         - application/json
       summary: Aggregated type information by ID
       description: >-
-        TBD<br />User roles: admin, manager, editor, viewer,
-        authenticatedVisitor, anonymous
+        Aggregated type information by ID<br />User roles: admin, manager,
+        editor, viewer, authenticatedVisitor, anonymous
       parameters:
         - *ref_253
         - *ref_256
@@ -25116,6 +25116,9 @@ paths:
   '/mydelivery/v1/rendering/render/content/{id}':
     get:
       summary: Applies server side rendering to the specified content item
+      description: >-
+        Applies server side rendering to the specified content item<br />User
+        roles: admin, manager, editor, viewer, authenticatedVisitor
       produces:
         - text/html
       parameters:
@@ -25139,7 +25142,6 @@ paths:
         - editor
         - viewer
         - authenticatedVisitor
-      description: '<br />User roles: admin, manager, editor, viewer, authenticatedVisitor'
       tags:
         - Delivery render
   '/mydelivery/v1/rendering/type/{id}':
@@ -25148,8 +25150,8 @@ paths:
         - application/json
       summary: Aggregated type information by ID
       description: >-
-        TBD<br />User roles: admin, manager, editor, viewer,
-        authenticatedVisitor
+        Aggregated type information by ID<br />User roles: admin, manager,
+        editor, viewer, authenticatedVisitor
       parameters:
         - *ref_253
         - *ref_256
